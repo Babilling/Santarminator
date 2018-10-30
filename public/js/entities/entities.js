@@ -1,10 +1,11 @@
+var veldemerde = -5;
 game.BirdEntity = me.Entity.extend({
     init: function(x, y) {
         var settings = {};
         settings.image = 'clumsy';
         settings.width = 85;
         settings.height = 60;
-
+		veldemerde = -5;
         this._super(me.Entity, 'init', [x, y, settings]);
         this.alwaysUpdate = true;
         this.body.gravity = 0.2;
@@ -111,6 +112,10 @@ game.BirdEntity = me.Entity.extend({
         if (obj.type === 'hit') {
             me.game.world.removeChildNow(obj);
             game.data.steps++;
+			if (game.data.steps % 200 < 10 && game.data.steps > 200)
+				veldemerde = veldemerde - 0.5;
+			else 
+				veldemerde = -5;
             me.audio.play('hit');
             var random = Math.random();
 			if (random > 0.99)
@@ -164,6 +169,7 @@ game.PipeEntity = me.Entity.extend({
 
     update: function(dt) {
         // mechanics
+		
         if (!game.data.start) {
             return this._super(me.Entity, 'update', [dt]);
         }
@@ -171,6 +177,8 @@ game.PipeEntity = me.Entity.extend({
         if (this.pos.x < -this.image.width) {
             me.game.world.removeChild(this);
         }
+		this.body.vel.set(veldemerde, 0);
+		
         me.Rect.prototype.updateBounds.apply(this);
         this._super(me.Entity, 'update', [dt]);
         return true;
@@ -226,7 +234,7 @@ game.HitEntity = me.Entity.extend({
         this.body.gravity = 0;
         this.updateTime = false;
         this.renderable.alpha = 0;
-        this.body.accel.set(-5, 0);
+        this.body.accel.set(veldemerde, 0);
         this.body.removeShapeAt(0);
         this.body.addShape(new me.Rect(0, 0, settings.width - 30, settings.height - 30));
         this.type = 'hit';
