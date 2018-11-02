@@ -1,132 +1,74 @@
-var veldemerde = -5;
 game.BirdEntity = me.Entity.extend({
     init: function(x, y) {
         var settings = {};
         settings.image = 'clumsy';
         settings.width = 85;
         settings.height = 60;
-		veldemerde = -5;
         this._super(me.Entity, 'init', [x, y, settings]);
         this.alwaysUpdate = true;
-        this.body.gravity = 0.2;
-        this.maxAngleRotation = Number.prototype.degToRad(-30);
-        this.maxAngleRotationDown = Number.prototype.degToRad(35);
-        this.renderable.addAnimation("flying", [0, 1, 2]);
-        this.renderable.addAnimation("idle", [0]);
-        this.renderable.setCurrentAnimation("flying");
-        //this.renderable.anchorPoint = new me.Vector2d(0.1, 0.5);
         this.body.removeShapeAt(0);
         this.body.addShape(new me.Ellipse(5, 5, 71, 51));
-
-        // a tween object for the flying physic effect
-        this.flyTween = new me.Tween(this.pos);
-        this.flyTween.easing(me.Tween.Easing.Exponential.InOut);
-
-        this.currentAngle = 0;
-        this.angleTween = new me.Tween(this);
-        this.angleTween.easing(me.Tween.Easing.Exponential.InOut);
-
-        // end animation tween
-        this.endTween = null;
-
         // collision shape
         this.collided = false;
+        this.weapon = game.weapon[1];
+        this.lastShot = 0;
 
-        this.gravityForce = 0.3;
+        this.velY = 5;
+        this.velX = 5;
 
-        this.velY = 0;
-        this.jumpForce = 5;
+        this.renderable.addAnimation("fly", [ 0, 1, 2]);
+        this.renderable.setCurrentAnimation("fly");
     },
 
     update: function(dt) {
         var that = this;
-        this.pos.x = 60;
         if (!game.data.start) {
             return this._super(me.Entity, 'update', [dt]);
         }
         this.renderable.currentTransform.identity();
-        if (me.input.isKeyPressed('fly')) {
-            me.audio.play('wing');
-            //this.gravityForce = 0.2;
-            var currentPos = this.pos.y;
-
-            //this.angleTween.stop();
-            //this.flyTween.stop();
-
-            //this.flyTween.to({y: currentPos - 72}, 50);
-            //this.flyTween.start();
-
-            this.velY = -this.jumpForce
-
-            //this.angleTween.to({currentAngle: that.maxAngleRotation}, 50).onComplete(function(angle) {
-            //    that.renderable.currentTransform.rotate(that.maxAngleRotation);
-            //})
-            //this.angleTween.start();
-
-        } else {
-            //this.gravityForce += 0.2;
-            //this.pos.y += me.timer.tick * this.gravityForce;
-            this.pos.y += this.velY;
-            this.velY += this.gravityForce;
-
-            //this.currentAngle += Number.prototype.degToRad(3);
-            //if (this.currentAngle >= this.maxAngleRotationDown) {
-            //    this.renderable.currentTransform.identity();
-            //    this.currentAngle = this.maxAngleRotationDown;
-            //}
+        if (me.input.isKeyPressed('shot')) {
+            if (Date.now() - this.lastShot > this.weapon.cd){
+                this.lastShot = Date.now();
+                me.audio.play(this.weapon.sound);
+                me.game.world.addChild(new me.pool.pull(this.weapon.type, this.pos.x + this.weapon.x, this.pos.y + this.weapon.y), 11);
+            }
         }
-        // This is not the best solution, should be changed ...
-        this.currentAngle = this.velY * 0.08
-
-        this.renderable.currentTransform.rotate(this.currentAngle);
+        if (me.input.isKeyPressed('forward')) {
+            this.pos.y -= this.velY * game.data.speed;
+            if (this.pos.y < 25) this.pos.y = 25;
+        }
+        if (me.input.isKeyPressed('backward')) {
+            this.pos.y += this.velY * game.data.speed;
+            if (this.pos.y > me.game.viewport.height - 30) this.pos.y = me.game.viewport.height - 30;
+        }
+        if (me.input.isKeyPressed('left')) {
+            this.pos.x -= this.velX * game.data.speed;
+            if (this.pos.x < 37) this.pos.x = 37;
+        }
+        if (me.input.isKeyPressed('right')) {
+            this.pos.x += this.velX * game.data.speed;
+            if (this.pos.x > me.game.viewport.width - 47) this.pos.x = me.game.viewport.width - 47;
+        }
         me.Rect.prototype.updateBounds.apply(this);
 
-        var hitSky = -80; // bird height + 20px
-		var hitGround = 584; // heightof the background img
-        if (this.pos.y <= hitSky || this.pos.y >= hitGround || this.collided) {
+        if (this.collided) {
             game.data.start = false;
             me.audio.play("lose");
             this.endAnimation();
-            return false;
         }
         me.collision.check(this);
+
+        if (Date.now() - game.data.dateStart > 25000)
+            game.data.speed = 2;
         return true;
     },
 
     onCollision: function(response) {
         var obj = response.b;
         if (obj.type === 'pipe') {
-            if (Math.random () > 0.9){
-                // Vibromasseur mode
-                me.device.vibrate(50000);
-            }
-            else
-                me.device.vibrate(500);
-            this.collided = true;
-            if (Math.random() > 0.5)
-                me.audio.play("tesdanslaxe", false, null, 1);
-            else
-                me.audio.play("fatchdefitch", false, null, 1);
+            me.device.vibrate(500);
         }
-        // remove the hit box
-        if (obj.type === 'hit') {
-            me.game.world.removeChildNow(obj);
-            game.data.steps++;
-			if (game.data.steps % 200 < 10 && game.data.steps > 200)
-				veldemerde = veldemerde - 0.5;
-			else 
-				veldemerde = -5;
-            me.audio.play('hit');
-            var random = Math.random();
-			if (random > 0.99)
-				me.audio.play('balledeboulepremium', false, null, 1);
-            else if (random > 0.9)
-                me.audio.play('cest du bon', false, null, 1);
-            else if (random > 0.8)
-                me.audio.play('onestbienla', false, null, 1);
-            else if (random > 0.75)
-                me.audio.play('balle de boule', false, null, 1); 
-        }
+        return false;
     },
 
     endAnimation: function() {
@@ -134,8 +76,6 @@ game.BirdEntity = me.Entity.extend({
         var currentPos = this.pos.y;
         this.endTween = new me.Tween(this.pos);
         this.endTween.easing(me.Tween.Easing.Exponential.InOut);
-
-        this.flyTween.stop();
         this.renderable.currentTransform.identity();
         this.renderable.currentTransform.rotate(Number.prototype.degToRad(90));
         var finalPos = me.game.viewport.height - this.renderable.width/2 - 96;
@@ -147,23 +87,109 @@ game.BirdEntity = me.Entity.extend({
             });
         this.endTween.start();
     }
-
 });
 
-
-game.PipeEntity = me.Entity.extend({
+game.BulletEntity = me.Entity.extend({
     init: function(x, y) {
         var settings = {};
-        settings.image = this.image = me.loader.getImage('pipe');
-        settings.width = 148;
-        settings.height= 1664;
-        settings.framewidth = 148;
-        settings.frameheight = 1664;
+        settings.image = this.image = me.loader.getImage('bullet');
+        settings.width = 73;
+        settings.height= 64;
+        settings.framewidth = 73;
+        settings.frameheight = 64;
 
         this._super(me.Entity, 'init', [x, y, settings]);
         this.alwaysUpdate = true;
+        this.pos.add(this.body.vel);
         this.body.gravity = 0;
-        this.body.vel.set(-5, 0);
+        this.body.vel.set(20 * game.data.speed, 0);
+        this.type = 'bullet';
+    },
+
+    update: function(dt) {
+        // mechanics
+		
+        if (!game.data.start) {
+            return this._super(me.Entity, 'update', [dt]);
+        }
+        this.pos.add(this.body.vel);
+        if (this.pos.x > me.game.viewport.width) {
+            me.game.world.removeChild(this);
+        }
+		this.body.vel.set(20 * game.data.speed, 0);
+		
+        me.Rect.prototype.updateBounds.apply(this);
+        this._super(me.Entity, 'update', [dt]);
+        return true;
+    },
+
+});
+
+game.LaserEntity = me.Entity.extend({
+    init: function(x, y) {
+        var settings = {};
+        settings.image = this.image = me.loader.getImage('laser');
+        settings.width = 1500;
+        settings.height= 67;
+        settings.framewidth = 1500;
+        settings.frameheight = 67;
+
+        this._super(me.Entity, 'init', [x, y, settings]);
+        this.alwaysUpdate = true;
+        this.pos.add(this.body.vel);
+        this.body.gravity = 0;
+        this.body.vel.set(0, 0);
+        this.type = 'laser';
+        this.date = Date.now();
+    },
+
+    update: function(dt) {
+        // mechanics
+		
+        if (!game.data.start) {
+            return this._super(me.Entity, 'update', [dt]);
+        }
+        this.pos.add(this.body.vel);
+        if (Date.now() - this.date > 50) {
+            me.game.world.removeChild(this);
+        }
+		this.body.vel.set(0, 0);
+		
+        me.Rect.prototype.updateBounds.apply(this);
+        this._super(me.Entity, 'update', [dt]);
+        return true;
+    }
+});
+
+// =======================
+//       DECORATION
+// =======================
+game.PipeEntity = me.Entity.extend({
+    init: function(x, y) {
+        var settings = {};
+        var building = Math.random();
+        if (building > 0.9)
+            settings.image = this.image = me.loader.getImage('pipe');
+        else if (building > 0.8)
+            settings.image = this.image = me.loader.getImage('pipe2');
+        else if (building > 0.7)
+            settings.image = this.image = me.loader.getImage('pipe3');
+        else if (building > 0.6)
+            settings.image = this.image = me.loader.getImage('pipebis');
+        else if (building > 0.5)
+            settings.image = this.image = me.loader.getImage('pipe2bis');
+        else 
+            settings.image = this.image = me.loader.getImage('pipe3bis');
+        settings.width = 250;
+        settings.height= 554;
+        settings.framewidth = 250;
+        settings.frameheight = 554;
+
+        this._super(me.Entity, 'init', [x, y, settings]);
+        this.alwaysUpdate = true;
+        this.pos.add(this.body.vel);
+        this.body.gravity = 0;
+        this.body.vel.set(-5 * game.data.speed, 0);
         this.type = 'pipe';
     },
 
@@ -177,7 +203,7 @@ game.PipeEntity = me.Entity.extend({
         if (this.pos.x < -this.image.width) {
             me.game.world.removeChild(this);
         }
-		this.body.vel.set(veldemerde, 0);
+		this.body.vel.set(-10 * game.data.speed, 0);
 		
         me.Rect.prototype.updateBounds.apply(this);
         this._super(me.Entity, 'update', [dt]);
@@ -188,71 +214,80 @@ game.PipeEntity = me.Entity.extend({
 
 game.PipeGenerator = me.Renderable.extend({
     init: function() {
-        this._super(me.Renderable, 'init', [0, me.game.viewport.width, me.game.viewport.height, 92]);
+        this._super(me.Renderable, 'init', [0, me.game.viewport.width, me.game.viewport.height, 80]);
         this.alwaysUpdate = true;
         this.generate = 0;
-        this.pipeFrequency = 92;
-        this.pipeHoleSize = 1340;
+        this.pipeFrequency = 80;
         this.posX = me.game.viewport.width;
     },
 
     update: function(dt) {
-        if (this.generate++ % this.pipeFrequency == 0) {
+        if (this.generate++ % Math.floor(this.pipeFrequency / (game.data.speed * 2)) == 0) {
             var posY = Number.prototype.random(
-                    me.video.renderer.getHeight() - 20,
-                    200
+                    me.video.renderer.getHeight() - 100,
+                    150
             );
-			if (game.data.steps % 10 == 0 && this.pipeHoleSize > 1290) {
-				this.pipeHoleSize = this.pipeHoleSize - 10;
-			}
-			if (game.data.steps === 350) {
-				this.pipeHoleSize = 1160;
-			}
-            var posY2 = posY - me.game.viewport.height - this.pipeHoleSize;
-            var pipe1 = new me.pool.pull('pipe', this.posX, posY);
-            var pipe2 = new me.pool.pull('pipe', this.posX, posY2);
-            var hitPos = posY - 100;
-            var hit = new me.pool.pull("hit", this.posX, hitPos);
-            //pipe1.renderable.currentTransform.scaleY(-1);
-            me.game.world.addChild(pipe1, 10);
-            me.game.world.addChild(pipe2, 10);
-            me.game.world.addChild(hit, 11);
+            me.game.world.addChild(new me.pool.pull('pipe', this.posX, posY), 10);
         }
         this._super(me.Entity, "update", [dt]);
     },
-
 });
 
-game.HitEntity = me.Entity.extend({
+game.SnowEntity = me.Entity.extend({
     init: function(x, y) {
         var settings = {};
-        settings.image = this.image = me.loader.getImage('hit');
-        settings.width = 148;
-        settings.height= 60;
-        settings.framewidth = 148;
-        settings.frameheight = 60;
+        settings.image = this.image = me.loader.getImage('snow');
+        settings.width = 10;
+        settings.height= 10;
+        settings.framewidth = 10;
+        settings.frameheight = 10;
 
         this._super(me.Entity, 'init', [x, y, settings]);
         this.alwaysUpdate = true;
+        this.pos.add(this.body.vel);
         this.body.gravity = 0;
-        this.updateTime = false;
-        this.renderable.alpha = 0;
-        this.body.accel.set(veldemerde, 0);
-        this.body.removeShapeAt(0);
-        this.body.addShape(new me.Rect(0, 0, settings.width - 30, settings.height - 30));
-        this.type = 'hit';
+        this.body.vel.set(-5 * game.data.speed, 2);
+        this.type = 'snow';
     },
 
     update: function(dt) {
         // mechanics
-        this.pos.add(this.body.accel);
-        if (this.pos.x < -this.image.width) {
+		
+        if (!game.data.start) {
+            return this._super(me.Entity, 'update', [dt]);
+        }
+        this.pos.add(this.body.vel);
+        if (this.pos.x < -this.image.width || this.pos.y < -this.image.height) {
             me.game.world.removeChild(this);
         }
+		this.body.vel.set(-5 * game.data.speed, 2);
+		
         me.Rect.prototype.updateBounds.apply(this);
-        this._super(me.Entity, "update", [dt]);
+        this._super(me.Entity, 'update', [dt]);
         return true;
     },
 
 });
 
+game.SnowGenerator = me.Renderable.extend({
+    init: function() {
+        this._super(me.Renderable, 'init', [0, me.game.viewport.width, me.game.viewport.height, 10]);
+        this.alwaysUpdate = true;
+        this.generate = 0;
+        this.pipeFrequency = 10;
+        this.posX = me.game.viewport.width;
+    },
+
+    update: function(dt) {
+        if (this.generate++ % Math.floor(this.pipeFrequency / (game.data.speed * 2)) == 0) {
+            var posX = Number.prototype.random(100, me.video.renderer.getWidth());
+            var posY = -5;
+            me.game.world.addChild(new me.pool.pull('snow', posX, posY), 5);
+
+            posX = me.video.renderer.getWidth() + 5;
+            posY = Number.prototype.random(100, me.video.renderer.getHeight());
+            me.game.world.addChild(new me.pool.pull('snow', posX, posY), 5);
+        }
+        this._super(me.Entity, "update", [dt]);
+    },
+});

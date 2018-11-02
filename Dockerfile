@@ -1,9 +1,9 @@
 FROM node:8.12.0-alpine
 
-COPY . /flappybat/
+COPY . /SpaceChristmas/
 
 ENV PORT=8080
 
-RUN chmod +x flappybat/entrypoint.sh
+RUN chmod +x SpaceChristmas/entrypoint.sh
 
-ENTRYPOINT ["sh","flappybat/entrypoint.sh"]
+ENTRYPOINT ["sh","SpaceChristmas/entrypoint.sh"]

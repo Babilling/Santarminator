@@ -114,7 +114,15 @@ game.GameOverScreen = me.ScreenObject.extend({
         me.event.unsubscribe(this.handler);
         me.input.unbindKey(me.input.KEY.ENTER);
         me.input.unbindKey(me.input.KEY.SPACE);
-        me.input.unbindPointer(me.input.pointer.LEFT);
+        me.input.unbindKey(me.input.KEY.Z);
+        me.input.unbindKey(me.input.KEY.Q);
+        me.input.unbindKey(me.input.KEY.S);
+        me.input.unbindKey(me.input.KEY.D);
+
+        me.input.unbindKey(me.input.KEY.UP);
+        me.input.unbindKey(me.input.KEY.LEFT);
+        me.input.unbindKey(me.input.KEY.DOWN);
+        me.input.unbindKey(me.input.KEY.RIGHT);
 
         this.font = null;
         me.audio.stop("theme");

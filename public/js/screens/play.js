@@ -12,21 +12,28 @@ game.PlayScreen = me.ScreenObject.extend({
             me.audio.play("theme", true,null,0.2);
         }
 
-        me.input.bindKey(me.input.KEY.SPACE, "fly", true);
-        game.data.score = 0;
+        me.input.bindKey(me.input.KEY.SPACE, "shot");
+        me.input.bindKey(me.input.KEY.Z, "forward");
+        me.input.bindKey(me.input.KEY.Q, "left");
+        me.input.bindKey(me.input.KEY.S, "backward");
+        me.input.bindKey(me.input.KEY.D, "right");
+
+        me.input.bindKey(me.input.KEY.UP, "forward");
+        me.input.bindKey(me.input.KEY.LEFT, "left");
+        me.input.bindKey(me.input.KEY.DOWN, "backward");
+        me.input.bindKey(me.input.KEY.RIGHT, "right");
         game.data.steps = 0;
         game.data.start = false;
-        game.data.newHiscore = false;
+        game.data.speed = 1;
+        game.data.dateStart = Date.now();
 
         me.game.world.addChild(new BackgroundLayer('bg', 1));
-
-
 
         this.HUD = new game.HUD.Container();
         me.game.world.addChild(this.HUD, 11);
 
         this.bird = me.pool.pull("clumsy", 60, me.game.viewport.height/2 - 100);
-        me.game.world.addChild(this.bird, 10);
+        me.game.world.addChild(this.bird, 12);
 
         //inputs
         me.input.bindPointer(me.input.pointer.LEFT, me.input.KEY.SPACE);
@@ -44,6 +51,7 @@ game.PlayScreen = me.ScreenObject.extend({
             .onComplete(function() {
                 game.data.start = true;
                 me.game.world.addChild(new game.PipeGenerator(), 0);
+                me.game.world.addChild(new game.SnowGenerator(), 0);
                 me.game.world.removeChild(that.getReady);
             }).start();
     },
