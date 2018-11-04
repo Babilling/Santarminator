@@ -52,6 +52,7 @@ game.PlayScreen = me.ScreenObject.extend({
                 game.data.start = true;
                 me.game.world.addChild(new game.PipeGenerator(), 0);
                 me.game.world.addChild(new game.SnowGenerator(), 0);
+                me.game.world.addChild(new game.EnnemyGenerator(), 0);
                 me.game.world.removeChild(that.getReady);
             }).start();
     },

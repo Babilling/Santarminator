@@ -10,14 +10,11 @@ game.BirdEntity = me.Entity.extend({
         this.body.addShape(new me.Ellipse(5, 5, 71, 51));
         // collision shape
         this.collided = false;
-        this.weapon = game.weapon[1];
+        this.weapon = game.weapon[0];
         this.lastShot = 0;
 
         this.velY = 5;
         this.velX = 5;
-
-        this.renderable.addAnimation("fly", [ 0, 1, 2]);
-        this.renderable.setCurrentAnimation("fly");
     },
 
     update: function(dt) {
@@ -65,8 +62,9 @@ game.BirdEntity = me.Entity.extend({
 
     onCollision: function(response) {
         var obj = response.b;
-        if (obj.type === 'pipe') {
+        if (obj.type === 'ennemy') {
             me.device.vibrate(500);
+            this.collided = true;
         }
         return false;
     },
@@ -89,6 +87,9 @@ game.BirdEntity = me.Entity.extend({
     }
 });
 
+// =======================
+//       WEAPON
+// =======================
 game.BulletEntity = me.Entity.extend({
     init: function(x, y) {
         var settings = {};
@@ -103,7 +104,7 @@ game.BulletEntity = me.Entity.extend({
         this.pos.add(this.body.vel);
         this.body.gravity = 0;
         this.body.vel.set(20 * game.data.speed, 0);
-        this.type = 'bullet';
+        this.type = 'weapon';
     },
 
     update: function(dt) {
@@ -120,9 +121,40 @@ game.BulletEntity = me.Entity.extend({
 		
         me.Rect.prototype.updateBounds.apply(this);
         this._super(me.Entity, 'update', [dt]);
+
+        if (this.collided) {
+            // TODO
+            me.game.world.removeChild(this);
+        }
+        //me.collision.check(this);
         return true;
     },
 
+onCollision: function(response) {
+    var obj = response.b;
+    if (obj.type === 'ennemy') {
+        me.device.vibrate(500);
+        this.collided = true;
+    }
+    return false;
+},
+
+endAnimation: function() {
+    me.game.viewport.fadeOut("#fff", 100);
+    var currentPos = this.pos.y;
+    this.endTween = new me.Tween(this.pos);
+    this.endTween.easing(me.Tween.Easing.Exponential.InOut);
+    this.renderable.currentTransform.identity();
+    this.renderable.currentTransform.rotate(Number.prototype.degToRad(90));
+    var finalPos = me.game.viewport.height - this.renderable.width/2 - 96;
+    this.endTween
+        .to({y: currentPos}, 1000)
+        .to({y: finalPos}, 1000)
+        .onComplete(function() {
+            me.state.change(me.state.GAME_OVER);
+        });
+    this.endTween.start();
+}
 });
 
 game.LaserEntity = me.Entity.extend({
@@ -139,7 +171,7 @@ game.LaserEntity = me.Entity.extend({
         this.pos.add(this.body.vel);
         this.body.gravity = 0;
         this.body.vel.set(0, 0);
-        this.type = 'laser';
+        this.type = 'weapon';
         this.date = Date.now();
     },
 
@@ -159,6 +191,66 @@ game.LaserEntity = me.Entity.extend({
         this._super(me.Entity, 'update', [dt]);
         return true;
     }
+});
+
+// =======================
+//       ENNEMIES
+// =======================
+game.SimpleEnnemyEntity = me.Entity.extend({
+    init: function(x, y) {
+        var settings = {};
+        settings.image = this.image = me.loader.getImage('simpleEnnemy');
+        settings.width = 50;
+        settings.height= 50;
+        settings.framewidth = 50;
+        settings.frameheight = 50;
+
+        this._super(me.Entity, 'init', [x, y, settings]);
+        this.alwaysUpdate = true;
+        this.pos.add(this.body.vel);
+        this.body.gravity = 0;
+        this.type = 'ennemy';
+        this.xGenere = -5;
+        this.yGenere = Number.prototype.random(-2, 2);
+        this.body.vel.set(this.xGenere, this.yGenere);
+    },
+
+    update: function(dt) {
+        // mechanics
+		
+        if (!game.data.start) {
+            return this._super(me.Entity, 'update', [dt]);
+        }
+        this.pos.add(this.body.vel);
+        if (this.pos.x < -this.image.width || this.pos.y < -this.image.height || this.pos.y > me.game.viewport.width) {
+            me.game.world.removeChild(this);
+        }
+		this.body.vel.set(this.xGenere, this.yGenere);
+		
+        me.Rect.prototype.updateBounds.apply(this);
+        this._super(me.Entity, 'update', [dt]);
+        return true;
+    },
+
+});
+
+game.EnnemyGenerator = me.Renderable.extend({
+    init: function() {
+        this._super(me.Renderable, 'init', [0, me.game.viewport.width, me.game.viewport.height, 80]);
+        this.alwaysUpdate = true;
+        this.generate = 0;
+        this.pipeFrequency = 80;
+        this.posX = me.game.viewport.width;
+    },
+
+    update: function(dt) {
+        if (this.generate++ % this.pipeFrequency == 0) {
+            var posX = me.game.viewport.width + 50;
+            var posY = Number.prototype.random(100, me.video.renderer.getHeight() - 100);
+            me.game.world.addChild(new me.pool.pull('simpleEnnemy', posX, posY), 13);
+        }
+        this._super(me.Entity, "update", [dt]);
+    },
 });
 
 // =======================
