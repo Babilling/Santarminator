@@ -32,8 +32,12 @@ game.PlayScreen = me.ScreenObject.extend({
         this.HUD = new game.HUD.Container();
         me.game.world.addChild(this.HUD, 11);
 
-        this.bird = me.pool.pull("clumsy", 60, me.game.viewport.height/2 - 100);
-        me.game.world.addChild(this.bird, 12);
+        //this.bird = me.pool.pull("clumsy", 60, me.game.viewport.height/2 - 100);
+        //me.game.world.addChild(this.bird, 12);
+		
+		var SantaEntity = new game.SantaEntity();
+		// add it to the scene
+		me.game.world.addChild(SantaEntity, 12);
 
         //inputs
         me.input.bindPointer(me.input.pointer.LEFT, me.input.KEY.SPACE);

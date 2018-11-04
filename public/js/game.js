@@ -18,6 +18,8 @@ var game = {
         {name: "pipe3bis", type:"image", src: "data/img/pipe3bis.png"},
         {name: "snow", type:"image", src: "data/img/snow.png"},
         {name: "logo", type:"image", src: "data/img/logo.png"},
+		{name: "santa", type:"image", src: "data/img/santa.png"},
+		{name: "santa", type:"json", src: "data/img/santa.json"},
 
         {name: "gameover", type:"image", src: "data/img/gameover.png"},
 		{name: "tablo", type:"image", src: "data/img/tablo.png"},
@@ -44,8 +46,8 @@ var game = {
 
     weapon: [
         // 0 is default
-        {type: "bullet", x: 0, y: -20, cd: 300, sound: "bullet", entitySkin: "clumsy"},
-        {type: "laser", x: 0, y: -20, cd: 50, sound: "laser", entitySkin: "clumsy"}
+        {type: "bullet", x: 40, y: 9, cd: 300, sound: "bullet", entitySkin: "clumsy"},
+        {type: "laser", x: 60, y: 9, cd: 50, sound: "laser", entitySkin: "clumsy"}
     ],
 
     "onload": function() {
@@ -71,6 +73,11 @@ var game = {
         me.pool.register("laser", game.LaserEntity, true);
         me.pool.register("pipe", game.PipeEntity, true);
         me.pool.register("snow", game.SnowEntity, true);
+		
+		game.texture = new me.video.renderer.Texture(
+        me.loader.getJSON("santa"),
+        me.loader.getImage("santa")
+    );
 
         me.state.change(me.state.MENU);
     }

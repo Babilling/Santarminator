@@ -89,6 +89,81 @@ game.BirdEntity = me.Entity.extend({
     }
 });
 
+/**
+ * Santa entiry
+ */
+game.SantaEntity = me.Entity.extend({
+    /**
+     * constructor
+     */
+    init: function (x, y) {
+
+        // call the super constructor
+        this._super(me.Entity, "init", [200, 140, {width : 60, height : 100}]);
+
+        // create an animation using the cap guy sprites, and add as renderable
+        this.renderable = game.texture.createAnimationFromName([
+            "santa1", "santa2"
+        ]);
+
+        // enable this, since the entity starts off the viewport
+        this.alwaysUpdate = true;
+		
+		// collision shape
+        this.collided = false;
+        this.weapon = game.weapon[1];
+        this.lastShot = 0;
+
+        this.velY = 5;
+        this.velX = 5;
+    },
+	update: function(dt) {
+        var that = this;
+        if (!game.data.start) {
+            return this._super(me.Entity, 'update', [dt]);
+        }
+        this.renderable.currentTransform.identity();
+        if (me.input.isKeyPressed('shot')) {
+            if (Date.now() - this.lastShot > this.weapon.cd){
+                this.lastShot = Date.now();
+                me.audio.play(this.weapon.sound);
+                me.game.world.addChild(new me.pool.pull(this.weapon.type, this.pos.x + this.weapon.x, this.pos.y + this.weapon.y), 11);
+            }
+        }
+        if (me.input.isKeyPressed('forward')) {
+            this.pos.y -= this.velY * game.data.speed;
+            if (this.pos.y < 25) this.pos.y = 25;
+        }
+        if (me.input.isKeyPressed('backward')) {
+            this.pos.y += this.velY * game.data.speed;
+            if (this.pos.y > me.game.viewport.height - 30) this.pos.y = me.game.viewport.height - 30;
+        }
+        if (me.input.isKeyPressed('left')) {
+            this.pos.x -= this.velX * game.data.speed;
+            if (this.pos.x < 37) this.pos.x = 37;
+        }
+        if (me.input.isKeyPressed('right')) {
+            this.pos.x += this.velX * game.data.speed;
+            if (this.pos.x > me.game.viewport.width - 47) this.pos.x = me.game.viewport.width - 47;
+        }
+        me.Rect.prototype.updateBounds.apply(this);
+
+        if (this.collided) {
+            game.data.start = false;
+            me.audio.play("lose");
+            this.endAnimation();
+        }
+        me.collision.check(this);
+
+        if (Date.now() - game.data.dateStart > 25000)
+            game.data.speed = 2;
+		
+		 // call the parent function
+		this._super(me.Entity, "update", [dt]);
+        return true;
+    },
+});
+
 game.BulletEntity = me.Entity.extend({
     init: function(x, y) {
         var settings = {};
