@@ -1,12 +1,16 @@
 <!DOCTYPE HTML>
 <html lang="en">
+	
+</html>
+<!DOCTYPE HTML>
+<html lang="en">
     <head>
         <title>Flappy Bat</title>
         <link rel="apple-touch-icon-precomposed" href="data/img/touch-icon-iphone.png"/>
         <link rel="apple-touch-icon-precomposed" sizes="120x120" href="data/img/touch-icon-iphone-retina.png"/>
         <link rel="shortcut icon" href="data/img/favicon.ico">
         <link rel="stylesheet" type="text/css" media="screen" href="index.css">
-        <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
         <meta name="apple-mobile-web-app-title" content="Flappy Bat">
@@ -27,10 +31,10 @@
 			var socket = io();
 			socket.on('start', function(auth, err){
 				if (auth){
-					document.getElementById('pseudo').style["display"] = "none";
+					document.getElementById('login').style["display"] = "none";
 					document.getElementById('screen').style["display"] = "block";
-					localStorage.setItem('me.save.pseudo', document.getElementById('pseudotxt').value);
-					localStorage.setItem('me.save.pwd', document.getElementById('pseudopwd').value);
+					localStorage.setItem('me.save.pseudo', document.getElementById('username').value);
+					localStorage.setItem('me.save.pwd', document.getElementById('password').value);
 				}
 				else alert(err);
 			});
@@ -40,20 +44,19 @@
 			});
 
 			function register() {
-				socket.emit('register', document.getElementById('pseudotxt').value, document.getElementById('pseudopwd').value);
+				socket.emit('register', document.getElementById('username').value, document.getElementById('password').value);
 				game.onload();
 				me.save.rows=0;
 			}
         </script>
-        <div id="pseudo" style="display:none">
-            <img src="data/img/logo.png" class="pseudoLogo"/>
+        <div class="login" id="login" style="display:none">
+			<h1>LOGIN</h1>
 			<form action="javascript:register()">
-				<input oninput="this.value = this.value.toUpperCase()" id="pseudotxt" type="text" required placeholder="PSEUDO" class="pseudo" pattern=".{1,8}" maxlength="8"/>
-				<input type="submit" value="JOUER !" class="pseudo" id="button">
+				<input id="username" oninput="this.value = this.value.toUpperCase().trim()" type="text" name="u" placeholder="USERNAME" required pattern=".{1,8}" maxlength="8"/>	
+				<button type="submit" class="btn btn-primary btn-block btn-large">LET ME IN</button>
 			</form>
-			<input id="pseudopwd" type="password" required placeholder="Mot de passe" class="pseudoPwd" style="visibility: hidden;"/>
-            <div class="info" style="color:black;">CHOISIS UN PSEUDO POUR JOUER (8 CARACTERES MAX)</div>
-        </div>
+			<input id="password" type="password" required placeholder="Password" style="visibility: hidden;"/>
+			</div>
         <!-- Canvas placeholder -->
         <div id="screen" style="display:none"></div>
 		<div id="iecaca" style="display:none"></div>
@@ -92,7 +95,7 @@
 						game.onload();
 						me.save.rows=0;
 					}
-					else document.getElementById('pseudo').style["display"] = "block";       
+					else document.getElementById('login').style["display"] = "block";       
 				}
             });
         </script>

@@ -1,14 +1,24 @@
-game.BirdEntity = me.Entity.extend({
-    init: function(x, y) {
-        var settings = {};
-        settings.image = 'clumsy';
-        settings.width = 85;
-        settings.height = 60;
-        this._super(me.Entity, 'init', [x, y, settings]);
+/**
+ * Santa entiry
+ */
+game.SantaEntity = me.Entity.extend({
+    /**
+     * constructor
+     */
+    init: function (x, y) {
+
+        // call the super constructor
+        this._super(me.Entity, "init", [200, 140, {width : 60, height : 100}]);
+
+        // create an animation using the cap guy sprites, and add as renderable
+        this.renderable = game.texture.createAnimationFromName([
+            "santa1", "santa2"
+        ]);
+
+        // enable this, since the entity starts off the viewport
         this.alwaysUpdate = true;
-        this.body.removeShapeAt(0);
-        this.body.addShape(new me.Ellipse(5, 5, 71, 51));
-        // collision shape
+		
+		// collision shape
         this.collided = false;
         this.weapon = game.weapon[0];
         this.lastShot = 0;
@@ -16,8 +26,7 @@ game.BirdEntity = me.Entity.extend({
         this.velY = 5;
         this.velX = 5;
     },
-
-    update: function(dt) {
+	update: function(dt) {
         var that = this;
         if (!game.data.start) {
             return this._super(me.Entity, 'update', [dt]);
@@ -57,6 +66,9 @@ game.BirdEntity = me.Entity.extend({
 
         if (Date.now() - game.data.dateStart > 25000)
             game.data.speed = 2;
+		
+		 // call the parent function
+		this._super(me.Entity, "update", [dt]);
         return true;
     },
 
