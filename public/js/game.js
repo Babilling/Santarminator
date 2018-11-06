@@ -5,11 +5,19 @@ var game = {
     },
 
     resources: [
-            // images
+        // Images
         {name: "bg", type:"image", src: "data/img/bg.png"},
         {name: "clumsy", type:"image", src: "data/img/clumsy.png"},
+
+        // Weapon
         {name: "bullet", type:"image", src: "data/img/bullet.png"},
         {name: "laser", type:"image", src: "data/img/laser.png"},
+
+        // Ennemies
+        {name: "simpleEnnemy", type:"image", src: "data/img/simpleEnnemy.png"},
+        {name: "diagEnnemy", type:"image", src: "data/img/diagEnnemy.png"},
+
+        // Decoration
         {name: "pipe", type:"image", src: "data/img/pipe.png"},
         {name: "pipe2", type:"image", src: "data/img/pipe2.png"},
         {name: "pipe3", type:"image", src: "data/img/pipe3.png"},
@@ -28,6 +36,7 @@ var game = {
         {name: "hit", type:"image", src: "data/img/hit.png"},
         {name: "getready", type:"image", src: "data/img/getready.png"},
         {name: "new", type:"image", src: "data/img/new.png"},
+
         // sounds
         {name: "theme", type: "audio", src: "data/bgm/"},
         {name: "hit", type: "audio", src: "data/sfx/"},
@@ -71,6 +80,7 @@ var game = {
         me.pool.register("clumsy", game.BirdEntity);
         me.pool.register("bullet", game.BulletEntity, true);
         me.pool.register("laser", game.LaserEntity, true);
+        me.pool.register("simpleEnnemy", game.SimpleEnnemyEntity, true);
         me.pool.register("pipe", game.PipeEntity, true);
         me.pool.register("snow", game.SnowEntity, true);
 		
