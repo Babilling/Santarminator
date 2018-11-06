@@ -36,7 +36,6 @@ game.TitleScreen = me.ScreenObject.extend({
             .to({y: me.game.viewport.height/2 - 100}, 1000)
             .easing(me.Tween.Easing.Exponential.InOut).start();
 
-
         me.game.world.addChild(new (me.Renderable.extend ({
             // constructor
             init: function() {

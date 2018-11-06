@@ -2,27 +2,35 @@
 
 {
 	"filename": "santa1",
-	"frame": {"x":1,"y":1,"w":60,"h":100},
+	"frame": {"x":1,"y":1,"w":67,"h":70},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":60,"h":100},
-	"sourceSize": {"w":60,"h":100}
+	"spriteSourceSize": {"x":0,"y":0,"w":67,"h":70},
+	"sourceSize": {"w":67,"h":70}
 },
 {
 	"filename": "santa2",
-	"frame": {"x":1,"y":103,"w":60,"h":100},
+	"frame": {"x":70,"y":1,"w":67,"h":70},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":60,"h":100},
-	"sourceSize": {"w":60,"h":100}
+	"spriteSourceSize": {"x":0,"y":0,"w":67,"h":70},
+	"sourceSize": {"w":67,"h":70}
+},
+{
+	"filename": "santa3",
+	"frame": {"x":139,"y":1,"w":67,"h":70},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":67,"h":70},
+	"sourceSize": {"w":67,"h":70}
 }],
 "meta": {
 	"app": "https://www.codeandweb.com/texturepacker",
 	"version": "1.0",
 	"image": "santa.png",
 	"format": "RGBA8888",
-	"size": {"w":62,"h":204},
-	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:fc90de600b35bbc2747e52dc63664c71:88461b1e8d6a170981a5d29f24fac393:3095c57fbbd330068b206a9f43d27330$"
+	"size": {"w":207,"h":72},
+	"scale": "0.65",
+	"smartupdate": "$TexturePacker:SmartUpdate:bd933e5f4577b7d50f29a1aed8a0cc75:62a3719c61b7d4306d3910ebbc6ee49e:3095c57fbbd330068b206a9f43d27330$"
 }
 }

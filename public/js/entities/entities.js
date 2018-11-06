@@ -99,11 +99,11 @@ game.SantaEntity = me.Entity.extend({
     init: function (x, y) {
 
         // call the super constructor
-        this._super(me.Entity, "init", [200, 140, {width : 60, height : 100}]);
+        this._super(me.Entity, "init", [200, 140, {width : 103, height : 107}]);
 
         // create an animation using the cap guy sprites, and add as renderable
         this.renderable = game.texture.createAnimationFromName([
-            "santa1", "santa2"
+            "santa1", "santa2", "santa3"
         ]);
 
         // enable this, since the entity starts off the viewport
