@@ -9,7 +9,6 @@ game.GameOverScreen = me.ScreenObject.extend({
         this.savedData = {
             pseudo:localStorage.getItem('me.save.pseudo'),
             pwd:localStorage.getItem('me.save.pwd'),
-            score: game.data.score,
             steps: game.data.steps
         };
         me.save.add(this.savedData);

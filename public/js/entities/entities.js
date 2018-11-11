@@ -8,11 +8,17 @@ game.SantaEntity = me.Entity.extend({
     init: function (x, y) {
 
         // call the super constructor
-        this._super(me.Entity, "init", [200, 140, {width : 103, height : 107}]);
+        this._super(me.Entity, "init", [200, 140, {width : 72, height : 98}]);
 
         // create an animation using the cap guy sprites, and add as renderable
         this.renderable = game.texture.createAnimationFromName([
-            "santa1", "santa2", "santa3"
+            "Armature_Fly_0", "Armature_Fly_1", "Armature_Fly_2", "Armature_Fly_3", "Armature_Fly_4",
+			"Armature_Fly_5", "Armature_Fly_6", "Armature_Fly_7", "Armature_Fly_8", "Armature_Fly_9",
+			"Armature_Fly_10", "Armature_Fly_11", "Armature_Fly_12", "Armature_Fly_13", "Armature_Fly_14",
+			"Armature_Fly_15", "Armature_Fly_16", "Armature_Fly_17", "Armature_Fly_18", "Armature_Fly_19",
+			"Armature_Fly_20", "Armature_Fly_21", "Armature_Fly_22", "Armature_Fly_23", "Armature_Fly_24",
+			"Armature_Fly_25", "Armature_Fly_26", "Armature_Fly_27", "Armature_Fly_28", "Armature_Fly_29", 
+			"Armature_Fly_30"
         ]);
 
         // enable this, since the entity starts off the viewport

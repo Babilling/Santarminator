@@ -7,7 +7,6 @@ var game = {
     resources: [
         // Images
         {name: "bg", type:"image", src: "data/img/bg.png"},
-        {name: "clumsy", type:"image", src: "data/img/clumsy.png"},
 
         // Weapon
         {name: "bullet", type:"image", src: "data/img/bullet.png"},
@@ -26,8 +25,8 @@ var game = {
         {name: "pipe3bis", type:"image", src: "data/img/pipe3bis.png"},
         {name: "snow", type:"image", src: "data/img/snow.png"},
         {name: "logo", type:"image", src: "data/img/logo.png"},
-		{name: "santa", type:"image", src: "data/img/santa.png"},
-		{name: "santa", type:"json", src: "data/img/santa.json"},
+		{name: "santa_default", type:"image", src: "data/img/santa_default.png"},
+		{name: "santa_default", type:"json", src: "data/img/santa_default.json"},
 
         {name: "gameover", type:"image", src: "data/img/gameover.png"},
 		{name: "tablo", type:"image", src: "data/img/tablo.png"},
@@ -77,7 +76,6 @@ var game = {
         me.state.set(me.state.PLAY, new game.PlayScreen());
         me.state.set(me.state.GAME_OVER, new game.GameOverScreen());
 
-        me.pool.register("clumsy", game.BirdEntity);
         me.pool.register("bullet", game.BulletEntity, true);
         me.pool.register("laser", game.LaserEntity, true);
         me.pool.register("simpleEnnemy", game.SimpleEnnemyEntity, true);
@@ -85,8 +83,8 @@ var game = {
         me.pool.register("snow", game.SnowEntity, true);
 		
 		game.texture = new me.video.renderer.Texture(
-        me.loader.getJSON("santa"),
-        me.loader.getImage("santa")
+        me.loader.getJSON("santa_default"),
+        me.loader.getImage("santa_default")
     );
 
         me.state.change(me.state.MENU);
