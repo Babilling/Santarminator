@@ -120,8 +120,8 @@ game.BulletEntity = me.Entity.extend({
         this._super(me.Entity, 'init', [x, y, settings]);
         this.alwaysUpdate = true;
         this.pos.add(this.body.vel);
-        this.body.gravity = 0;
-        this.body.vel.set(20 * game.data.speed, 0);
+        this.body.speed = 20;
+        this.body.vel.set(this.body.speed * game.data.speed, 0);
         this.type = 'weapon';
     },
 
@@ -135,44 +135,34 @@ game.BulletEntity = me.Entity.extend({
         if (this.pos.x > me.game.viewport.width) {
             me.game.world.removeChild(this);
         }
-		this.body.vel.set(20 * game.data.speed, 0);
+		this.body.vel.set(this.body.speed * game.data.speed, 0);
 		
         me.Rect.prototype.updateBounds.apply(this);
+        me.collision.check(this);
         this._super(me.Entity, 'update', [dt]);
-
-        if (this.collided) {
-            // TODO
-            me.game.world.removeChild(this);
-        }
-        //me.collision.check(this);
         return true;
     },
-
-onCollision: function(response) {
-    var obj = response.b;
-    if (obj.type === 'ennemy') {
-        me.device.vibrate(500);
-        this.collided = true;
+    onCollision: function(response) {
+        var obj = response.b;
+        if (obj.type === 'ennemy') {
+            me.game.world.removeChild(obj);
+            me.game.world.removeChild(this);
+        }
+        return false;
+    },
+    endAnimation: function() {
+        this.body.speed = 0;
+        var currentPos = this.pos.y;
+        this.endTween = new me.Tween(this.pos);
+        this.endTween.easing(me.Tween.Easing.Exponential.InOut);
+        this.renderable.currentTransform.identity();
+        this.renderable.currentTransform.rotate(Number.prototype.degToRad(90));
+        var finalPos = me.game.viewport.height - this.renderable.width/2 - 96;
+        this.endTween
+            .to({y: currentPos}, 100)
+            .to({y: finalPos}, 100);
+        this.endTween.start();
     }
-    return false;
-},
-
-endAnimation: function() {
-    me.game.viewport.fadeOut("#fff", 100);
-    var currentPos = this.pos.y;
-    this.endTween = new me.Tween(this.pos);
-    this.endTween.easing(me.Tween.Easing.Exponential.InOut);
-    this.renderable.currentTransform.identity();
-    this.renderable.currentTransform.rotate(Number.prototype.degToRad(90));
-    var finalPos = me.game.viewport.height - this.renderable.width/2 - 96;
-    this.endTween
-        .to({y: currentPos}, 1000)
-        .to({y: finalPos}, 1000)
-        .onComplete(function() {
-            me.state.change(me.state.GAME_OVER);
-        });
-    this.endTween.start();
-}
 });
 
 game.LaserEntity = me.Entity.extend({
@@ -244,12 +234,10 @@ game.SimpleEnnemyEntity = me.Entity.extend({
             me.game.world.removeChild(this);
         }
 		this.body.vel.set(this.xGenere, this.yGenere);
-		
         me.Rect.prototype.updateBounds.apply(this);
         this._super(me.Entity, 'update', [dt]);
         return true;
     },
-
 });
 
 game.EnnemyGenerator = me.Renderable.extend({
