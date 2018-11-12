@@ -13,7 +13,8 @@ var game = {
         {name: "laser", type:"image", src: "data/img/laser.png"},
 
         // Ennemies
-        {name: "simpleEnnemy", type:"image", src: "data/img/simpleEnnemy.png"},
+		{name: "simpleEnemy", type:"image", src: "data/img/enemy1.png"},
+		{name: "simpleEnemy", type:"json", src: "data/img/enemy1.json"},
         {name: "diagEnnemy", type:"image", src: "data/img/diagEnnemy.png"},
 
         // Decoration
@@ -78,7 +79,12 @@ var game = {
 
         me.pool.register("bullet", game.BulletEntity, true);
         me.pool.register("laser", game.LaserEntity, true);
-        me.pool.register("simpleEnnemy", game.SimpleEnnemyEntity, true);
+		
+		game.simpleEnemyTexture = new me.video.renderer.Texture(
+        me.loader.getJSON("simpleEnemy"),
+        me.loader.getImage("simpleEnemy")
+    );
+		me.pool.register("simpleEnemy", game.SimpleEnemyEntity, true);
         me.pool.register("pipe", game.PipeEntity, true);
         me.pool.register("snow", game.SnowEntity, true);
 		
