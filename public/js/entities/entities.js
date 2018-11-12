@@ -214,16 +214,18 @@ game.LaserEntity = me.Entity.extend({
 // =======================
 //       ENNEMIES
 // =======================
-game.SimpleEnnemyEntity = me.Entity.extend({
+game.SimpleEnemyEntity = me.Entity.extend({
     init: function(x, y) {
-        var settings = {};
-        settings.image = this.image = me.loader.getImage('simpleEnnemy');
-        settings.width = 50;
-        settings.height= 50;
-        settings.framewidth = 50;
-        settings.frameheight = 50;
+		var width = 80;
+		var height = 80;
+		// call the super constructor
+        this._super(me.Entity, "init", [x, y, {width : width, height : height}]);
 
-        this._super(me.Entity, 'init', [x, y, settings]);
+        // create an animation using the cap guy sprites, and add as renderable
+        this.renderable = game.simpleEnemyTexture.createAnimationFromName([
+            "5_ATTACK_000", "5_ATTACK_002", "5_ATTACK_003", "5_ATTACK_004", "5_ATTACK_005"
+        ]);
+
         this.alwaysUpdate = true;
         this.pos.add(this.body.vel);
         this.body.gravity = 0;
@@ -240,12 +242,11 @@ game.SimpleEnnemyEntity = me.Entity.extend({
             return this._super(me.Entity, 'update', [dt]);
         }
         this.pos.add(this.body.vel);
-        if (this.pos.x < -this.image.width || this.pos.y < -this.image.height || this.pos.y > me.game.viewport.width) {
+        if (this.pos.x < -this.width || this.pos.y < -this.height || this.pos.y > me.game.viewport.width) {
             me.game.world.removeChild(this);
         }
 		this.body.vel.set(this.xGenere, this.yGenere);
 		
-        me.Rect.prototype.updateBounds.apply(this);
         this._super(me.Entity, 'update', [dt]);
         return true;
     },
@@ -265,7 +266,7 @@ game.EnnemyGenerator = me.Renderable.extend({
         if (this.generate++ % this.pipeFrequency == 0) {
             var posX = me.game.viewport.width + 50;
             var posY = Number.prototype.random(100, me.video.renderer.getHeight() - 100);
-            me.game.world.addChild(new me.pool.pull('simpleEnnemy', posX, posY), 13);
+            me.game.world.addChild(new me.pool.pull('simpleEnemy', posX, posY), 13);
         }
         this._super(me.Entity, "update", [dt]);
     },
