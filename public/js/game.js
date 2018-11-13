@@ -40,6 +40,7 @@ var game = {
         // sounds
         {name: "theme", type: "audio", src: "data/bgm/"},
         {name: "hit", type: "audio", src: "data/sfx/"},
+        {name: "hurt", type: "audio", src: "data/sfx/"},
         {name: "lose", type: "audio", src: "data/sfx/"},
         {name: "bullet", type: "audio", src: "data/sfx/"},
         {name: "laser", type: "audio", src: "data/sfx/"},

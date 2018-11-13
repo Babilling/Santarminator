@@ -119,6 +119,7 @@ game.BulletEntity = me.Entity.extend({
 
         this._super(me.Entity, 'init', [x, y, settings]);
         this.alwaysUpdate = true;
+        this.degat = 5;
         this.pos.add(this.body.vel);
         this.body.speed = 20;
         this.body.vel.set(this.body.speed * game.data.speed, 0);
@@ -145,7 +146,8 @@ game.BulletEntity = me.Entity.extend({
     onCollision: function(response) {
         var obj = response.b;
         if (obj.type === 'ennemy') {
-            me.game.world.removeChild(obj);
+            me.audio.play("hurt");
+            obj.destroy(this.degat);
             me.game.world.removeChild(this);
         }
         return false;
@@ -216,6 +218,8 @@ game.SimpleEnemyEntity = me.Entity.extend({
             "5_ATTACK_000", "5_ATTACK_002", "5_ATTACK_003", "5_ATTACK_004", "5_ATTACK_005"
         ]);
 
+        this.hp = 10;
+        this.points = 1;
         this.alwaysUpdate = true;
         this.pos.add(this.body.vel);
         this.body.gravity = 0;
@@ -240,6 +244,16 @@ game.SimpleEnemyEntity = me.Entity.extend({
         this._super(me.Entity, 'update', [dt]);
         return true;
     },
+    destroy: function(degat){
+        this.hp -= degat;
+        if (this.hp <= 0){
+            game.data.steps += this.points;
+            me.game.world.removeChild(this);
+            // TODO Drop gifts (ils doivent être ramassés ou pas ?)
+            me.audio.play("hit");
+        }
+            
+    }
 });
 
 game.EnnemyGenerator = me.Renderable.extend({
