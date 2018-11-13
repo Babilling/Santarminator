@@ -13,8 +13,10 @@ var game = {
         {name: "laser", type:"image", src: "data/img/laser.png"},
 
         // Ennemies
-		{name: "simpleEnemy", type:"image", src: "data/img/enemy1.png"},
-		{name: "simpleEnemy", type:"json", src: "data/img/enemy1.json"},
+		{name: "meleeEnemy", type:"image", src: "data/img/enemy1.png"},
+		{name: "meleeEnemy", type:"json", src: "data/img/enemy1.json"},
+		{name: "mageEnemy", type:"image", src: "data/img/enemy2.png"},
+		{name: "mageEnemy", type:"json", src: "data/img/enemy2.json"},
         {name: "diagEnnemy", type:"image", src: "data/img/diagEnnemy.png"},
 
         // Decoration
@@ -80,19 +82,27 @@ var game = {
 
         me.pool.register("bullet", game.BulletEntity, true);
         me.pool.register("laser", game.LaserEntity, true);
-		
-		game.simpleEnemyTexture = new me.video.renderer.Texture(
-        me.loader.getJSON("simpleEnemy"),
-        me.loader.getImage("simpleEnemy")
-    );
-		me.pool.register("simpleEnemy", game.SimpleEnemyEntity, true);
-        me.pool.register("pipe", game.PipeEntity, true);
+		me.pool.register("pipe", game.PipeEntity, true);
         me.pool.register("snow", game.SnowEntity, true);
+		me.pool.register("simpleEnemy", game.SimpleEnemyEntity, true);
 		
+		//Melee enemy
+		game.meleeEnemyTexture = new me.video.renderer.Texture(
+			me.loader.getJSON("meleeEnemy"),
+			me.loader.getImage("meleeEnemy")
+		);
+		
+		//Mage enemy
+		game.mageEnemyTexture = new me.video.renderer.Texture(
+			me.loader.getJSON("mageEnemy"),
+			me.loader.getImage("mageEnemy")
+		);
+
+		//Santa
 		game.texture = new me.video.renderer.Texture(
-        me.loader.getJSON("santa_default"),
-        me.loader.getImage("santa_default")
-    );
+			me.loader.getJSON("santa_default"),
+			me.loader.getImage("santa_default")
+		);
 
         me.state.change(me.state.MENU);
     }

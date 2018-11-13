@@ -207,17 +207,24 @@ game.LaserEntity = me.Entity.extend({
 //       ENNEMIES
 // =======================
 game.SimpleEnemyEntity = me.Entity.extend({
-    init: function(x, y) {
-		var width = 80;
-		var height = 80;
-		// call the super constructor
-        this._super(me.Entity, "init", [x, y, {width : width, height : height}]);
+    init: function(x, y, enemyType) {
 
-        // create an animation using the cap guy sprites, and add as renderable
-        this.renderable = game.simpleEnemyTexture.createAnimationFromName([
-            "5_ATTACK_000", "5_ATTACK_002", "5_ATTACK_003", "5_ATTACK_004", "5_ATTACK_005"
-        ]);
-
+		if (enemyType == 1) {
+			// call the super constructor
+			this._super(me.Entity, "init", [x, y, {width : 80, height : 80}]);
+			// create an animation using the cap guy sprites, and add as renderable
+			this.renderable = game.meleeEnemyTexture.createAnimationFromName([
+				"5_ATTACK_000", "5_ATTACK_002", "5_ATTACK_003", "5_ATTACK_004", "5_ATTACK_005"
+			]);
+		}else if (enemyType == 2) {
+			// call the super constructor
+			this._super(me.Entity, "init", [x, y, {width : 69, height : 77}]);
+			// create an animation using the cap guy sprites, and add as renderable
+			this.renderable = game.mageEnemyTexture.createAnimationFromName([
+				"2_ATTACK_001", "2_ATTACK_002", "2_ATTACK_003"
+			]);
+		}
+		
         this.hp = 10;
         this.points = 1;
         this.alwaysUpdate = true;
@@ -269,7 +276,7 @@ game.EnnemyGenerator = me.Renderable.extend({
         if (this.generate++ % this.pipeFrequency == 0) {
             var posX = me.game.viewport.width + 50;
             var posY = Number.prototype.random(100, me.video.renderer.getHeight() - 100);
-            me.game.world.addChild(new me.pool.pull('simpleEnemy', posX, posY), 13);
+			me.game.world.addChild(new me.pool.pull('simpleEnemy', posX, posY, randomIntFromInterval(1,2)), 13);
         }
         this._super(me.Entity, "update", [dt]);
     },
@@ -405,3 +412,8 @@ game.SnowGenerator = me.Renderable.extend({
         this._super(me.Entity, "update", [dt]);
     },
 });
+
+function randomIntFromInterval(min,max) // min and max included
+{
+    return Math.floor(Math.random()*(max-min+1)+min);
+}
