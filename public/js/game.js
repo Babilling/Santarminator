@@ -10,6 +10,7 @@ var game = {
 
         // Weapon
         {name: "bullet", type:"image", src: "data/img/bullet.png"},
+		{name: "hadoken", type:"image", src: "data/img/hadoken.png"},
         {name: "laser", type:"image", src: "data/img/laser.png"},
 
         // Ennemies
@@ -42,8 +43,10 @@ var game = {
         // sounds
         {name: "theme", type: "audio", src: "data/bgm/"},
         {name: "hit", type: "audio", src: "data/sfx/"},
+        {name: "hurt", type: "audio", src: "data/sfx/"},
         {name: "lose", type: "audio", src: "data/sfx/"},
         {name: "bullet", type: "audio", src: "data/sfx/"},
+		{name: "hadoken", type: "audio", src: "data/sfx/"},
         {name: "laser", type: "audio", src: "data/sfx/"},
 		{name: "balledeboulepremium", type: "audio", src: "data/sfx/"},
         {name: "balle de boule", type: "audio", src: "data/sfx/"},
@@ -57,8 +60,9 @@ var game = {
 
     weapon: [
         // 0 is default
-        {type: "bullet", x: 40, y: 9, cd: 300, sound: "bullet", entitySkin: "clumsy"},
-        {type: "laser", x: 60, y: 9, cd: 50, sound: "laser", entitySkin: "clumsy"}
+        {type: "bullet", x: 40, y: 45, cd: 300, sound: "bullet"},
+		{type: "hadoken", x: 40, y: 9, cd: 300, sound: "hadoken"},
+        {type: "laser", x: 60, y: 9, cd: 50, sound: "laser"}
     ],
 
     "onload": function() {
@@ -80,6 +84,7 @@ var game = {
         me.state.set(me.state.GAME_OVER, new game.GameOverScreen());
 
         me.pool.register("bullet", game.BulletEntity, true);
+		me.pool.register("hadoken", game.BulletEntity, true);
         me.pool.register("laser", game.LaserEntity, true);
 		me.pool.register("pipe", game.PipeEntity, true);
         me.pool.register("snow", game.SnowEntity, true);
