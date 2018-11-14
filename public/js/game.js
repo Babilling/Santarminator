@@ -18,7 +18,6 @@ var game = {
 		{name: "meleeEnemy", type:"json", src: "data/img/enemy1.json"},
 		{name: "mageEnemy", type:"image", src: "data/img/enemy2.png"},
 		{name: "mageEnemy", type:"json", src: "data/img/enemy2.json"},
-        {name: "diagEnnemy", type:"image", src: "data/img/diagEnnemy.png"},
 
         // Decoration
         {name: "pipe", type:"image", src: "data/img/pipe.png"},
@@ -88,8 +87,9 @@ var game = {
         me.pool.register("laser", game.LaserEntity, true);
 		me.pool.register("pipe", game.PipeEntity, true);
         me.pool.register("snow", game.SnowEntity, true);
-		me.pool.register("simpleEnemy", game.SimpleEnemyEntity, true);
-		
+		me.pool.register("mageEnemy", game.MageEnemyEntity, true);
+		me.pool.register("meleeEnemy", game.MeleeEnemyEntity, true);
+
 		//Melee enemy
 		game.meleeEnemyTexture = new me.video.renderer.Texture(
 			me.loader.getJSON("meleeEnemy"),
