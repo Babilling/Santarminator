@@ -31,14 +31,8 @@ game.GameOverScreen = me.ScreenObject.extend({
             });
 
         me.game.world.addChild(new me.Sprite(
-            me.game.viewport.width/6,
-            me.game.viewport.height/3,
-            {image: 'gameover'}
-        ), 12);
-		
-		me.game.world.addChild(new me.Sprite(
-            (me.game.viewport.width) - (me.game.viewport.width/6),
-            (me.game.viewport.height) - (me.game.viewport.height/3),
+            me.game.viewport.width/2,
+            me.game.viewport.height/6,
             {image: 'gameover'}
         ), 12);
 		
@@ -62,7 +56,7 @@ game.GameOverScreen = me.ScreenObject.extend({
                 this._super(me.Renderable, 'init',
                     [0, 0, me.game.viewport.width/2, me.game.viewport.height/2]
                 );
-                this.font = new me.Font('consolas', 25, 'white', 'left');
+                this.font = new me.Font('gamefont', 25, 'white', 'left');
             },
 
             draw: function (renderer) {
