@@ -12,7 +12,8 @@ game.MageEnemyEntity = me.Entity.extend({
 		this.renderable = game.mageEnemyTexture.createAnimationFromName([
 				"2_ATTACK_001", "2_ATTACK_002", "2_ATTACK_003"
 		]);
-
+		this.renderable.addAnimation ("attack", [0,1,2]);
+		this.renderable.setCurrentAnimation("attack");
 		
         this.hp = hp;
         this.points = points;
@@ -24,8 +25,15 @@ game.MageEnemyEntity = me.Entity.extend({
         this.yGenere = Number.prototype.random(-2, 2);
         this.body.vel.set(this.xGenere, this.yGenere);
     },
-
-     update: function(dt) {
+	
+	onActivateEvent : function () {
+		var _this = this;
+		this.intervalID = me.timer.setInterval(function () {
+			me.game.world.addChild(new me.pool.pull('projectile', _this.pos.x - 5, _this.pos.y + 24), 14);
+		}, 1000);
+	},	
+	
+    update: function(dt) {
         // mechanics
 		
         if (!game.data.start) {
@@ -38,14 +46,12 @@ game.MageEnemyEntity = me.Entity.extend({
 		this.body.vel.set(this.xGenere, this.yGenere);
         me.Rect.prototype.updateBounds.apply(this);
 		
-		if ((Date.now() - socket.date) % 1000 == 0) {
-            me.game.world.addChild(new me.pool.pull('projectile', this.pos.x - 50, this.pos.y), 14);
-        }
         this._super(me.Entity, "update", [dt]);
 		
 		
         return true;
     },
+	
     destroy: function(degat){
         this.hp -= degat;
         if (this.hp <= 0){
@@ -55,7 +61,11 @@ game.MageEnemyEntity = me.Entity.extend({
             me.audio.play("hit");
         }
             
-    }
+    },
+	
+	onDeactivateEvent : function () {
+		me.timer.clearInterval(this.intervalID);
+	}
 });
 /**
  * MeleeEnemyEntity
@@ -112,7 +122,8 @@ game.MeleeEnemyEntity = me.Entity.extend({
  * MageAttackEntity
  */
 game.MageAttackEntity = me.Entity.extend({
-    init: function(x, y) {
+
+    init: function(x, y, velX, velY) {
 		var settings = {};
         settings.image = this.image = me.loader.getImage('projectile');
         settings.width = 22;
@@ -126,8 +137,12 @@ game.MageAttackEntity = me.Entity.extend({
         this.pos.add(this.body.vel);
         this.body.gravity = 0;
         this.type = 'attack';
-        this.xGenere = -5;
-        this.yGenere = Number.prototype.random(-2, 2);
+		this.xGenere = velX;
+		this.yGenere = velY;
+		if(this.xGenere == undefined)
+			this.xGenere = -10;
+		if(this.yGenere == undefined)
+			this.yGenere = Number.prototype.random(-1, 1);
         this.body.vel.set(this.xGenere, this.yGenere);
     },
 
@@ -146,7 +161,8 @@ game.MageAttackEntity = me.Entity.extend({
         this._super(me.Entity, 'update', [dt]);
         return true;
     },
-    destroy: function(){
-            
-    }
+	
+	destroy: function(){
+		
+	}
 });

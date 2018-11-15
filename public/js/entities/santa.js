@@ -80,7 +80,7 @@ game.SantaEntity = me.Entity.extend({
 
     onCollision: function(response) {
         var obj = response.b;
-        if (obj.type === 'ennemy') {
+        if (obj.type === 'ennemy' || obj.type === 'attack') {
             me.device.vibrate(500);
             this.collided = true;
         }

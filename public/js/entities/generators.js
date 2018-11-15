@@ -17,10 +17,10 @@ game.EnnemyGenerator = me.Renderable.extend({
         if (this.generate++ % this.pipeFrequency == 0) {
             var posX = me.game.viewport.width + 50;
             var posY = Number.prototype.random(100, me.video.renderer.getHeight() - 100);
-			var enemiesHp = 1;
+			var enemiesHp = 10;
 			var enemiesPoints = 10;
 			if(randomIntFromInterval(1,2) == 1)
-				me.game.world.addChild(new me.pool.pull('meleeEnemy', posX, posY, enemiesHp, enemiesPoints), 13);
+				me.game.world.addChild(new me.pool.pull('mageEnemy', posX, posY, enemiesHp, enemiesPoints), 13);
 			else
 				me.game.world.addChild(new me.pool.pull('mageEnemy', posX, posY, enemiesHp, enemiesPoints), 13);
         }
