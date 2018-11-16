@@ -11,7 +11,7 @@ game.SantaEntity = me.Entity.extend({
         this._super(me.Entity, "init", [200, 140, {width : 72, height : 98}]);
 
         // create an animation using the cap guy sprites, and add as renderable
-        this.renderable = game.texture.createAnimationFromName([
+        this.defaultRenderable = game.texture.createAnimationFromName([
             "Armature_Fly_0", "Armature_Fly_1", "Armature_Fly_2", "Armature_Fly_3", "Armature_Fly_4",
 			"Armature_Fly_5", "Armature_Fly_6", "Armature_Fly_7", "Armature_Fly_8", "Armature_Fly_9",
 			"Armature_Fly_10", "Armature_Fly_11", "Armature_Fly_12", "Armature_Fly_13", "Armature_Fly_14",
@@ -20,6 +20,7 @@ game.SantaEntity = me.Entity.extend({
 			"Armature_Fly_25", "Armature_Fly_26", "Armature_Fly_27", "Armature_Fly_28", "Armature_Fly_29", 
 			"Armature_Fly_30"
         ]);
+        this.renderable = this.defaultRenderable;
 
         // enable this, since the entity starts off the viewport
         this.alwaysUpdate = true;
@@ -27,7 +28,7 @@ game.SantaEntity = me.Entity.extend({
 		// collision shape
         this.collided = false;
         this.weapon = game.weapon[0];
-        this.lastShot = 0;
+        this.fireReleased = true;
 
         this.velY = 5;
         this.velX = 5;
@@ -39,10 +40,12 @@ game.SantaEntity = me.Entity.extend({
         }
         this.renderable.currentTransform.identity();
         if (me.input.isKeyPressed('shot')) {
-            if (Date.now() - this.lastShot > this.weapon.cd){
-                this.lastShot = Date.now();
-                me.audio.play(this.weapon.sound);
-                me.game.world.addChild(new me.pool.pull(this.weapon.type, this.pos.x + this.weapon.x, this.pos.y + this.weapon.y), 13);
+            this.fireReleased = false;
+            this.weapon.pressFire(this.pos.x, this.pos.y);
+        } else {
+            if (!this.fireReleased){
+                this.fireReleased = true;
+                this.weapon.releaseFire();
             }
         }
         if (me.input.isKeyPressed('forward')) {
@@ -64,6 +67,7 @@ game.SantaEntity = me.Entity.extend({
         me.Rect.prototype.updateBounds.apply(this);
 
         if (this.collided) {
+            this.weapon.resetWeapon();
             game.data.start = false;
             me.audio.play("lose");
             this.endAnimation();

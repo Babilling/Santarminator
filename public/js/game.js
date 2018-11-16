@@ -12,6 +12,7 @@ var game = {
         {name: "bullet", type:"image", src: "data/img/bullet.png"},
 		{name: "hadoken", type:"image", src: "data/img/hadoken.png"},
         {name: "laser", type:"image", src: "data/img/laser.png"},
+        {name: "minigun", type:"image", src: "data/img/minigun.png"},
 
         // Ennemies
 		{name: "meleeEnemy", type:"image", src: "data/img/enemy1.png"},
@@ -48,6 +49,8 @@ var game = {
         {name: "bullet", type: "audio", src: "data/sfx/"},
 		{name: "hadoken", type: "audio", src: "data/sfx/"},
         {name: "laser", type: "audio", src: "data/sfx/"},
+        {name: "minigunLoading", type: "audio", src: "data/sfx/"},
+        {name: "minigunFire", type: "audio", src: "data/sfx/"},
 		{name: "balledeboulepremium", type: "audio", src: "data/sfx/"},
         {name: "balle de boule", type: "audio", src: "data/sfx/"},
         {name: "cabiche", type: "audio", src: "data/sfx/"},
@@ -60,9 +63,108 @@ var game = {
 
     weapon: [
         // 0 is default
-        {type: "bullet", x: 40, y: 45, cd: 300, sound: "bullet"},
-		{type: "hadoken", x: 40, y: 9, cd: 300, sound: "hadoken"},
-        {type: "laser", x: 60, y: 9, cd: 50, sound: "laser"}
+        {
+            type: "bullet", 
+            lastShot: 0,
+            x: 40, 
+            y: 45, 
+            cd: 300, 
+            sound: "bullet", 
+            pressFire: function(posX, posY) {
+                if (Date.now() - this.lastShot > this.cd){
+                    this.lastShot = Date.now();
+                    me.audio.play(this.sound);
+                    me.game.world.addChild(new me.pool.pull(this.type, posX + this.x, posY + this.y), 13);
+                }
+            },
+            releaseFire: function(){
+        
+            },
+            resetWeapon: function(){
+                this.lastShot = 0;
+            }
+        },
+        {
+            type: "hadoken", 
+            lastShot: 0,
+            x: 40, 
+            y: 9, 
+            cd: 300, 
+            sound: "hadoken", 
+            pressFire: function(posX, posY) {
+                if (Date.now() - this.lastShot > this.cd){
+                    this.lastShot = Date.now();
+                    me.audio.play(this.sound);
+                    me.game.world.addChild(new me.pool.pull(this.type, posX + this.x, posY + this.y), 13);
+                }
+            },
+            releaseFire: function(){
+        
+            },
+            resetWeapon: function(){
+
+            },
+            resetWeapon: function(){
+                this.lastShot = 0;
+            }
+        },
+        
+        {
+            type: "laser", 
+            lastShot: 0,
+            x: 60, 
+            y: 9, 
+            cd: 50, 
+            sound: "laser", 
+            pressFire: function(posX, posY) {
+                if (Date.now() - this.lastShot > this.cd){
+                    this.lastShot = Date.now();
+                    me.audio.play(this.sound);
+                    me.game.world.addChild(new me.pool.pull(this.type, posX + this.x, posY + this.y), 13);
+                }
+            },
+            releaseFire: function(){
+        
+            },
+            resetWeapon: function(){
+                this.lastShot = 0;
+            }
+        },
+        {
+            type: "minigun", 
+            lastShot: 0,
+            firstShot: 0,
+            x: 40, 
+            y: 45, 
+            cd: 50, 
+            cdBeforeFire: 1000,
+            cdBeforeFirePlayed: false, 
+            pressFire: function(posX, posY) {
+                if (Date.now() - this.lastShot > this.cd){
+                    if (this.firstShot == 0) this.firstShot = Date.now();
+                    this.lastShot = Date.now();
+
+                    if (! this.cdBeforeFirePlayed && Date.now() - this.firstShot < this.cdBeforeFire){
+                        this.cdBeforeFirePlayed = true;
+                        me.audio.play("minigunLoading");
+                    }
+                    else if (Date.now() - this.firstShot >= this.cdBeforeFire){
+                        me.audio.play("minigunLoading");
+                        me.game.world.addChild(new me.pool.pull(this.type, posX + this.x, posY + this.y), 13);
+                    }
+                    
+                }
+            },
+            releaseFire: function(){
+                this.cdBeforeFirePlayed = false;
+                this.firstShot = 0;
+            },
+            resetWeapon: function(){
+                this.cdBeforeFirePlayed = false;
+                this.firstShot = 0;
+                this.lastShot = 0;
+            }
+        },
     ],
 
     "onload": function() {
@@ -86,6 +188,7 @@ var game = {
         me.pool.register("bullet", game.BulletEntity, true);
 		me.pool.register("hadoken", game.BulletEntity, true);
         me.pool.register("laser", game.LaserEntity, true);
+        me.pool.register("minigun", game.MinigunEntity, true);
 		me.pool.register("pipe", game.PipeEntity, true);
         me.pool.register("snow", game.SnowEntity, true);
 		me.pool.register("mageEnemy", game.MageEnemyEntity, true);

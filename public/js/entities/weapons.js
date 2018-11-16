@@ -47,19 +47,6 @@ game.BulletEntity = me.Entity.extend({
             me.game.world.removeChild(this);
         }
         return false;
-    },
-    endAnimation: function() {
-        this.body.speed = 0;
-        var currentPos = this.pos.y;
-        this.endTween = new me.Tween(this.pos);
-        this.endTween.easing(me.Tween.Easing.Exponential.InOut);
-        this.renderable.currentTransform.identity();
-        this.renderable.currentTransform.rotate(Number.prototype.degToRad(90));
-        var finalPos = me.game.viewport.height - this.renderable.width/2 - 96;
-        this.endTween
-            .to({y: currentPos}, 100)
-            .to({y: finalPos}, 100);
-        this.endTween.start();
     }
 });
 /**
@@ -108,19 +95,6 @@ game.HadokenEntity = me.Entity.extend({
             me.game.world.removeChild(this);
         }
         return false;
-    },
-    endAnimation: function() {
-        this.body.speed = 0;
-        var currentPos = this.pos.y;
-        this.endTween = new me.Tween(this.pos);
-        this.endTween.easing(me.Tween.Easing.Exponential.InOut);
-        this.renderable.currentTransform.identity();
-        this.renderable.currentTransform.rotate(Number.prototype.degToRad(90));
-        var finalPos = me.game.viewport.height - this.renderable.width/2 - 96;
-        this.endTween
-            .to({y: currentPos}, 100)
-            .to({y: finalPos}, 100);
-        this.endTween.start();
     }
 });
 /**
@@ -160,4 +134,53 @@ game.LaserEntity = me.Entity.extend({
         this._super(me.Entity, 'update', [dt]);
         return true;
     }
+});
+
+/**
+ * MinigunEntity
+ */
+game.MinigunEntity = me.Entity.extend({
+    init: function(x, y) {
+        var settings = {};
+        settings.image = this.image = me.loader.getImage('minigun');
+        settings.width = 29;
+        settings.height= 6;
+        settings.framewidth = 29;
+        settings.frameheight = 6;
+
+        this._super(me.Entity, 'init', [x, y, settings]);
+        this.alwaysUpdate = true;
+        this.degat = 5;
+        this.pos.add(this.body.vel);
+        this.body.speed = 20;
+        this.body.vel.set(this.body.speed * game.data.speed, 0);
+        this.type = 'weapon';
+    },
+
+    update: function(dt) {
+        // mechanics
+		
+        if (!game.data.start) {
+            return this._super(me.Entity, 'update', [dt]);
+        }
+        this.pos.add(this.body.vel);
+        if (this.pos.x > me.game.viewport.width) {
+            me.game.world.removeChild(this);
+        }
+		this.body.vel.set(this.body.speed * game.data.speed, 0);
+		
+        me.Rect.prototype.updateBounds.apply(this);
+        me.collision.check(this);
+        this._super(me.Entity, 'update', [dt]);
+        return true;
+    },
+    onCollision: function(response) {
+        var obj = response.b;
+        if (obj.type === 'ennemy') {
+            me.audio.play("hurt");
+            obj.destroy(this.degat);
+            me.game.world.removeChild(this);
+        }
+        return false;
+    },
 });
