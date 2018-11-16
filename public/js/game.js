@@ -51,6 +51,7 @@ var game = {
         {name: "laser", type: "audio", src: "data/sfx/"},
         {name: "minigunLoading", type: "audio", src: "data/sfx/"},
         {name: "minigunFire", type: "audio", src: "data/sfx/"},
+        {name: "minigunRelease", type: "audio", src: "data/sfx/"},
 		{name: "balledeboulepremium", type: "audio", src: "data/sfx/"},
         {name: "balle de boule", type: "audio", src: "data/sfx/"},
         {name: "cabiche", type: "audio", src: "data/sfx/"},
@@ -137,8 +138,9 @@ var game = {
             x: 40, 
             y: 45, 
             cd: 50, 
-            cdBeforeFire: 1000,
-            cdBeforeFirePlayed: false, 
+            cdBeforeFire: 950,
+            cdBeforeFirePlayed: false,
+            isFiring: false, 
             pressFire: function(posX, posY) {
                 if (Date.now() - this.lastShot > this.cd){
                     if (this.firstShot == 0) this.firstShot = Date.now();
@@ -149,7 +151,10 @@ var game = {
                         me.audio.play("minigunLoading");
                     }
                     else if (Date.now() - this.firstShot >= this.cdBeforeFire){
-                        me.audio.play("minigunLoading");
+                        if (!this.isFiring) {
+                            me.audio.play("minigunFire", true);
+                            this.isFiring = true;
+                        }
                         me.game.world.addChild(new me.pool.pull(this.type, posX + this.x, posY + this.y), 13);
                     }
                     
@@ -157,12 +162,18 @@ var game = {
             },
             releaseFire: function(){
                 this.cdBeforeFirePlayed = false;
+                this.isFiring = false;
                 this.firstShot = 0;
+                me.audio.stop("minigunLoading");
+                me.audio.stop("minigunFire");
+                me.audio.play("minigunRelease");
             },
             resetWeapon: function(){
                 this.cdBeforeFirePlayed = false;
+                this.isFiring = false;
                 this.firstShot = 0;
                 this.lastShot = 0;
+                me.audio.stop("minigunFire");
             }
         },
     ],
