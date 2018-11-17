@@ -24,7 +24,7 @@ game.MageEnemyEntity = me.Entity.extend({
         this.body.gravity = 0;
         this.type = 'ennemy';
         this.xGenere = -5;
-        this.yGenere = Number.prototype.random(-2, 2);
+        this.yGenere = me.Math.random(-2, 2);
         this.body.vel.set(this.xGenere, this.yGenere);
     },
 	
@@ -90,7 +90,7 @@ game.MeleeEnemyEntity = me.Entity.extend({
         this.body.gravity = 0;
         this.type = 'ennemy';
         this.xGenere = -5;
-        this.yGenere = Number.prototype.random(-2, 2);
+        this.yGenere = me.Math.random(-2, 2);
         this.body.vel.set(this.xGenere, this.yGenere);
     },
 
@@ -146,7 +146,7 @@ game.MageAttackEntity = me.Entity.extend({
 		if(this.xGenere == undefined)
 			this.xGenere = -10;
 		if(this.yGenere == undefined)
-			this.yGenere = Number.prototype.random(-1, 1);
+			this.yGenere = me.Math.random(-1, 1);
         if(this.explode == undefined)
             this.explode = false;
         if(this.childs == undefined)
@@ -191,7 +191,7 @@ game.MageAttackEntity = me.Entity.extend({
     createExplosion : function (childs) {
         var i;
         for(i = 0; i < childs; i++) {
-            var rad = (360 / childs * (i + 1)) * 3.14 / 180;
+            var rad = me.Math.degToRad(360 / childs * (i + 1));
             me.game.world.addChild(new me.pool.pull('projectile', this.pos.x, this.pos.y, 0, -5, false, 0, rad), 14);
         }
     }

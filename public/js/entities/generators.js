@@ -16,7 +16,7 @@ game.EnnemyGenerator = me.Renderable.extend({
     update: function(dt) {
         if (this.generate++ % this.pipeFrequency == 0) {
             var posX = me.game.viewport.width + 50;
-            var posY = Number.prototype.random(100, me.video.renderer.getHeight() - 100);
+            var posY = me.Math.random(100, me.video.renderer.getHeight() - 100);
 			var enemiesHp = 10;
 			var enemiesPoints = 10;
 			if(randomIntFromInterval(1,2) == 1)
@@ -41,7 +41,7 @@ game.PipeGenerator = me.Renderable.extend({
 
     update: function(dt) {
         if (this.generate++ % Math.floor(this.pipeFrequency / 2) == 0) {
-            var posY = Number.prototype.random(
+            var posY = me.Math.random(
                     me.video.renderer.getHeight() - 100,
                     150
             );
@@ -64,12 +64,12 @@ game.SnowGenerator = me.Renderable.extend({
 
     update: function(dt) {
         if (this.generate++ % Math.floor(this.pipeFrequency / 2) == 0) {
-            var posX = Number.prototype.random(100, me.video.renderer.getWidth());
+            var posX = me.Math.random(100, me.video.renderer.getWidth());
             var posY = -5;
             me.game.world.addChild(new me.pool.pull('snow', posX, posY), 5);
 
             posX = me.video.renderer.getWidth() + 5;
-            posY = Number.prototype.random(100, me.video.renderer.getHeight());
+            posY = me.Math.random(100, me.video.renderer.getHeight());
             me.game.world.addChild(new me.pool.pull('snow', posX, posY), 5);
         }
         this._super(me.Entity, "update", [dt]);

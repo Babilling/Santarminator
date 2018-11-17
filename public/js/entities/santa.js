@@ -94,7 +94,7 @@ game.SantaEntity = me.Entity.extend({
         this.endTween = new me.Tween(this.pos);
         this.endTween.easing(me.Tween.Easing.Exponential.InOut);
         this.renderable.currentTransform.identity();
-        this.renderable.currentTransform.rotate(Number.prototype.degToRad(90));
+        this.renderable.currentTransform.rotate(me.Math.degToRad(90));
         var finalPos = me.game.viewport.height - this.renderable.width/2 - 96;
         this.endTween
             .to({y: currentPos}, 1000)

@@ -178,7 +178,13 @@ var game = {
         },
     ],
 
-    "onload": function() {
+    onload: function() {
+        if (document.location.hash === "#debug") {
+            me.device.onReady(function () {
+              me.plugin.register.defer(debugPanel, "debug");
+            });
+        }
+
         if (!me.video.init(900, 504, {
             wrapper: "screen",
             scale : "auto",
@@ -191,7 +197,7 @@ var game = {
         me.loader.preload(game.resources, this.loaded.bind(this));
     },
 
-    "loaded": function() {
+    loaded: function() {
         me.state.set(me.state.MENU, new game.TitleScreen());
         me.state.set(me.state.PLAY, new game.PlayScreen());
         me.state.set(me.state.GAME_OVER, new game.GameOverScreen());
@@ -221,9 +227,7 @@ var game = {
 		//Santa
 		game.texture = new me.video.renderer.Texture(
 			me.loader.getJSON("santa_default"),
-            me.loader.getImage("santa_default"),
-            me.loader.getJSON("santa_minigun"),
-			me.loader.getImage("santa_minigun")
+            me.loader.getImage("santa_default")
 		);
 
         me.state.change(me.state.MENU);
