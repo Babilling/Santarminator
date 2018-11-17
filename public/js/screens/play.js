@@ -1,6 +1,6 @@
 game.PlayScreen = me.ScreenObject.extend({
     init: function() {
-        //me.audio.play("theme", true,null,1);
+        me.audio.play("theme", true, null, 0.3);
         me.audio.setVolume(1);
         this._super(me.ScreenObject, 'init');
     },
@@ -8,7 +8,7 @@ game.PlayScreen = me.ScreenObject.extend({
     onResetEvent: function() {
         me.game.reset();
         me.audio.stop("theme");
-        //me.audio.play("theme", true,null,0.2);
+        me.audio.play("theme", true, null, 0.3);
 
         me.input.bindKey(me.input.KEY.SPACE, "shot");
         me.input.bindKey(me.input.KEY.Z, "forward");
@@ -29,12 +29,9 @@ game.PlayScreen = me.ScreenObject.extend({
         this.HUD = new game.HUD.Container();
         me.game.world.addChild(this.HUD, 11);
 
-        //this.bird = me.pool.pull("clumsy", 60, me.game.viewport.height/2 - 100);
-        //me.game.world.addChild(this.bird, 12);
-		
-		var SantaEntity = new game.SantaEntity();
+		this.santa = new game.SantaEntity();
 		// add it to the scene
-		me.game.world.addChild(SantaEntity, 12);
+		me.game.world.addChild(this.santa, 12);
 
         //inputs
         me.input.bindPointer(me.input.pointer.LEFT, me.input.KEY.SPACE);
@@ -62,7 +59,7 @@ game.PlayScreen = me.ScreenObject.extend({
         me.audio.stopTrack('theme');
         // free the stored instance
         this.HUD = null;
-        this.bird = null;
+        this.santa = null;
 
         me.input.unbindKey(me.input.KEY.SPACE);
         me.input.unbindPointer(me.input.pointer.LEFT);
