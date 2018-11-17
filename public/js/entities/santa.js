@@ -49,19 +49,19 @@ game.SantaEntity = me.Entity.extend({
             }
         }
         if (me.input.isKeyPressed('forward')) {
-            this.pos.y -= this.velY * game.data.speed;
+            this.pos.y -= this.velY;
             if (this.pos.y < 25) this.pos.y = 25;
         }
         if (me.input.isKeyPressed('backward')) {
-            this.pos.y += this.velY * game.data.speed;
+            this.pos.y += this.velY;
             if (this.pos.y > me.game.viewport.height - 30) this.pos.y = me.game.viewport.height - 30;
         }
         if (me.input.isKeyPressed('left')) {
-            this.pos.x -= this.velX * game.data.speed;
+            this.pos.x -= this.velX;
             if (this.pos.x < 37) this.pos.x = 37;
         }
         if (me.input.isKeyPressed('right')) {
-            this.pos.x += this.velX * game.data.speed;
+            this.pos.x += this.velX;
             if (this.pos.x > me.game.viewport.width - 47) this.pos.x = me.game.viewport.width - 47;
         }
         me.Rect.prototype.updateBounds.apply(this);
@@ -73,9 +73,6 @@ game.SantaEntity = me.Entity.extend({
             this.endAnimation();
         }
         me.collision.check(this);
-
-        if (Date.now() - game.data.dateStart > 25000)
-            game.data.speed = 2;
 		
 		 // call the parent function
 		this._super(me.Entity, "update", [dt]);

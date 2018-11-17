@@ -18,7 +18,7 @@ game.BulletEntity = me.Entity.extend({
         this.degat = 5;
         this.pos.add(this.body.vel);
         this.body.speed = 20;
-        this.body.vel.set(this.body.speed * game.data.speed, 0);
+        this.body.vel.set(this.body.speed, 0);
         this.type = 'weapon';
     },
 
@@ -32,7 +32,7 @@ game.BulletEntity = me.Entity.extend({
         if (this.pos.x > me.game.viewport.width) {
             me.game.world.removeChild(this);
         }
-		this.body.vel.set(this.body.speed * game.data.speed, 0);
+		this.body.vel.set(this.body.speed, 0);
 		
         me.Rect.prototype.updateBounds.apply(this);
         me.collision.check(this);
@@ -66,7 +66,7 @@ game.HadokenEntity = me.Entity.extend({
         this.degat = 5;
         this.pos.add(this.body.vel);
         this.body.speed = 20;
-        this.body.vel.set(this.body.speed * game.data.speed, 0);
+        this.body.vel.set(this.body.speed, 0);
         this.type = 'weapon';
     },
 
@@ -80,7 +80,7 @@ game.HadokenEntity = me.Entity.extend({
         if (this.pos.x > me.game.viewport.width) {
             me.game.world.removeChild(this);
         }
-		this.body.vel.set(this.body.speed * game.data.speed, 0);
+		this.body.vel.set(this.body.speed, 0);
 		
         me.Rect.prototype.updateBounds.apply(this);
         me.collision.check(this);
@@ -153,7 +153,7 @@ game.MinigunEntity = me.Entity.extend({
         this.degat = 5;
         this.pos.add(this.body.vel);
         this.body.speed = 20;
-        this.body.vel.set(this.body.speed * game.data.speed, 0);
+        this.body.vel.set(this.body.speed, 0);
         this.type = 'weapon';
     },
 
@@ -167,7 +167,7 @@ game.MinigunEntity = me.Entity.extend({
         if (this.pos.x > me.game.viewport.width) {
             me.game.world.removeChild(this);
         }
-		this.body.vel.set(this.body.speed * game.data.speed, 0);
+		this.body.vel.set(this.body.speed, 0);
 		
         me.Rect.prototype.updateBounds.apply(this);
         me.collision.check(this);

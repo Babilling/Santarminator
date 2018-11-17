@@ -40,7 +40,7 @@ game.PipeGenerator = me.Renderable.extend({
     },
 
     update: function(dt) {
-        if (this.generate++ % Math.floor(this.pipeFrequency / (game.data.speed * 2)) == 0) {
+        if (this.generate++ % Math.floor(this.pipeFrequency / 2) == 0) {
             var posY = Number.prototype.random(
                     me.video.renderer.getHeight() - 100,
                     150
@@ -63,7 +63,7 @@ game.SnowGenerator = me.Renderable.extend({
     },
 
     update: function(dt) {
-        if (this.generate++ % Math.floor(this.pipeFrequency / (game.data.speed * 2)) == 0) {
+        if (this.generate++ % Math.floor(this.pipeFrequency / 2) == 0) {
             var posX = Number.prototype.random(100, me.video.renderer.getWidth());
             var posY = -5;
             me.game.world.addChild(new me.pool.pull('snow', posX, posY), 5);

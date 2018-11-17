@@ -29,7 +29,7 @@ game.PipeEntity = me.Entity.extend({
         this.alwaysUpdate = true;
         this.pos.add(this.body.vel);
         this.body.gravity = 0;
-        this.body.vel.set(-5 * game.data.speed, 0);
+        this.body.vel.set(-5, 0);
         this.type = 'pipe';
     },
 
@@ -43,7 +43,7 @@ game.PipeEntity = me.Entity.extend({
         if (this.pos.x < -this.image.width) {
             me.game.world.removeChild(this);
         }
-		this.body.vel.set(-10 * game.data.speed, 0);
+		this.body.vel.set(-10, 0);
 		
         me.Rect.prototype.updateBounds.apply(this);
         this._super(me.Entity, 'update', [dt]);
@@ -67,7 +67,7 @@ game.SnowEntity = me.Entity.extend({
         this.alwaysUpdate = true;
         this.pos.add(this.body.vel);
         this.body.gravity = 0;
-        this.body.vel.set(-5 * game.data.speed, 2);
+        this.body.vel.set(-5, 2);
         this.type = 'snow';
     },
 
@@ -81,7 +81,7 @@ game.SnowEntity = me.Entity.extend({
         if (this.pos.x < -this.image.width || this.pos.y < -this.image.height) {
             me.game.world.removeChild(this);
         }
-		this.body.vel.set(-5 * game.data.speed, 2);
+		this.body.vel.set(-5, 2);
 		
         me.Rect.prototype.updateBounds.apply(this);
         this._super(me.Entity, 'update', [dt]);

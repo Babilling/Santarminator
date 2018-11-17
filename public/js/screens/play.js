@@ -24,7 +24,6 @@ game.PlayScreen = me.ScreenObject.extend({
         me.input.bindKey(me.input.KEY.RIGHT, "right");
         game.data.steps = 0;
         game.data.start = false;
-        game.data.speed = 1;
         game.data.dateStart = Date.now();
 
         me.game.world.addChild(new BackgroundLayer('bg', 1));
