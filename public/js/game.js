@@ -221,7 +221,9 @@ var game = {
 		//Santa
 		game.texture = new me.video.renderer.Texture(
 			me.loader.getJSON("santa_default"),
-			me.loader.getImage("santa_default")
+            me.loader.getImage("santa_default"),
+            me.loader.getJSON("santa_minigun"),
+			me.loader.getImage("santa_minigun")
 		);
 
         me.state.change(me.state.MENU);

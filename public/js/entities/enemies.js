@@ -31,7 +31,7 @@ game.MageEnemyEntity = me.Entity.extend({
 	startAttackTimer : function (timerDelay) {
 		var _this = this;
 		this.intervalID = me.timer.setInterval(function () {
-			me.game.world.addChild(new me.pool.pull('projectile', _this.pos.x - 5, _this.pos.y + 24, undefined, undefined, true, 8), 14);
+			me.game.world.addChild(new me.pool.pull('projectile', _this.pos.x - 5, _this.pos.y + 24, undefined, undefined, true, 3), 14);
 		}, timerDelay);
 	},	
 	
@@ -59,7 +59,7 @@ game.MageEnemyEntity = me.Entity.extend({
         if (this.hp <= 0){
             game.data.steps += this.points;
             me.game.world.removeChild(this);
-            // TODO Drop gifts (ils doivent être ramassés ou pas ?)
+            // TODO Drop gifts (ils doivent ï¿½tre ramassï¿½s ou pas ?)
             me.audio.play("hit");
         }
             
@@ -114,7 +114,7 @@ game.MeleeEnemyEntity = me.Entity.extend({
         if (this.hp <= 0){
             game.data.steps += this.points;
             me.game.world.removeChild(this);
-            // TODO Drop gifts (ils doivent être ramassés ou pas ?)
+            // TODO Drop gifts (ils doivent ï¿½tre ramassï¿½s ou pas ?)
             me.audio.play("hit");
         }
             
@@ -125,7 +125,7 @@ game.MeleeEnemyEntity = me.Entity.extend({
  */
 game.MageAttackEntity = me.Entity.extend({
 
-    init: function(x, y, velX, velY, explode, childs) {
+    init: function(x, y, velX, velY, explode, childs, rad) {
 		var settings = {};
         settings.image = this.image = me.loader.getImage('projectile');
         settings.width = 22;
@@ -152,6 +152,11 @@ game.MageAttackEntity = me.Entity.extend({
         if(this.childs == undefined)
             this.childs = 0;
         this.body.vel.set(this.xGenere, this.yGenere);
+
+        if (rad != undefined){
+            this.body.vel = this.body.vel.rotate(rad);
+            this.rad = rad;
+        }
     },
 
     update: function(dt) {
@@ -171,7 +176,9 @@ game.MageAttackEntity = me.Entity.extend({
             this.explode = false;
             me.game.world.removeChild(this);
         }
-		this.body.vel.set(this.xGenere, this.yGenere);
+        this.body.vel.set(this.xGenere, this.yGenere);
+        if (this.rad != undefined)
+            this.body.vel = this.body.vel.rotate(this.rad);
         me.Rect.prototype.updateBounds.apply(this);
         this._super(me.Entity, 'update', [dt]);
         return true;
@@ -184,7 +191,8 @@ game.MageAttackEntity = me.Entity.extend({
     createExplosion : function (childs) {
         var i;
         for(i = 0; i < childs; i++) {
-            me.game.world.addChild(new me.pool.pull('projectile', this.pos.x, this.pos.y, Number.prototype.random(-5, 1), Number.prototype.random(-5, 5), false), 14);
+            var rad = (360 / childs * (i + 1)) * 3.14 / 180;
+            me.game.world.addChild(new me.pool.pull('projectile', this.pos.x, this.pos.y, 0, -5, false, 0, rad), 14);
         }
     }
 });
