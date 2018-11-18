@@ -18,9 +18,12 @@ var game = {
         // Ennemies
 		{name: "meleeEnemy", type:"image", src: "data/img/enemy1.png"},
 		{name: "meleeEnemy", type:"json", src: "data/img/enemy1.json"},
+        {name: "archerEnemy", type:"image", src: "data/img/archer.png"},
+        {name: "archerEnemy", type:"json", src: "data/img/archer.json"},
 		{name: "mageEnemy", type:"image", src: "data/img/enemy2.png"},
 		{name: "mageEnemy", type:"json", src: "data/img/enemy2.json"},
-		{name: "projectile", type:"image", src: "data/img/projectile2.png"},
+		{name: "mageAttack", type:"image", src: "data/img/mageAttack.png"},
+        {name: "archerAttack", type:"image", src: "data/img/archerAttack.png"},
 
         // Decoration
         {name: "pipe", type:"image", src: "data/img/pipe.png"},
@@ -254,7 +257,9 @@ var game = {
         me.pool.register("snow", game.SnowEntity, true);
 		me.pool.register("mageEnemy", game.MageEnemyEntity, true);
 		me.pool.register("meleeEnemy", game.MeleeEnemyEntity, true);
-		me.pool.register("projectile", game.MageAttackEntity, true);
+        me.pool.register("archerEnemy", game.ArcherEnemyEntity, true);
+		me.pool.register("mageAttackEntity", game.MageAttackEntity, true);
+        me.pool.register("archerAttackEntity", game.ArcherAttackEntity, true);
 
 		//Melee enemy
 		game.meleeEnemyTexture = new me.video.renderer.Texture(
@@ -267,6 +272,12 @@ var game = {
 			me.loader.getJSON("mageEnemy"),
 			me.loader.getImage("mageEnemy")
 		);
+
+        //Archer enemy
+        game.archerEnemyTexture = new me.video.renderer.Texture(
+            me.loader.getJSON("archerEnemy"),
+            me.loader.getImage("archerEnemy")
+        );
 
 		//Santa
 		game.texture = new me.video.renderer.Texture(

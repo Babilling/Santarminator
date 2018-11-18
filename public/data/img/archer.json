@@ -1,0 +1,36 @@
+{"frames": [
+
+{
+	"filename": "ARCHER_ATTACK_000",
+	"frame": {"x":0,"y":0,"w":79,"h":80},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":79,"h":80},
+	"sourceSize": {"w":79,"h":80}
+},
+{
+	"filename": "ARCHER_ATTACK_001",
+	"frame": {"x":79,"y":0,"w":78,"h":80},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":78,"h":80},
+	"sourceSize": {"w":78,"h":80}
+},
+{
+	"filename": "ARCHER_ATTACK_002",
+	"frame": {"x":157,"y":0,"w":78,"h":80},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":78,"h":80},
+	"sourceSize": {"w":78,"h":80}
+}],
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "archer.png",
+	"format": "RGBA8888",
+	"size": {"w":235,"h":80},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:b45e85e27ccb0d157a5010f144be8f35:fce39acc0e26d97561164ca9b3956981:bbed60d0c37d7d583029ac290d33128a$"
+}
+}

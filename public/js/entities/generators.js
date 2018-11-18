@@ -15,14 +15,21 @@ game.EnnemyGenerator = me.Renderable.extend({
 
     update: function(dt) {
         if (this.generate++ % this.pipeFrequency == 0) {
-            var posX = me.game.viewport.width + 50;
-            var posY = me.Math.random(100, me.video.renderer.getHeight() - 100);
-			var enemiesHp = 10;
-			var enemiesPoints = 10;
-			if(randomIntFromInterval(1,2) == 1)
-				me.game.world.addChild(new me.pool.pull('meleeEnemy', posX, posY, undefined, undefined, enemiesHp, enemiesPoints), 13);
-			else
-				me.game.world.addChild(new me.pool.pull('meleeEnemy', posX, posY, undefined, undefined, enemiesHp, enemiesPoints), 13);
+            let posX = me.game.viewport.width + 50;
+            let posY = me.Math.random(100, me.video.renderer.getHeight() - 100);
+			let enemiesHp = 10;
+			let enemiesPoints = 10;
+			switch(me.Math.random(1, 4)) {
+                case 1 :
+                    me.game.world.addChild(new me.pool.pull('meleeEnemy', posX, posY, undefined, undefined, enemiesHp, enemiesPoints), 13);
+                    break;
+                case 2 :
+                    me.game.world.addChild(new me.pool.pull('archerEnemy', posX, posY, undefined, undefined, enemiesHp, enemiesPoints), 13);
+                    break;
+                case 3 :
+                    me.game.world.addChild(new me.pool.pull('mageEnemy', posX, posY, undefined, undefined, enemiesHp, enemiesPoints), 13);
+                    break;
+            }
         }
         this._super(me.Entity, "update", [dt]);
     },
