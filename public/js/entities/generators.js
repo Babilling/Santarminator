@@ -20,9 +20,9 @@ game.EnnemyGenerator = me.Renderable.extend({
 			var enemiesHp = 10;
 			var enemiesPoints = 10;
 			if(randomIntFromInterval(1,2) == 1)
-				me.game.world.addChild(new me.pool.pull('meleeEnemy', posX, posY, enemiesHp, enemiesPoints), 13);
+				me.game.world.addChild(new me.pool.pull('meleeEnemy', posX, posY, undefined, undefined, enemiesHp, enemiesPoints), 13);
 			else
-				me.game.world.addChild(new me.pool.pull('meleeEnemy', posX, posY, enemiesHp, enemiesPoints), 13);
+				me.game.world.addChild(new me.pool.pull('meleeEnemy', posX, posY, undefined, undefined, enemiesHp, enemiesPoints), 13);
         }
         this._super(me.Entity, "update", [dt]);
     },

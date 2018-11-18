@@ -40,7 +40,7 @@ game.EnemyEntity = me.Entity.extend({
 
     destroy: function(damage){
         // Already dead ?
-        if (this.hp <= 0){
+        if (this.hp >= 0){
             this.hp -= damage;
             if (this.hp <= 0){
                 game.data.steps += this.points;
@@ -57,6 +57,10 @@ game.EnemyEntity = me.Entity.extend({
  * RangedEnemyEntity : launch ranged attacks
  */
 game.RangedEnemyEntity = game.EnemyEntity.extend({
+    init: function (x, y, settings, velX, velY, hp, points) {
+        this._super(game.EnemyEntity, "init", [x, y, settings, velX, velY, hp, points]);
+        this.startAttackTimer(this.animationSpeed * this.attackFrames.length);
+    },
 
     startAttackTimer : function (timerDelay) {
         let _this = this;
@@ -75,13 +79,12 @@ game.RangedEnemyEntity = game.EnemyEntity.extend({
 game.MageEnemyEntity = game.RangedEnemyEntity.extend({
     init: function(x, y, velX, velY, hp, points) {
         // Texture
+        this.attackFrames = [0,1,2];
         this._super(game.RangedEnemyEntity, "init", [x, y, {width : 77, height : 69}, velX, velY, hp, points]);
         this.renderable = game.mageEnemyTexture.createAnimationFromName([
             "2_ATTACK_001", "2_ATTACK_002", "2_ATTACK_003"
         ]);
-        let attackFrames = [0,1,2];
-        this.renderable.addAnimation ("attack", attackFrames,this.animationSpeed);
-        this.startAttackTimer(this.animationSpeed * attackFrames.length);
+        this.renderable.addAnimation ("attack", [0,1,2], this.animationSpeed);
         this.renderable.setCurrentAnimation("attack");
     },
 
@@ -94,52 +97,17 @@ game.MageEnemyEntity = game.RangedEnemyEntity.extend({
 /**
  * MeleeEnemyEntity
  */
-game.MeleeEnemyEntity = me.Entity.extend({
-    init: function(x, y, hp, points) {
-		
-		// call the super constructor
-		this._super(me.Entity, "init", [x, y, {width : 80, height : 80}]);
-		// create an animation using the cap guy sprites, and add as renderable
-		this.renderable = game.meleeEnemyTexture.createAnimationFromName([
-		"5_ATTACK_000", "5_ATTACK_002", "5_ATTACK_003", "5_ATTACK_004", "5_ATTACK_005"
-		]);
-
-		
-        this.hp = hp;
-        this.points = points;
-        this.alwaysUpdate = true;
-        this.pos.add(this.body.vel);
-        this.body.gravity = 0;
-        this.type = 'ennemy';
-        this.xGenere = -5;
-        this.yGenere = me.Math.random(-2, 2);
-        this.body.vel.set(this.xGenere, this.yGenere);
-    },
-
-    update: function(dt) {
-        // mechanics
-		
-        if (!game.data.start) {
-            return this._super(me.Entity, 'update', [dt]);
-        }
-        this.pos.add(this.body.vel);
-        if (this.pos.x < -this.width || this.pos.y < -this.height || this.pos.y > me.game.viewport.width) {
-            me.game.world.removeChild(this);
-        }
-		this.body.vel.set(this.xGenere, this.yGenere);
-        me.Rect.prototype.updateBounds.apply(this);
-        this._super(me.Entity, 'update', [dt]);
-        return true;
-    },
-    destroy: function(degat){
-        this.hp -= degat;
-        if (this.hp <= 0){
-            game.data.steps += this.points;
-            me.game.world.removeChild(this);
-            // TODO Drop gifts
-            me.audio.play("hit");
-        }
-            
+game.MeleeEnemyEntity = game.EnemyEntity.extend({
+    init: function(x, y, velX, velY, hp, points) {
+        // Texture and animation
+        this._super(game.EnemyEntity, "init", [x, y, {width : 80, height : 80}, velX, velY, hp, points]);
+        this.renderable = game.meleeEnemyTexture.createAnimationFromName([
+            "5_ATTACK_000", "5_ATTACK_002", "5_ATTACK_003", "5_ATTACK_004", "5_ATTACK_005"
+        ]);
+        let attackFrames = [1,2,3,4,5];
+        this.animationSpeed = 200;
+        this.renderable.addAnimation ("attack", attackFrames,this.animationSpeed);
+        this.renderable.setCurrentAnimation("attack");
     }
 });
 /**
