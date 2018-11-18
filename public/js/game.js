@@ -48,6 +48,8 @@ var game = {
         {name: "hurt", type: "audio", src: "data/sfx/"},
         {name: "lose", type: "audio", src: "data/sfx/"},
         {name: "bullet", type: "audio", src: "data/sfx/"},
+        {name: "shotgun", type: "audio", src: "data/sfx/"},
+        {name: "shotgunReloading", type: "audio", src: "data/sfx/"},
 		{name: "hadoken", type: "audio", src: "data/sfx/"},
         {name: "laser", type: "audio", src: "data/sfx/"},
         {name: "minigunLoading", type: "audio", src: "data/sfx/"},
@@ -93,34 +95,33 @@ var game = {
             y: 45, 
             cd: 1000, 
             cartbridge: 8,
-            reloadingCd : 3000,
+            reloadingCd : 4000,
             reloading: false,
             reloadingPlayed: false,
             pressFire: function(posX, posY) {
                 var duration = Date.now() - this.lastShot;
 
-                // Check du rechargement
-                if (this.reloading){
-                    if (duration > this.reloadingCd){
-                        this.reloading = false;
-                        this.cartbridge = 8;
-                        this.reloadingPlayed = false;
-                    }
-                    else if (duration > this.cd && ! this.reloadingPlayed){
-                        this.reloadingPlayed = true;
-                        // Play sound
-                    }
+                if (this.reloading && duration > this.reloadingCd){
+                    this.reloading = false;
+                    this.cartbridge = 8;
+                    this.reloadingPlayed = false;
                 }
 
                 // On peut tirer
                 if (duration > this.cd && ! this.reloading){
                     this.lastShot = Date.now();
-                    // Play sound + pompe
+                    me.audio.play("shotgun");
                     for (var i = -5; i < 6; i++)
                         me.game.world.addChild(new me.pool.pull(this.type, posX + this.x, posY + this.y, 
                             me.Math.degToRad(i * me.Math.random(-15, 15))), 13);
                     this.cartbridge -= 1;
                     if (this.cartbridge == 0) this.reloading = true;
+                }
+
+                // Check du rechargement
+                if (this.reloading && ! this.reloadingPlayed){
+                    this.reloadingPlayed = true;
+                    me.audio.play("shotgunReloading");
                 }
             },
             releaseFire: function(){
