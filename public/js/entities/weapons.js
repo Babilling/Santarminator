@@ -55,9 +55,9 @@ game.ShotgunEntity = me.Entity.extend({
     init: function(x, y, rad) {
         var settings = {};
         settings.image = this.image = me.loader.getImage('shotgun');
-        settings.width = 29;
+        settings.width = 6;
         settings.height= 6;
-        settings.framewidth = 29;
+        settings.framewidth = 6;
         settings.frameheight = 6;
 
         this._super(me.Entity, 'init', [x, y, settings]);
