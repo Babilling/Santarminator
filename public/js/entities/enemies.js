@@ -39,12 +39,17 @@ game.EnemyEntity = me.Entity.extend({
     },
 
     destroy: function(damage){
-        this.hp -= damage;
+        // Already dead ?
         if (this.hp <= 0){
-            game.data.steps += this.points;
-            me.game.world.removeChild(this);
-            // TODO Drop gifts
-            me.audio.play("hit");
+            this.hp -= damage;
+            if (this.hp <= 0){
+                game.data.steps += this.points;
+                me.game.world.removeChild(this);
+                // TODO Drop gifts
+                me.audio.play("hit");
+            }
+            else
+                me.audio.play("hurt");
         }
     }
 });
