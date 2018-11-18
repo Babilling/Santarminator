@@ -226,11 +226,6 @@ var game = {
     ],
 
     onload: function() {
-        if (document.location.hash === "#debug") {
-            me.device.onReady(function () {
-              me.plugin.register.defer(debugPanel, "debug");
-            });
-        }
 
         if (!me.video.init(900, 504, {
             wrapper: "screen",
