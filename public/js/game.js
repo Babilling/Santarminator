@@ -10,6 +10,7 @@ var game = {
 
         // Weapon
         {name: "bullet", type:"image", src: "data/img/bullet.png"},
+        {name: "shotgun", type:"image", src: "data/img/shotgun.png"},
 		{name: "hadoken", type:"image", src: "data/img/hadoken.png"},
         {name: "laser", type:"image", src: "data/img/laser.png"},
         {name: "minigun", type:"image", src: "data/img/minigun.png"},
@@ -83,6 +84,52 @@ var game = {
             },
             resetWeapon: function(){
                 this.lastShot = 0;
+            }
+        },
+        {
+            type: "shotgun", 
+            lastShot: 0,
+            x: 40, 
+            y: 45, 
+            cd: 1000, 
+            cartbridge: 8,
+            reloadingCd : 3000,
+            reloading: false,
+            reloadingPlayed: false,
+            pressFire: function(posX, posY) {
+                var duration = Date.now() - this.lastShot;
+
+                // Check du rechargement
+                if (this.reloading){
+                    if (duration > this.reloadingCd){
+                        this.reloading = false;
+                        this.cartbridge = 8;
+                        this.reloadingPlayed = false;
+                    }
+                    else if (duration > this.cd && ! this.reloadingPlayed){
+                        this.reloadingPlayed = true;
+                        // Play sound
+                    }
+                }
+
+                // On peut tirer
+                if (duration > this.cd && ! this.reloading){
+                    this.lastShot = Date.now();
+                    // Play sound + pompe
+                    for (var i = -5; i < 6; i++)
+                        me.game.world.addChild(new me.pool.pull(this.type, posX + this.x, posY + this.y, 
+                            me.Math.degToRad(i * me.Math.random(-15, 15))), 13);
+                    this.cartbridge -= 1;
+                    if (this.cartbridge == 0) this.reloading = true;
+                }
+            },
+            releaseFire: function(){
+            },
+            resetWeapon: function(){
+                this.cartbridge = 8;
+                this.lastShot = 0;
+                this.reloading = false;
+                this.reloadingPlayed = false;
             }
         },
         {
@@ -203,6 +250,7 @@ var game = {
         me.state.set(me.state.GAME_OVER, new game.GameOverScreen());
 
         me.pool.register("bullet", game.BulletEntity, true);
+        me.pool.register("shotgun", game.ShotgunEntity, true);
 		me.pool.register("hadoken", game.BulletEntity, true);
         me.pool.register("laser", game.LaserEntity, true);
         me.pool.register("minigun", game.MinigunEntity, true);

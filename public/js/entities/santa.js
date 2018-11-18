@@ -27,7 +27,7 @@ game.SantaEntity = me.Entity.extend({
 		
 		// collision shape
         this.collided = false;
-        this.weapon = game.weapon[3];
+        this.weapon = game.weapon[1];
         this.fireReleased = true;
 
         this.velY = 5;

@@ -42,12 +42,64 @@ game.BulletEntity = me.Entity.extend({
     onCollision: function(response) {
         var obj = response.b;
         if (obj.type === 'ennemy') {
-            me.audio.play("hurt");
             obj.destroy(this.degat);
             me.game.world.removeChild(this);
         }
         return false;
     }
+});
+/**
+ * ShotgunEntity
+ */
+game.ShotgunEntity = me.Entity.extend({
+    init: function(x, y, rad) {
+        var settings = {};
+        settings.image = this.image = me.loader.getImage('shotgun');
+        settings.width = 29;
+        settings.height= 6;
+        settings.framewidth = 29;
+        settings.frameheight = 6;
+
+        this._super(me.Entity, 'init', [x, y, settings]);
+        this.alwaysUpdate = true;
+        this.defaultSpeed = 10 + me.Math.random(3, 7);
+        this.duration = 500;
+        this.degat = 50;
+        this.minDegat = 5;
+        this.pos.add(this.body.vel);
+        this.body.vel.set(this.defaultSpeed, 0);
+        this.body.vel = this.body.vel.rotate(rad);
+        this.rad = rad;
+        this.type = 'weapon';
+        this.date = Date.now();
+    },
+
+    update: function(dt) {
+        // mechanics
+		
+        if (!game.data.start) {
+            return this._super(me.Entity, 'update', [dt]);
+        }
+        this.pos.add(this.body.vel);
+        if (Date.now() - this.date > this.duration)
+            me.game.world.removeChild(this);
+		this.body.vel.set(this.defaultSpeed - (Date.now() - this.date) * this.defaultSpeed / this.duration, 0);
+        this.body.vel = this.body.vel.rotate(this.rad);
+		
+        me.Rect.prototype.updateBounds.apply(this);
+        me.collision.check(this);
+        this._super(me.Entity, 'update', [dt]);
+        return true;
+    },
+    onCollision: function(response) {
+        var obj = response.b;
+        if (obj.type === 'ennemy') {
+            var partDegat = this.degat - this.minDegat;
+            obj.destroy(partDegat - (Date.now() - this.date) * partDegat / this.duration + this.minDegat);
+            me.game.world.removeChild(this);
+        }
+        return false;
+    },
 });
 /**
  * HadokenEntity
@@ -90,7 +142,6 @@ game.HadokenEntity = me.Entity.extend({
     onCollision: function(response) {
         var obj = response.b;
         if (obj.type === 'ennemy') {
-            me.audio.play("hurt");
             obj.destroy(this.degat);
             me.game.world.removeChild(this);
         }
@@ -180,7 +231,6 @@ game.MinigunEntity = me.Entity.extend({
     onCollision: function(response) {
         var obj = response.b;
         if (obj.type === 'ennemy') {
-            me.audio.play("hurt");
             obj.destroy(this.degat);
             me.game.world.removeChild(this);
         }
