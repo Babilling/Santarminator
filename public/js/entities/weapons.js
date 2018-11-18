@@ -62,7 +62,7 @@ game.ShotgunEntity = me.Entity.extend({
 
         this._super(me.Entity, 'init', [x, y, settings]);
         this.alwaysUpdate = true;
-        this.defaultSpeed = 10 + me.Math.random(3, 7);
+        this.defaultSpeed = 10 + me.Math.random(5, 10);
         this.duration = 500;
         this.degat = 50;
         this.minDegat = 5;
