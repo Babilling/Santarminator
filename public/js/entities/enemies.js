@@ -48,7 +48,7 @@ game.EnemyEntity = me.Entity.extend({
                 // TODO Drop gifts
                 me.audio.play("hit");
             }
-            else
+            else if (this.hp > 0)
                 me.audio.play("hurt");
         }
     }
