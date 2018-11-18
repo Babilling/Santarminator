@@ -56,7 +56,7 @@ socket.on('start', function(){
 
     if (socket.started){
 	    var d = Date(Date.now());
-      console.log(d.toLocaleString('fr-FR') + " Game over for " + pseudo + " : " + step + " step(s) (Game time = " + millisToMinutesAndSeconds((Date.now() - socket.date)) + ")");
+      console.log(d.toLocaleString('fr-FR') + " Game over for " + pseudo + " : Score = " + step + " (Game time = " + millisToMinutesAndSeconds((Date.now() - socket.date)) + ")");
       socket.started = false;
       db.run(`UPDATE User SET step = ? where pseudo=? AND pwd=? AND step < ?`, [step, pseudo, hash.sha256().update(pwd).digest('hex'), step],
         function(err) {

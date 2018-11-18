@@ -2,42 +2,29 @@
  * Enemies entities
  */
 /**
- * MageEnemyEntity
+ * EnemyEntity : basic enemies stats
  */
-game.MageEnemyEntity = me.Entity.extend({
-    init: function(x, y, hp, points) {
-		
-		this._super(me.Entity, "init", [x, y, {width : 80, height : 80}]);
-
-		this.renderable = game.mageEnemyTexture.createAnimationFromName([
-				"2_ATTACK_001", "2_ATTACK_002", "2_ATTACK_003"
-		]);
-		this.timerDelay = 1000;
-		this.renderable.addAnimation ("attack", [0,1,2],this.timerDelay/3);
-        this.startAttackTimer(this.timerDelay);
-		this.renderable.setCurrentAnimation("attack");
-
-        this.hp = hp;
-        this.points = points;
+game.EnemyEntity = me.Entity.extend({
+    init: function(x, y, settings, velX, velY, hp, points) {
+        // Default params values
+        /*************************************************************************/
+        if (typeof velX === 'undefined') { this.velX = -5; } else {this.velX = velX;}
+        if (typeof velY === 'undefined') { this.velY = me.Math.random(-2, 2); } else {this.velY = velY;}
+        if (typeof hp === 'undefined') { this.hp = 1; } else {this.hp = hp;}
+        if (typeof points === 'undefined') { this.points = 10; } else {this.points = points;}
+        /*************************************************************************/
+        // call the super constructor
+        this._super(me.Entity, "init", [x, y, settings]);
+        this.type = 'ennemy';
         this.alwaysUpdate = true;
         this.pos.add(this.body.vel);
         this.body.gravity = 0;
-        this.type = 'ennemy';
-        this.xGenere = -5;
-        this.yGenere = me.Math.random(-2, 2);
-        this.body.vel.set(this.xGenere, this.yGenere);
+        this.body.vel.set(this.velX, this.velY);
+        this.animationSpeed = 333;
     },
-	
-	startAttackTimer : function (timerDelay) {
-		var _this = this;
-		this.intervalID = me.timer.setInterval(function () {
-			me.game.world.addChild(new me.pool.pull('projectile', _this.pos.x - 5, _this.pos.y + 24, undefined, undefined, true, 3), 14);
-		}, timerDelay);
-	},	
-	
+
     update: function(dt) {
         // mechanics
-		
         if (!game.data.start) {
             return this._super(me.Entity, 'update', [dt]);
         }
@@ -45,29 +32,59 @@ game.MageEnemyEntity = me.Entity.extend({
         if (this.pos.x < -this.width || this.pos.y < -this.height || this.pos.y > me.game.viewport.width) {
             me.game.world.removeChild(this);
         }
-		this.body.vel.set(this.xGenere, this.yGenere);
+        this.body.vel.set(this.velX, this.velY);
         me.Rect.prototype.updateBounds.apply(this);
-		
         this._super(me.Entity, "update", [dt]);
-		
-		
         return true;
     },
-	
-    destroy: function(degat){
-        this.hp -= degat;
+
+    destroy: function(damage){
+        this.hp -= damage;
         if (this.hp <= 0){
             game.data.steps += this.points;
             me.game.world.removeChild(this);
-            // TODO Drop gifts (ils doivent �tre ramass�s ou pas ?)
+            // TODO Drop gifts
             me.audio.play("hit");
         }
-            
+    }
+});
+/**
+ * RangedEnemyEntity : launch ranged attacks
+ */
+game.RangedEnemyEntity = game.EnemyEntity.extend({
+
+    startAttackTimer : function (timerDelay) {
+        let _this = this;
+        this.intervalID = me.timer.setInterval(function () {
+            me.game.world.addChild(new me.pool.pull('projectile', _this.pos.x - 5, _this.pos.y + 24, undefined, undefined, true, 3), 14);
+        }, timerDelay);
     },
-	
-	onDeactivateEvent : function () {
-		me.timer.clearInterval(this.intervalID);
-	}
+
+    onDeactivateEvent : function () {
+        me.timer.clearInterval(this.intervalID);
+    }
+});
+/**
+ * MageEnemyEntity
+ */
+game.MageEnemyEntity = game.RangedEnemyEntity.extend({
+    init: function(x, y, velX, velY, hp, points) {
+        // Texture
+        this._super(game.RangedEnemyEntity, "init", [x, y, {width : 77, height : 69}, velX, velY, hp, points]);
+        this.renderable = game.mageEnemyTexture.createAnimationFromName([
+            "2_ATTACK_001", "2_ATTACK_002", "2_ATTACK_003"
+        ]);
+        let attackFrames = [0,1,2];
+        this.renderable.addAnimation ("attack", attackFrames,this.animationSpeed);
+        this.startAttackTimer(this.animationSpeed * attackFrames.length);
+        this.renderable.setCurrentAnimation("attack");
+    },
+
+    update: function(dt) {
+        this._super(game.RangedEnemyEntity, "update", [dt]);
+        if(this.pos.x <= me.game.viewport.width-150) {this.body.vel.set(0, this.velY);}
+    }
+
 });
 /**
  * MeleeEnemyEntity
@@ -114,7 +131,7 @@ game.MeleeEnemyEntity = me.Entity.extend({
         if (this.hp <= 0){
             game.data.steps += this.points;
             me.game.world.removeChild(this);
-            // TODO Drop gifts (ils doivent �tre ramass�s ou pas ?)
+            // TODO Drop gifts
             me.audio.play("hit");
         }
             
@@ -146,14 +163,14 @@ game.MageAttackEntity = me.Entity.extend({
 		if(this.xGenere == undefined)
 			this.xGenere = -10;
 		if(this.yGenere == undefined)
-			this.yGenere = me.Math.random(-1, 1);
+			this.yGenere = 0;
         if(this.explode == undefined)
             this.explode = false;
         if(this.childs == undefined)
             this.childs = 0;
         this.body.vel.set(this.xGenere, this.yGenere);
 
-        if (rad != undefined){
+        if (rad != undefined && !this.explode){
             this.body.vel = this.body.vel.rotate(rad);
             this.rad = rad;
         }
@@ -177,7 +194,7 @@ game.MageAttackEntity = me.Entity.extend({
             me.game.world.removeChild(this);
         }
         this.body.vel.set(this.xGenere, this.yGenere);
-        if (this.rad != undefined)
+        if (this.rad != undefined && !this.explode)
             this.body.vel = this.body.vel.rotate(this.rad);
         me.Rect.prototype.updateBounds.apply(this);
         this._super(me.Entity, 'update', [dt]);
