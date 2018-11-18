@@ -155,9 +155,9 @@ var game = {
                             me.audio.play("minigunFire", true);
                             this.isFiring = true;
                         }
-                        me.game.world.addChild(new me.pool.pull(this.type, posX + this.x, posY + this.y), 13);
+                        for (var i = -1; i < 2; i++)
+                            me.game.world.addChild(new me.pool.pull(this.type, posX + this.x, posY + this.y, me.Math.degToRad(i * 2)), 13);
                     }
-                    
                 }
             },
             releaseFire: function(){

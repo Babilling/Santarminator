@@ -140,7 +140,7 @@ game.LaserEntity = me.Entity.extend({
  * MinigunEntity
  */
 game.MinigunEntity = me.Entity.extend({
-    init: function(x, y) {
+    init: function(x, y, rad) {
         var settings = {};
         settings.image = this.image = me.loader.getImage('minigun');
         settings.width = 29;
@@ -154,6 +154,8 @@ game.MinigunEntity = me.Entity.extend({
         this.pos.add(this.body.vel);
         this.body.speed = 20;
         this.body.vel.set(this.body.speed, 0);
+        this.body.vel = this.body.vel.rotate(rad);
+        this.rad = rad;
         this.type = 'weapon';
     },
 
@@ -167,8 +169,9 @@ game.MinigunEntity = me.Entity.extend({
         if (this.pos.x > me.game.viewport.width) {
             me.game.world.removeChild(this);
         }
-		this.body.vel.set(this.body.speed, 0);
-		
+        this.body.vel.set(this.body.speed, 0);
+        this.body.vel = this.body.vel.rotate(this.rad);
+
         me.Rect.prototype.updateBounds.apply(this);
         me.collision.check(this);
         this._super(me.Entity, 'update', [dt]);
