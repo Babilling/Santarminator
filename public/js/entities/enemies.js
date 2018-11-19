@@ -32,6 +32,9 @@ game.EnemyEntity = me.Entity.extend({
         if (this.pos.x < -this.width || this.pos.y < -this.height || this.pos.y > me.game.viewport.width) {
             me.game.world.removeChild(this);
         }
+        if (this.pos.y < -this.height/4) {
+            this.velX += this.velX * 2;
+        }
         this.body.vel.set(this.velX, this.velY);
         me.Rect.prototype.updateBounds.apply(this);
         this._super(me.Entity, "update", [dt]);
@@ -199,6 +202,7 @@ game.MageAttackEntity = me.Entity.extend({
         for(let i = 0; i < this.explodesIntoNb; i++) {
             let rad = me.Math.degToRad(360 / this.explodesIntoNb * (i + 1));
             me.game.world.addChild(new me.pool.pull('mageAttackEntity', this.pos.x, this.pos.y, 0, -5, false, this.explodesIntoNb, rad), 14);
+            me.audio.play("explosion",false,null,0.1);
         }
     }
 });
@@ -217,7 +221,7 @@ game.ArcherAttackEntity = me.Entity.extend({
         this._super(me.Entity, 'init', [x, y, settings]);
         this.alwaysUpdate = true;
         this.pos.add(this.body.vel);
-        this.body.gravity = 0;
+        this.body.gravity = 0.2;
         this.type = 'attack';
         if (typeof velX === 'undefined') { this.velX = -10; } else {this.velX = velX;}
         if (typeof velY === 'undefined') { this.velY = 0; } else {this.velY = velY;}

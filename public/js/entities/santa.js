@@ -50,19 +50,19 @@ game.SantaEntity = me.Entity.extend({
         }
         if (me.input.isKeyPressed('forward')) {
             this.pos.y -= this.velY;
-            if (this.pos.y < 25) this.pos.y = 25;
+            if (this.pos.y < 0) this.pos.y = 0;
         }
         if (me.input.isKeyPressed('backward')) {
             this.pos.y += this.velY;
-            if (this.pos.y > me.game.viewport.height - 30) this.pos.y = me.game.viewport.height - 30;
+            if (this.pos.y > me.game.viewport.height - this.height) this.pos.y = me.game.viewport.height - this.height;
         }
         if (me.input.isKeyPressed('left')) {
             this.pos.x -= this.velX;
-            if (this.pos.x < 37) this.pos.x = 37;
+            if (this.pos.x < 0) this.pos.x = 0;
         }
         if (me.input.isKeyPressed('right')) {
             this.pos.x += this.velX;
-            if (this.pos.x > me.game.viewport.width - 47) this.pos.x = me.game.viewport.width - 47;
+            if (this.pos.x > me.game.viewport.width - this.width) this.pos.x = me.game.viewport.width - this.width;
         }
         me.Rect.prototype.updateBounds.apply(this);
 
