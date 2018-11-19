@@ -84,11 +84,13 @@ game.RangedEnemyEntity = game.EnemyEntity.extend({
  * MageEnemyEntity
  */
 game.MageEnemyEntity = game.RangedEnemyEntity.extend({
-    init: function(x, y, velX, velY, hp, points, attackSplitNb) {
+    init: function(x, y, velX, velY, hp, points, attackSplitNb, attackVelX, attackVelY) {
         if (typeof attackSplitNb === 'undefined') { this.attackSplitNb = 3; } else {this.attackSplitNb = attackSplitNb;}
+		if (typeof attackVelX === 'undefined') { this.attackVelX = -3; } else {this.attackVelX = attackVelX;}
+		if (typeof attackVelY === 'undefined') { this.attackVelY = 0; } else {this.attackVelY = attackVelY;}
         // Texture
         this.attackFrames = [0,1,2];
-        this._super(game.RangedEnemyEntity, "init", [x, y, {width : 77, height : 69}, velX, velY, hp, points, 'mageAttackEntity', this.attackSplitNb]);
+        this._super(game.RangedEnemyEntity, "init", [x, y, {width : 77, height : 69}, velX, velY, hp, points, 'mageAttackEntity', this.attackSplitNb, this.attackVelX, this.attackVelY]);
         this.renderable = game.mageEnemyTexture.createAnimationFromName([
             "2_ATTACK_001", "2_ATTACK_002", "2_ATTACK_003"
         ]);
@@ -151,13 +153,13 @@ game.MageAttackEntity = me.Entity.extend({
         settings.height= 22;
         settings.framewidth = 22;
         settings.frameheight = 22;
-        this.explosionDelay = me.Math.random(500,1000);
+        this.explosionDelay = me.Math.random(1000,3000);
         this._super(me.Entity, 'init', [x, y, settings]);
         this.alwaysUpdate = true;
         this.pos.add(this.body.vel);
         this.body.gravity = 0;
         this.type = 'attack';
-        if (typeof velX === 'undefined') { this.velX = -10; } else {this.velX = velX;}
+        if (typeof velX === 'undefined') { this.velX = -3; } else {this.velX = velX;}
         if (typeof velY === 'undefined') { this.velY = 0; } else {this.velY = velY;}
         if (typeof explode === 'undefined') { this.explode = false; } else {this.explode = explode;}
         if (typeof explodesIntoNb === 'undefined') { this.explodesIntoNb = 0; } else {this.explodesIntoNb = explodesIntoNb;}
@@ -196,7 +198,7 @@ game.MageAttackEntity = me.Entity.extend({
     createExplosion : function () {
         for(let i = 0; i < this.explodesIntoNb; i++) {
             let rad = me.Math.degToRad(360 / this.explodesIntoNb * (i + 1));
-            me.game.world.addChild(new me.pool.pull('mageAttackEntity', this.pos.x, this.pos.y, 0, -5, false, 0, rad), 14);
+            me.game.world.addChild(new me.pool.pull('mageAttackEntity', this.pos.x, this.pos.y, 0, -5, false, this.explodesIntoNb, rad), 14);
         }
     }
 });
