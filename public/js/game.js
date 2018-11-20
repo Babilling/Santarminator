@@ -16,12 +16,12 @@ var game = {
         {name: "minigun", type:"image", src: "data/img/minigun.png"},
 
         // Ennemies
-		{name: "meleeEnemy", type:"image", src: "data/img/enemy1.png"},
-		{name: "meleeEnemy", type:"json", src: "data/img/enemy1.json"},
-        {name: "archerEnemy", type:"image", src: "data/img/archer.png"},
-        {name: "archerEnemy", type:"json", src: "data/img/archer.json"},
-		{name: "mageEnemy", type:"image", src: "data/img/enemy2.png"},
-		{name: "mageEnemy", type:"json", src: "data/img/enemy2.json"},
+		{name: "meleeEnemy", type:"image", src: "data/img/meleehats.png"},
+		{name: "meleeEnemy", type:"json", src: "data/img/meleehats.json"},
+        {name: "archerEnemy", type:"image", src: "data/img/archerhats.png"},
+        {name: "archerEnemy", type:"json", src: "data/img/archerhats.json"},
+		{name: "mageEnemy", type:"image", src: "data/img/magehats.png"},
+		{name: "mageEnemy", type:"json", src: "data/img/magehats.json"},
 		{name: "mageAttack", type:"image", src: "data/img/mageAttack.png"},
         {name: "archerAttack", type:"image", src: "data/img/archerAttack.png"},
 

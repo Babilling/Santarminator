@@ -17,13 +17,14 @@ game.SantaEntity = me.Entity.extend({
             "Santa_Fly_Minigun_0", "Santa_Fly_Minigun_1", "Santa_Fly_Minigun_2", "Santa_Fly_Minigun_3",
             "Santa_Fly_Minigun_Spinning_0", "Santa_Fly_Minigun_Spinning_1", "Santa_Fly_Minigun_Spinning_2", "Santa_Fly_Minigun_Spinning_3",
             "Santa_Fly_default_0", "Santa_Fly_default_1", "Santa_Fly_default_2", "Santa_Fly_default_3",
-            "Santa_Fly_shotgun_0", "Santa_Fly_shotgun_1", "Santa_Fly_shotgun_2", "Santa_Fly_shotgun_3"
+            "Santa_Fly_shotgun_0", "Santa_Fly_shotgun_1", "Santa_Fly_shotgun_2", "Santa_Fly_shotgun_3",
+            "Santa_Hadoken_0","Santa_Hadoken_1","Santa_Hadoken_2","Santa_Hadoken_3","Santa_Hadoken_4"
         ]);
 
         this.renderable.addAnimation ("default", ["Santa_Fly_default_0","Santa_Fly_default_1","Santa_Fly_default_2","Santa_Fly_default_3"]);
         this.renderable.addAnimation ("shotgun", ["Santa_Fly_shotgun_0", "Santa_Fly_shotgun_1", "Santa_Fly_shotgun_2", "Santa_Fly_shotgun_3"]);
         this.renderable.addAnimation ("ak", ["Santa_Fly_AK_0", "Santa_Fly_AK_1", "Santa_Fly_AK_2", "Santa_Fly_AK_3"]);
-        this.renderable.addAnimation ("hadoken", ["Santa_Fly_default_0","Santa_Fly_default_1","Santa_Fly_default_2","Santa_Fly_default_3"]);
+        this.renderable.addAnimation ("hadoken", ["Santa_Hadoken_0","Santa_Hadoken_1","Santa_Hadoken_2","Santa_Hadoken_3","Santa_Hadoken_4"]);
         this.renderable.addAnimation ("laser", ["Santa_Fly_Laser_0", "Santa_Fly_Laser_1", "Santa_Fly_Laser_2", "Santa_Fly_Laser_3"]);
         this.renderable.addAnimation ("minigun_off", ["Santa_Fly_Minigun_0", "Santa_Fly_Minigun_1", "Santa_Fly_Minigun_2", "Santa_Fly_Minigun_3"]);
         this.renderable.addAnimation ("minigun_on", ["Santa_Fly_Minigun_Spinning_0", "Santa_Fly_Minigun_Spinning_1", "Santa_Fly_Minigun_Spinning_2", "Santa_Fly_Minigun_Spinning_3"]);

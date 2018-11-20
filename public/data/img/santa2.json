@@ -87,27 +87,6 @@
 		{
 			"filename": "Santa_Fly_Laser_0",
 			"frame": {
-				"x": 429,
-				"y": 1,
-				"w": 102,
-				"h": 97
-			},
-			"rotated": false,
-			"trimmed": false,
-			"spriteSourceSize": {
-				"x": 0,
-				"y": 0,
-				"w": 102,
-				"h": 97
-			},
-			"sourceSize": {
-				"w": 102,
-				"h": 97
-			}
-		},
-		{
-			"filename": "Santa_Fly_Laser_1",
-			"frame": {
 				"x": 1,
 				"y": 100,
 				"w": 102,
@@ -127,7 +106,7 @@
 			}
 		},
 		{
-			"filename": "Santa_Fly_Laser_2",
+			"filename": "Santa_Fly_Laser_1",
 			"frame": {
 				"x": 105,
 				"y": 100,
@@ -148,7 +127,7 @@
 			}
 		},
 		{
-			"filename": "Santa_Fly_Laser_3",
+			"filename": "Santa_Fly_Laser_2",
 			"frame": {
 				"x": 209,
 				"y": 100,
@@ -169,10 +148,31 @@
 			}
 		},
 		{
-			"filename": "Santa_Fly_Minigun_0",
+			"filename": "Santa_Fly_Laser_3",
 			"frame": {
 				"x": 313,
 				"y": 100,
+				"w": 102,
+				"h": 97
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 102,
+				"h": 97
+			},
+			"sourceSize": {
+				"w": 102,
+				"h": 97
+			}
+		},
+		{
+			"filename": "Santa_Fly_Minigun_0",
+			"frame": {
+				"x": 1,
+				"y": 199,
 				"w": 114,
 				"h": 97
 			},
@@ -192,7 +192,7 @@
 		{
 			"filename": "Santa_Fly_Minigun_1",
 			"frame": {
-				"x": 1,
+				"x": 117,
 				"y": 199,
 				"w": 114,
 				"h": 97
@@ -213,7 +213,7 @@
 		{
 			"filename": "Santa_Fly_Minigun_2",
 			"frame": {
-				"x": 117,
+				"x": 233,
 				"y": 199,
 				"w": 114,
 				"h": 97
@@ -234,7 +234,7 @@
 		{
 			"filename": "Santa_Fly_Minigun_3",
 			"frame": {
-				"x": 233,
+				"x": 349,
 				"y": 199,
 				"w": 114,
 				"h": 97
@@ -255,27 +255,6 @@
 		{
 			"filename": "Santa_Fly_Minigun_Spinning_0",
 			"frame": {
-				"x": 349,
-				"y": 199,
-				"w": 114,
-				"h": 97
-			},
-			"rotated": false,
-			"trimmed": false,
-			"spriteSourceSize": {
-				"x": 0,
-				"y": 0,
-				"w": 114,
-				"h": 97
-			},
-			"sourceSize": {
-				"w": 114,
-				"h": 97
-			}
-		},
-		{
-			"filename": "Santa_Fly_Minigun_Spinning_1",
-			"frame": {
 				"x": 1,
 				"y": 298,
 				"w": 114,
@@ -295,7 +274,7 @@
 			}
 		},
 		{
-			"filename": "Santa_Fly_Minigun_Spinning_2",
+			"filename": "Santa_Fly_Minigun_Spinning_1",
 			"frame": {
 				"x": 117,
 				"y": 298,
@@ -316,7 +295,7 @@
 			}
 		},
 		{
-			"filename": "Santa_Fly_Minigun_Spinning_3",
+			"filename": "Santa_Fly_Minigun_Spinning_2",
 			"frame": {
 				"x": 233,
 				"y": 298,
@@ -337,9 +316,30 @@
 			}
 		},
 		{
+			"filename": "Santa_Fly_Minigun_Spinning_3",
+			"frame": {
+				"x": 349,
+				"y": 298,
+				"w": 114,
+				"h": 97
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 114,
+				"h": 97
+			},
+			"sourceSize": {
+				"w": 114,
+				"h": 97
+			}
+		},
+		{
 			"filename": "Santa_Fly_default_0",
 			"frame": {
-				"x": 429,
+				"x": 417,
 				"y": 100,
 				"w": 75,
 				"h": 97
@@ -360,8 +360,8 @@
 		{
 			"filename": "Santa_Fly_default_1",
 			"frame": {
-				"x": 349,
-				"y": 298,
+				"x": 1,
+				"y": 397,
 				"w": 75,
 				"h": 97
 			},
@@ -381,8 +381,8 @@
 		{
 			"filename": "Santa_Fly_default_2",
 			"frame": {
-				"x": 426,
-				"y": 298,
+				"x": 78,
+				"y": 397,
 				"w": 75,
 				"h": 97
 			},
@@ -402,7 +402,7 @@
 		{
 			"filename": "Santa_Fly_default_3",
 			"frame": {
-				"x": 1,
+				"x": 155,
 				"y": 397,
 				"w": 75,
 				"h": 97
@@ -423,7 +423,7 @@
 		{
 			"filename": "Santa_Fly_shotgun_0",
 			"frame": {
-				"x": 78,
+				"x": 232,
 				"y": 397,
 				"w": 109,
 				"h": 97
@@ -444,7 +444,7 @@
 		{
 			"filename": "Santa_Fly_shotgun_1",
 			"frame": {
-				"x": 189,
+				"x": 343,
 				"y": 397,
 				"w": 109,
 				"h": 97
@@ -465,8 +465,8 @@
 		{
 			"filename": "Santa_Fly_shotgun_2",
 			"frame": {
-				"x": 300,
-				"y": 397,
+				"x": 429,
+				"y": 1,
 				"w": 109,
 				"h": 97
 			},
@@ -486,72 +486,9 @@
 		{
 			"filename": "Santa_Fly_shotgun_3",
 			"frame": {
-				"x": 411,
-				"y": 397,
-				"w": 109,
-				"h": 97
-			},
-			"rotated": false,
-			"trimmed": false,
-			"spriteSourceSize": {
-				"x": 0,
-				"y": 0,
-				"w": 109,
-				"h": 97
-			},
-			"sourceSize": {
-				"w": 109,
-				"h": 97
-			}
-		},
-		{
-			"filename": "Santa_Hadoken_0",
-			"frame": {
-				"x": 465,
-				"y": 199,
-				"w": 70,
-				"h": 97
-			},
-			"rotated": false,
-			"trimmed": false,
-			"spriteSourceSize": {
-				"x": 0,
-				"y": 0,
-				"w": 70,
-				"h": 97
-			},
-			"sourceSize": {
-				"w": 70,
-				"h": 97
-			}
-		},
-		{
-			"filename": "Santa_Hadoken_1",
-			"frame": {
-				"x": 533,
-				"y": 1,
-				"w": 73,
-				"h": 97
-			},
-			"rotated": false,
-			"trimmed": false,
-			"spriteSourceSize": {
-				"x": 0,
-				"y": 0,
-				"w": 73,
-				"h": 97
-			},
-			"sourceSize": {
-				"w": 73,
-				"h": 97
-			}
-		},
-		{
-			"filename": "Santa_Hadoken_2",
-			"frame": {
-				"x": 506,
+				"x": 494,
 				"y": 100,
-				"w": 72,
+				"w": 109,
 				"h": 97
 			},
 			"rotated": false,
@@ -559,53 +496,11 @@
 			"spriteSourceSize": {
 				"x": 0,
 				"y": 0,
-				"w": 72,
+				"w": 109,
 				"h": 97
 			},
 			"sourceSize": {
-				"w": 72,
-				"h": 97
-			}
-		},
-		{
-			"filename": "Santa_Hadoken_3",
-			"frame": {
-				"x": 537,
-				"y": 199,
-				"w": 73,
-				"h": 97
-			},
-			"rotated": false,
-			"trimmed": false,
-			"spriteSourceSize": {
-				"x": 0,
-				"y": 0,
-				"w": 73,
-				"h": 97
-			},
-			"sourceSize": {
-				"w": 73,
-				"h": 97
-			}
-		},
-		{
-			"filename": "Santa_Hadoken_4",
-			"frame": {
-				"x": 503,
-				"y": 298,
-				"w": 70,
-				"h": 97
-			},
-			"rotated": false,
-			"trimmed": false,
-			"spriteSourceSize": {
-				"x": 0,
-				"y": 0,
-				"w": 70,
-				"h": 97
-			},
-			"sourceSize": {
-				"w": 70,
+				"w": 109,
 				"h": 97
 			}
 		}
@@ -613,10 +508,10 @@
 	"meta": {
 		"app": "http://www.codeandweb.com/texturepacker",
 		"version": "1.0",
-		"image": "santa.png",
+		"image": "santa",
 		"format": "RGBA8888",
 		"size": {
-			"w": 611,
+			"w": 604,
 			"h": 495
 		},
 		"scale": "1"
