@@ -102,6 +102,53 @@ game.ShotgunEntity = me.Entity.extend({
     },
 });
 /**
+ * AkEntity
+ */
+game.AkEntity = me.Entity.extend({
+    init: function(x, y) {
+        var settings = {};
+        settings.image = this.image = me.loader.getImage('ak');
+        settings.width = 29;
+        settings.height= 6;
+        settings.framewidth = 29;
+        settings.frameheight = 6;
+
+        this._super(me.Entity, 'init', [x, y, settings]);
+        this.alwaysUpdate = true;
+        this.degat = 3;
+        this.pos.add(this.body.vel);
+        this.body.speed = 20;
+        this.body.vel.set(this.body.speed, 0);
+        this.type = 'weapon';
+    },
+
+    update: function(dt) {
+        // mechanics
+		
+        if (!game.data.start) {
+            return this._super(me.Entity, 'update', [dt]);
+        }
+        this.pos.add(this.body.vel);
+        if (this.pos.x > me.game.viewport.width) {
+            me.game.world.removeChild(this);
+        }
+		this.body.vel.set(this.body.speed, 0);
+		
+        me.Rect.prototype.updateBounds.apply(this);
+        me.collision.check(this);
+        this._super(me.Entity, 'update', [dt]);
+        return true;
+    },
+    onCollision: function(response) {
+        var obj = response.b;
+        if (obj.type === 'ennemy') {
+            obj.destroy(this.degat);
+            me.game.world.removeChild(this);
+        }
+        return false;
+    }
+});
+/**
  * HadokenEntity
  */
 game.HadokenEntity = me.Entity.extend({

@@ -11,6 +11,7 @@ var game = {
         // Weapon
         {name: "bullet", type:"image", src: "data/img/bullet.png"},
         {name: "shotgun", type:"image", src: "data/img/shotgun.png"},
+        {name: "ak", type:"image", src: "data/img/ak.png"},
 		{name: "hadoken", type:"image", src: "data/img/hadoken.png"},
         {name: "laser", type:"image", src: "data/img/laser.png"},
         {name: "minigun", type:"image", src: "data/img/minigun.png"},
@@ -53,6 +54,7 @@ var game = {
         {name: "lose", type: "audio", src: "data/sfx/"},
         {name: "bullet", type: "audio", src: "data/sfx/"},
         {name: "shotgun", type: "audio", src: "data/sfx/"},
+        {name: "ak", type: "audio", src: "data/sfx/"},
         {name: "shotgunReloading", type: "audio", src: "data/sfx/"},
 		{name: "hadoken", type: "audio", src: "data/sfx/"},
         {name: "laser", type: "audio", src: "data/sfx/"},
@@ -146,8 +148,8 @@ var game = {
             lastShot: 0,
             x: 45,
             y: 48,
-            cd: 300,
-            sound: "bullet",
+            cd: 200,
+            sound: "ak",
             pressFire: function(posX, posY) {
                 if (Date.now() - this.lastShot > this.cd){
                     this.lastShot = Date.now();
@@ -280,7 +282,7 @@ var game = {
 
         me.pool.register("bullet", game.BulletEntity, true);
         me.pool.register("shotgun", game.ShotgunEntity, true);
-        me.pool.register("ak", game.BulletEntity, true);
+        me.pool.register("ak", game.AkEntity, true);
 		me.pool.register("hadoken", game.BulletEntity, true);
         me.pool.register("laser", game.LaserEntity, true);
         me.pool.register("minigun", game.MinigunEntity, true);
