@@ -162,11 +162,12 @@ game.HadokenEntity = me.Entity.extend({
 
         this._super(me.Entity, 'init', [x, y, settings]);
         this.alwaysUpdate = true;
-        this.degat = 5;
+        this.degat = 50;
         this.pos.add(this.body.vel);
         this.body.speed = 20;
         this.body.vel.set(this.body.speed, 0);
         this.type = 'weapon';
+        this.enemies = [];
     },
 
     update: function(dt) {
@@ -188,10 +189,13 @@ game.HadokenEntity = me.Entity.extend({
     },
     onCollision: function(response) {
         var obj = response.b;
-        if (obj.type === 'ennemy') {
+        if (obj.type === 'ennemy' && !this.enemies.includes(obj)) {
+            this.enemies.push(obj);
             obj.destroy(this.degat);
-            me.game.world.removeChild(this);
         }
+        else if (obj.type === 'attack')
+            me.game.world.removeChild(obj);
+            
         return false;
     }
 });

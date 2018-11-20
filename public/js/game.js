@@ -148,7 +148,7 @@ var game = {
             lastShot: 0,
             x: 45,
             y: 48,
-            cd: 200,
+            cd: 150,
             sound: "ak",
             pressFire: function(posX, posY) {
                 if (Date.now() - this.lastShot > this.cd){
@@ -170,7 +170,7 @@ var game = {
             lastShot: 0,
             x: 40, 
             y: 9, 
-            cd: 300, 
+            cd: 800, 
             sound: "hadoken", 
             pressFire: function(posX, posY) {
                 if (Date.now() - this.lastShot > this.cd){
@@ -283,7 +283,7 @@ var game = {
         me.pool.register("bullet", game.BulletEntity, true);
         me.pool.register("shotgun", game.ShotgunEntity, true);
         me.pool.register("ak", game.AkEntity, true);
-		me.pool.register("hadoken", game.BulletEntity, true);
+		me.pool.register("hadoken", game.HadokenEntity, true);
         me.pool.register("laser", game.LaserEntity, true);
         me.pool.register("minigun", game.MinigunEntity, true);
 		me.pool.register("pipe", game.PipeEntity, true);
