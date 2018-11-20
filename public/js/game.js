@@ -78,7 +78,7 @@ var game = {
             lastShot: 0,
             x: 40,
             y: 48,
-            cd: 500, 
+            cd: 450, 
             sound: "bullet", 
             pressFire: function(posX, posY) {
                 if (Date.now() - this.lastShot > this.cd){
@@ -121,7 +121,7 @@ var game = {
                     for (var i = -5; i < 6; i++)
                         me.game.world.addChild(new me.pool.pull(this.type, posX + this.x, posY + this.y, 
                             me.Math.degToRad(i * me.Math.random(-15, 15))), 13);
-                    this.cartbridge -= 1;
+                    //this.cartbridge -= 1;
                     if (this.cartbridge == 0) this.reloading = true;
                 }
 
