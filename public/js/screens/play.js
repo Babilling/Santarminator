@@ -1,14 +1,15 @@
 game.PlayScreen = me.ScreenObject.extend({
     init: function() {
-        me.audio.play("theme", true, null, 0.3);
+        me.audio.play("theme" + me.Math.random(1, 3), true, null, 0.3);
         me.audio.setVolume(1);
         this._super(me.ScreenObject, 'init');
     },
 
     onResetEvent: function() {
         me.game.reset();
-        me.audio.stop("theme");
-        me.audio.play("theme", true, null, 0.3);
+        me.audio.stop("theme1");
+        me.audio.stop("theme2");
+        me.audio.play("theme" + me.Math.random(1, 3), true, null, 0.3);
 
         me.input.bindKey(me.input.KEY.SPACE, "shot");
         me.input.bindKey(me.input.KEY.Z, "forward");
@@ -58,7 +59,8 @@ game.PlayScreen = me.ScreenObject.extend({
     },
 
     onDestroyEvent: function() {
-        me.audio.stopTrack('theme');
+        me.audio.stopTrack('theme1');
+        me.audio.stopTrack('theme2');
         // free the stored instance
         this.HUD = null;
         this.santa = null;

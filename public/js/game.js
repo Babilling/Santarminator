@@ -48,7 +48,8 @@ var game = {
         {name: "new", type:"image", src: "data/img/new.png"},
 
         // sounds
-        {name: "theme", type: "audio", src: "data/bgm/"},
+        {name: "theme1", type: "audio", src: "data/bgm/"},
+        {name: "theme2", type: "audio", src: "data/bgm/"},
         {name: "hit", type: "audio", src: "data/sfx/"},
         {name: "hurt", type: "audio", src: "data/sfx/"},
         {name: "lose", type: "audio", src: "data/sfx/"},

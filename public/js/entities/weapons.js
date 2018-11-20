@@ -214,9 +214,10 @@ game.LaserEntity = me.Entity.extend({
         this._super(me.Entity, 'init', [x, y, settings]);
         this.alwaysUpdate = true;
         this.pos.add(this.body.vel);
-        this.body.gravity = 0;
+        this.degat = 5;
         this.body.vel.set(0, 0);
         this.type = 'weapon';
+        this.enemies = [];
         this.date = Date.now();
     },
 
@@ -227,14 +228,23 @@ game.LaserEntity = me.Entity.extend({
             return this._super(me.Entity, 'update', [dt]);
         }
         this.pos.add(this.body.vel);
-        if (Date.now() - this.date > 50) {
+        this.body.vel.set(0, 0);
+        if (Date.now() - this.date > 50)
             me.game.world.removeChild(this);
-        }
-		this.body.vel.set(0, 0);
 		
         me.Rect.prototype.updateBounds.apply(this);
+        me.collision.check(this);
         this._super(me.Entity, 'update', [dt]);
         return true;
+    },
+    onCollision: function(response) {
+        var obj = response.b;
+        if (obj.type === 'ennemy' && !this.enemies.includes(obj)) {
+            this.enemies.push(obj);
+            obj.destroy(this.degat);
+        }
+            
+        return false;
     }
 });
 
