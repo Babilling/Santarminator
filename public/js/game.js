@@ -78,7 +78,7 @@ var game = {
             lastShot: 0,
             x: 40,
             y: 48,
-            cd: 300, 
+            cd: 500, 
             sound: "bullet", 
             pressFire: function(posX, posY) {
                 if (Date.now() - this.lastShot > this.cd){
