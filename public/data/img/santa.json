@@ -1,6 +1,7 @@
 {
-	"frames": {
-		"Santa_Fly_AK_0.png": {
+	"frames": [
+		{
+			"filename": "Santa_Fly_AK_0",
 			"frame": {
 				"x": 1,
 				"y": 1,
@@ -20,7 +21,8 @@
 				"h": 97
 			}
 		},
-		"Santa_Fly_AK_1.png": {
+		{
+			"filename": "Santa_Fly_AK_1",
 			"frame": {
 				"x": 108,
 				"y": 1,
@@ -40,7 +42,8 @@
 				"h": 97
 			}
 		},
-		"Santa_Fly_AK_2.png": {
+		{
+			"filename": "Santa_Fly_AK_2",
 			"frame": {
 				"x": 215,
 				"y": 1,
@@ -60,7 +63,8 @@
 				"h": 97
 			}
 		},
-		"Santa_Fly_AK_3.png": {
+		{
+			"filename": "Santa_Fly_AK_3",
 			"frame": {
 				"x": 322,
 				"y": 1,
@@ -80,7 +84,8 @@
 				"h": 97
 			}
 		},
-		"Santa_Fly_Laser_0.png": {
+		{
+			"filename": "Santa_Fly_Laser_0",
 			"frame": {
 				"x": 1,
 				"y": 100,
@@ -100,7 +105,8 @@
 				"h": 97
 			}
 		},
-		"Santa_Fly_Laser_1.png": {
+		{
+			"filename": "Santa_Fly_Laser_1",
 			"frame": {
 				"x": 105,
 				"y": 100,
@@ -120,7 +126,8 @@
 				"h": 97
 			}
 		},
-		"Santa_Fly_Laser_2.png": {
+		{
+			"filename": "Santa_Fly_Laser_2",
 			"frame": {
 				"x": 209,
 				"y": 100,
@@ -140,7 +147,8 @@
 				"h": 97
 			}
 		},
-		"Santa_Fly_Laser_3.png": {
+		{
+			"filename": "Santa_Fly_Laser_3",
 			"frame": {
 				"x": 313,
 				"y": 100,
@@ -160,7 +168,8 @@
 				"h": 97
 			}
 		},
-		"Santa_Fly_Minigun_0.png": {
+		{
+			"filename": "Santa_Fly_Minigun_0",
 			"frame": {
 				"x": 1,
 				"y": 199,
@@ -180,7 +189,8 @@
 				"h": 97
 			}
 		},
-		"Santa_Fly_Minigun_1.png": {
+		{
+			"filename": "Santa_Fly_Minigun_1",
 			"frame": {
 				"x": 117,
 				"y": 199,
@@ -200,7 +210,8 @@
 				"h": 97
 			}
 		},
-		"Santa_Fly_Minigun_2.png": {
+		{
+			"filename": "Santa_Fly_Minigun_2",
 			"frame": {
 				"x": 233,
 				"y": 199,
@@ -220,7 +231,8 @@
 				"h": 97
 			}
 		},
-		"Santa_Fly_Minigun_3.png": {
+		{
+			"filename": "Santa_Fly_Minigun_3",
 			"frame": {
 				"x": 349,
 				"y": 199,
@@ -240,7 +252,8 @@
 				"h": 97
 			}
 		},
-		"Santa_Fly_Minigun_Spinning_0.png": {
+		{
+			"filename": "Santa_Fly_Minigun_Spinning_0",
 			"frame": {
 				"x": 1,
 				"y": 298,
@@ -260,7 +273,8 @@
 				"h": 97
 			}
 		},
-		"Santa_Fly_Minigun_Spinning_1.png": {
+		{
+			"filename": "Santa_Fly_Minigun_Spinning_1",
 			"frame": {
 				"x": 117,
 				"y": 298,
@@ -280,7 +294,8 @@
 				"h": 97
 			}
 		},
-		"Santa_Fly_Minigun_Spinning_2.png": {
+		{
+			"filename": "Santa_Fly_Minigun_Spinning_2",
 			"frame": {
 				"x": 233,
 				"y": 298,
@@ -300,7 +315,8 @@
 				"h": 97
 			}
 		},
-		"Santa_Fly_Minigun_Spinning_3.png": {
+		{
+			"filename": "Santa_Fly_Minigun_Spinning_3",
 			"frame": {
 				"x": 349,
 				"y": 298,
@@ -320,7 +336,8 @@
 				"h": 97
 			}
 		},
-		"Santa_Fly_default_0.png": {
+		{
+			"filename": "Santa_Fly_default_0",
 			"frame": {
 				"x": 417,
 				"y": 100,
@@ -340,7 +357,8 @@
 				"h": 97
 			}
 		},
-		"Santa_Fly_default_1.png": {
+		{
+			"filename": "Santa_Fly_default_1",
 			"frame": {
 				"x": 1,
 				"y": 397,
@@ -360,7 +378,8 @@
 				"h": 97
 			}
 		},
-		"Santa_Fly_default_2.png": {
+		{
+			"filename": "Santa_Fly_default_2",
 			"frame": {
 				"x": 78,
 				"y": 397,
@@ -380,7 +399,8 @@
 				"h": 97
 			}
 		},
-		"Santa_Fly_default_3.png": {
+		{
+			"filename": "Santa_Fly_default_3",
 			"frame": {
 				"x": 155,
 				"y": 397,
@@ -400,7 +420,8 @@
 				"h": 97
 			}
 		},
-		"Santa_Fly_shotgun_0.png": {
+		{
+			"filename": "Santa_Fly_shotgun_0",
 			"frame": {
 				"x": 232,
 				"y": 397,
@@ -420,7 +441,8 @@
 				"h": 97
 			}
 		},
-		"Santa_Fly_shotgun_1.png": {
+		{
+			"filename": "Santa_Fly_shotgun_1",
 			"frame": {
 				"x": 343,
 				"y": 397,
@@ -440,7 +462,8 @@
 				"h": 97
 			}
 		},
-		"Santa_Fly_shotgun_2.png": {
+		{
+			"filename": "Santa_Fly_shotgun_2",
 			"frame": {
 				"x": 429,
 				"y": 1,
@@ -460,7 +483,8 @@
 				"h": 97
 			}
 		},
-		"Santa_Fly_shotgun_3.png": {
+		{
+			"filename": "Santa_Fly_shotgun_3",
 			"frame": {
 				"x": 494,
 				"y": 100,
@@ -480,11 +504,11 @@
 				"h": 97
 			}
 		}
-	},
+	],
 	"meta": {
 		"app": "http://www.codeandweb.com/texturepacker",
 		"version": "1.0",
-		"image": "spritesheet.png",
+		"image": "santa",
 		"format": "RGBA8888",
 		"size": {
 			"w": 604,

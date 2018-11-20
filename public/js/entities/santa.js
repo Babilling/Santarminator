@@ -8,30 +8,41 @@ game.SantaEntity = me.Entity.extend({
     init: function (x, y) {
 
         // call the super constructor
-        this._super(me.Entity, "init", [200, 140, {width : 72, height : 98}]);
+        this._super(me.Entity, "init", [200, 140, {width : 75, height : 97}]);
 
         // create an animation using the cap guy sprites, and add as renderable
-        this.defaultRenderable = game.texture.createAnimationFromName([
-            "Armature_Fly_0", "Armature_Fly_1", "Armature_Fly_2", "Armature_Fly_3", "Armature_Fly_4",
-			"Armature_Fly_5", "Armature_Fly_6", "Armature_Fly_7", "Armature_Fly_8", "Armature_Fly_9",
-			"Armature_Fly_10", "Armature_Fly_11", "Armature_Fly_12", "Armature_Fly_13", "Armature_Fly_14",
-			"Armature_Fly_15", "Armature_Fly_16", "Armature_Fly_17", "Armature_Fly_18", "Armature_Fly_19",
-			"Armature_Fly_20", "Armature_Fly_21", "Armature_Fly_22", "Armature_Fly_23", "Armature_Fly_24",
-			"Armature_Fly_25", "Armature_Fly_26", "Armature_Fly_27", "Armature_Fly_28", "Armature_Fly_29", 
-			"Armature_Fly_30"
+        this.renderable = game.santaTexture.createAnimationFromName([
+            "Santa_Fly_AK_0", "Santa_Fly_AK_1", "Santa_Fly_AK_2", "Santa_Fly_AK_3",
+            "Santa_Fly_Laser_0", "Santa_Fly_Laser_1", "Santa_Fly_Laser_2", "Santa_Fly_Laser_3",
+            "Santa_Fly_Minigun_0", "Santa_Fly_Minigun_1", "Santa_Fly_Minigun_2", "Santa_Fly_Minigun_3",
+            "Santa_Fly_Minigun_Spinning_0", "Santa_Fly_Minigun_Spinning_1", "Santa_Fly_Minigun_Spinning_2", "Santa_Fly_Minigun_Spinning_3",
+            "Santa_Fly_default_0", "Santa_Fly_default_1", "Santa_Fly_default_2", "Santa_Fly_default_3",
+            "Santa_Fly_shotgun_0", "Santa_Fly_shotgun_1", "Santa_Fly_shotgun_2", "Santa_Fly_shotgun_3"
         ]);
-        this.renderable = this.defaultRenderable;
+
+        this.renderable.addAnimation ("default", ["Santa_Fly_default_0","Santa_Fly_default_1","Santa_Fly_default_2","Santa_Fly_default_3"]);
+        this.renderable.addAnimation ("shotgun", ["Santa_Fly_shotgun_0", "Santa_Fly_shotgun_1", "Santa_Fly_shotgun_2", "Santa_Fly_shotgun_3"]);
+        this.renderable.addAnimation ("ak", ["Santa_Fly_AK_0", "Santa_Fly_AK_1", "Santa_Fly_AK_2", "Santa_Fly_AK_3"]);
+        this.renderable.addAnimation ("hadoken", ["Santa_Fly_default_0","Santa_Fly_default_1","Santa_Fly_default_2","Santa_Fly_default_3"]);
+        this.renderable.addAnimation ("laser", ["Santa_Fly_Laser_0", "Santa_Fly_Laser_1", "Santa_Fly_Laser_2", "Santa_Fly_Laser_3"]);
+        this.renderable.addAnimation ("minigun_off", ["Santa_Fly_Minigun_0", "Santa_Fly_Minigun_1", "Santa_Fly_Minigun_2", "Santa_Fly_Minigun_3"]);
+        this.renderable.addAnimation ("minigun_on", ["Santa_Fly_Minigun_Spinning_0", "Santa_Fly_Minigun_Spinning_1", "Santa_Fly_Minigun_Spinning_2", "Santa_Fly_Minigun_Spinning_3"]);
+
+        this.renderable.setCurrentAnimation("default");
 
         // enable this, since the entity starts off the viewport
         this.alwaysUpdate = true;
 		
 		// collision shape
         this.collided = false;
-        this.weapon = game.weapon[1];
+        this.weapon = game.weapon[0];
         this.fireReleased = true;
 
         this.velY = 5;
         this.velX = 5;
+        //TODO debug remove on release
+        this.i = 0;
+        this.lastSwitch=0;
     },
 	update: function(dt) {
         var that = this;
@@ -63,6 +74,21 @@ game.SantaEntity = me.Entity.extend({
         if (me.input.isKeyPressed('right')) {
             this.pos.x += this.velX;
             if (this.pos.x > me.game.viewport.width - this.width) this.pos.x = me.game.viewport.width - this.width;
+        }
+        //TODO debug remove on release
+        if (me.input.isKeyPressed('switch') && Date.now() - this.lastSwitch > 300 ) {
+            this.i++;
+            if(this.i === 6)
+                this.i = 0;
+            switch(this.i) {
+                case 0:setSantaWeapon(this.i, "default");break;
+                case 1:setSantaWeapon(this.i, "shotgun");break;
+                case 2:setSantaWeapon(this.i, "ak");break;
+                case 3:setSantaWeapon(this.i, "hadoken");break;
+                case 4:setSantaWeapon(this.i, "laser");break;
+                case 5:setSantaWeapon(this.i, "minigun_off");break;
+            }
+        this.lastSwitch = Date.now();
         }
         me.Rect.prototype.updateBounds.apply(this);
 

@@ -25,6 +25,10 @@ var game = {
 		{name: "mageAttack", type:"image", src: "data/img/mageAttack.png"},
         {name: "archerAttack", type:"image", src: "data/img/archerAttack.png"},
 
+        // Santa
+        {name: "santa", type:"image", src: "data/img/santa.png"},
+        {name: "santa", type:"json", src: "data/img/santa.json"},
+
         // Decoration
         {name: "pipe", type:"image", src: "data/img/pipe.png"},
         {name: "pipe2", type:"image", src: "data/img/pipe2.png"},
@@ -34,9 +38,6 @@ var game = {
         {name: "pipe3bis", type:"image", src: "data/img/pipe3bis.png"},
         {name: "snow", type:"image", src: "data/img/snow.png"},
         {name: "logo", type:"image", src: "data/img/logo.png"},
-		{name: "santa_default", type:"image", src: "data/img/santa_default.png"},
-		{name: "santa_default", type:"json", src: "data/img/santa_default.json"},
-
         {name: "gameover", type:"image", src: "data/img/gameover.png"},
 		{name: "tablo", type:"image", src: "data/img/tablo.png"},
 		{name: "tablo12", type:"image", src: "data/img/tablo12.png"},
@@ -75,8 +76,8 @@ var game = {
         {
             type: "bullet", 
             lastShot: 0,
-            x: 40, 
-            y: 45, 
+            x: 40,
+            y: 48,
             cd: 300, 
             sound: "bullet", 
             pressFire: function(posX, posY) {
@@ -93,11 +94,12 @@ var game = {
                 this.lastShot = 0;
             }
         },
+        // 1 shotgun
         {
             type: "shotgun", 
             lastShot: 0,
-            x: 40, 
-            y: 45, 
+            x: 90,
+            y: 48,
             cd: 1000, 
             cartbridge: 8,
             reloadingCd : 4000,
@@ -138,6 +140,29 @@ var game = {
                 this.reloadingPlayed = false;
             }
         },
+        // 2 Ak
+        {
+            type: "ak",
+            lastShot: 0,
+            x: 45,
+            y: 48,
+            cd: 300,
+            sound: "bullet",
+            pressFire: function(posX, posY) {
+                if (Date.now() - this.lastShot > this.cd){
+                    this.lastShot = Date.now();
+                    me.audio.play(this.sound);
+                    me.game.world.addChild(new me.pool.pull(this.type, posX + this.x, posY + this.y), 13);
+                }
+            },
+            releaseFire: function(){
+
+            },
+            resetWeapon: function(){
+                this.lastShot = 0;
+            }
+        },
+        // 3 hadoken
         {
             type: "hadoken", 
             lastShot: 0,
@@ -162,12 +187,12 @@ var game = {
                 this.lastShot = 0;
             }
         },
-        
+        //4 laser
         {
             type: "laser", 
             lastShot: 0,
-            x: 60, 
-            y: 9, 
+            x: 83,
+            y: 15,
             cd: 50, 
             sound: "laser", 
             pressFire: function(posX, posY) {
@@ -184,12 +209,13 @@ var game = {
                 this.lastShot = 0;
             }
         },
+        // 5 minigun
         {
             type: "minigun", 
             lastShot: 0,
             firstShot: 0,
-            x: 40, 
-            y: 45, 
+            x: 77,
+            y: 64,
             cd: 50, 
             cdBeforeFire: 950,
             cdBeforeFirePlayed: false,
@@ -202,6 +228,7 @@ var game = {
                     if (! this.cdBeforeFirePlayed && Date.now() - this.firstShot < this.cdBeforeFire){
                         this.cdBeforeFirePlayed = true;
                         me.audio.play("minigunLoading");
+                        setSantaWeapon(5,"minigun_on");
                     }
                     else if (Date.now() - this.firstShot >= this.cdBeforeFire){
                         if (!this.isFiring) {
@@ -220,6 +247,7 @@ var game = {
                 me.audio.stop("minigunLoading");
                 me.audio.stop("minigunFire");
                 me.audio.play("minigunRelease");
+                setSantaWeapon(5,"minigun_off");
             },
             resetWeapon: function(){
                 this.cdBeforeFirePlayed = false;
@@ -252,6 +280,7 @@ var game = {
 
         me.pool.register("bullet", game.BulletEntity, true);
         me.pool.register("shotgun", game.ShotgunEntity, true);
+        me.pool.register("ak", game.BulletEntity, true);
 		me.pool.register("hadoken", game.BulletEntity, true);
         me.pool.register("laser", game.LaserEntity, true);
         me.pool.register("minigun", game.MinigunEntity, true);
@@ -282,9 +311,9 @@ var game = {
         );
 
 		//Santa
-		game.texture = new me.video.renderer.Texture(
-			me.loader.getJSON("santa_default"),
-            me.loader.getImage("santa_default")
+		game.santaTexture = new me.video.renderer.Texture(
+			me.loader.getJSON("santa"),
+            me.loader.getImage("santa")
 		);
 
         me.state.change(me.state.MENU);
