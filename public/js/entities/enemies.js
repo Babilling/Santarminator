@@ -32,9 +32,6 @@ game.EnemyEntity = me.Entity.extend({
         if (this.pos.x < -this.width || this.pos.y < -this.height || this.pos.y > me.game.viewport.width) {
             me.game.world.removeChild(this);
         }
-        if (this.pos.y < -this.height/4) {
-            this.velX += this.velX * 2;
-        }
         this.body.vel.set(this.velX, this.velY);
         me.Rect.prototype.updateBounds.apply(this);
         this._super(me.Entity, "update", [dt]);
@@ -160,7 +157,7 @@ game.MageAttackEntity = me.Entity.extend({
         settings.height= 22;
         settings.framewidth = 22;
         settings.frameheight = 22;
-        this.explosionDelay = me.Math.random(1000,3000);
+        this.explosionDelay = me.Math.random(1000,2000);
         this._super(me.Entity, 'init', [x, y, settings]);
         this.alwaysUpdate = true;
         this.pos.add(this.body.vel);

@@ -25,6 +25,9 @@ var game = {
 		{name: "mageEnemy", type:"json", src: "data/img/magehats.json"},
 		{name: "mageAttack", type:"image", src: "data/img/mageAttack.png"},
         {name: "archerAttack", type:"image", src: "data/img/archerAttack.png"},
+        // Boss
+        {name: "mageBoss", type:"image", src: "data/img/boss_mage.png"},
+        {name: "mageBoss", type:"json", src: "data/img/boss_mage.json"},
 
         // Santa
         {name: "santa", type:"image", src: "data/img/santa.png"},
@@ -296,6 +299,7 @@ var game = {
 		me.pool.register("pipe", game.PipeEntity, true);
         me.pool.register("snow", game.SnowEntity, true);
 		me.pool.register("mageEnemy", game.MageEnemyEntity, true);
+        me.pool.register("mageBoss", game.MageBossEntity, true);
 		me.pool.register("meleeEnemy", game.MeleeEnemyEntity, true);
         me.pool.register("archerEnemy", game.ArcherEnemyEntity, true);
 		me.pool.register("mageAttackEntity", game.MageAttackEntity, true);
@@ -317,6 +321,12 @@ var game = {
         game.archerEnemyTexture = new me.video.renderer.Texture(
             me.loader.getJSON("archerEnemy"),
             me.loader.getImage("archerEnemy")
+        );
+
+        //Mage boss
+        game.mageBossTexture = new me.video.renderer.Texture(
+            me.loader.getJSON("mageBoss"),
+            me.loader.getImage("mageBoss")
         );
 
 		//Santa
