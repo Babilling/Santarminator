@@ -112,6 +112,11 @@ game.SantaEntity = me.Entity.extend({
             me.device.vibrate(500);
             this.collided = true;
         }
+        else if (obj.type === 'present'){
+            game.data.steps += obj.points;
+            me.game.world.removeChild(obj);
+            // TODO play sound
+        }
         return false;
     },
 

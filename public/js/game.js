@@ -30,6 +30,11 @@ var game = {
         {name: "santa", type:"image", src: "data/img/santa.png"},
         {name: "santa", type:"json", src: "data/img/santa.json"},
 
+        // Gift
+        {name: "present1", type:"image", src: "data/img/present1.png"},
+        {name: "present2", type:"image", src: "data/img/present2.png"},
+        {name: "present3", type:"image", src: "data/img/present3.png"},
+
         // Decoration
         {name: "pipe", type:"image", src: "data/img/pipe.png"},
         {name: "pipe2", type:"image", src: "data/img/pipe2.png"},
@@ -287,6 +292,7 @@ var game = {
 		me.pool.register("hadoken", game.HadokenEntity, true);
         me.pool.register("laser", game.LaserEntity, true);
         me.pool.register("minigun", game.MinigunEntity, true);
+        me.pool.register("present", game.PresentEntity, true);
 		me.pool.register("pipe", game.PipeEntity, true);
         me.pool.register("snow", game.SnowEntity, true);
 		me.pool.register("mageEnemy", game.MageEnemyEntity, true);

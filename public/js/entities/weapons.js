@@ -93,7 +93,7 @@ game.ShotgunEntity = me.Entity.extend({
     },
     onCollision: function(response) {
         var obj = response.b;
-        if (obj.type === 'ennemy') {
+        if (obj.type === 'ennemy' || obj.type === 'present' ) {
             var partDegat = this.degat - this.minDegat;
             obj.destroy(partDegat - (Date.now() - this.date) * partDegat / this.duration + this.minDegat);
             me.game.world.removeChild(this);
@@ -141,7 +141,7 @@ game.AkEntity = me.Entity.extend({
     },
     onCollision: function(response) {
         var obj = response.b;
-        if (obj.type === 'ennemy') {
+        if (obj.type === 'ennemy' || obj.type === 'present') {
             obj.destroy(this.degat);
             me.game.world.removeChild(this);
         }
@@ -189,7 +189,7 @@ game.HadokenEntity = me.Entity.extend({
     },
     onCollision: function(response) {
         var obj = response.b;
-        if (obj.type === 'ennemy' && !this.enemies.includes(obj)) {
+        if ((obj.type === 'ennemy' || obj.type === 'present') && !this.enemies.includes(obj)) {
             this.enemies.push(obj);
             obj.destroy(this.degat);
         }
@@ -239,7 +239,7 @@ game.LaserEntity = me.Entity.extend({
     },
     onCollision: function(response) {
         var obj = response.b;
-        if (obj.type === 'ennemy' && !this.enemies.includes(obj)) {
+        if ((obj.type === 'ennemy' || obj.type === 'present') && !this.enemies.includes(obj)) {
             this.enemies.push(obj);
             obj.destroy(this.degat);
         }
@@ -291,7 +291,7 @@ game.MinigunEntity = me.Entity.extend({
     },
     onCollision: function(response) {
         var obj = response.b;
-        if (obj.type === 'ennemy') {
+        if (obj.type === 'ennemy' || obj.type === 'present') {
             obj.destroy(this.degat);
             me.game.world.removeChild(this);
         }
