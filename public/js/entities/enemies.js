@@ -21,7 +21,6 @@ game.EnemyEntity = me.Entity.extend({
         this.body.gravity = 0;
         this.body.vel.set(this.velX, this.velY);
         this.animationSpeed = 333;
-        this.defaultHp = this.hp;
     },
 
     update: function(dt) {
@@ -52,7 +51,7 @@ game.EnemyEntity = me.Entity.extend({
                 
                 if (Math.random() < 0.1){
                     // TODO Drop gifts
-                    me.game.world.addChild(new me.pool.pull('present', this.pos.x, this.pos.y, this.defaultHp, this.points), 10);
+                    me.game.world.addChild(new me.pool.pull('present', this.pos.x, this.pos.y, this.points), 10);
                 }
                 me.audio.play("hit");
             }

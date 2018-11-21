@@ -2,12 +2,9 @@
  * PresentEntity : basic enemies stats
  */
 game.PresentEntity = me.Entity.extend({
-    init: function(x, y, hp, points) {
+    init: function(x, y, points) {
         // Default params values
-        /*************************************************************************/
-        if (typeof hp === 'undefined') { this.hp = 1; } else {this.hp = hp;}
         if (typeof points === 'undefined') { this.points = 10; } else {this.points = points * 5;}
-        /*************************************************************************/
 
         var settings = {};
         settings.image = this.image = me.loader.getImage('present' + me.Math.random(1, 4));
@@ -38,14 +35,5 @@ game.PresentEntity = me.Entity.extend({
         me.Rect.prototype.updateBounds.apply(this);
         this._super(me.Entity, "update", [dt]);
         return true;
-    },
-
-    destroy: function(damage){
-        // Already dead ?
-        if (this.hp >= 0){
-            this.hp -= damage;
-            if (this.hp <= 0)
-                me.game.world.removeChild(this);
-        }
     }
 });
