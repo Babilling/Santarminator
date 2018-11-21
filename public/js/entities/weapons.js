@@ -17,7 +17,7 @@ game.BulletEntity = me.Entity.extend({
         this.alwaysUpdate = true;
         this.degat = 5;
         this.pos.add(this.body.vel);
-        this.body.speed = 20;
+        this.body.speed = 40;
         this.body.vel.set(this.body.speed, 0);
         this.type = 'weapon';
     },
@@ -93,7 +93,7 @@ game.ShotgunEntity = me.Entity.extend({
     },
     onCollision: function(response) {
         var obj = response.b;
-        if (obj.type === 'ennemy' || obj.type === 'present' ) {
+        if (obj.type === 'ennemy' ) {
             var partDegat = this.degat - this.minDegat;
             obj.destroy(partDegat - (Date.now() - this.date) * partDegat / this.duration + this.minDegat);
             me.game.world.removeChild(this);
@@ -141,7 +141,7 @@ game.AkEntity = me.Entity.extend({
     },
     onCollision: function(response) {
         var obj = response.b;
-        if (obj.type === 'ennemy' || obj.type === 'present') {
+        if (obj.type === 'ennemy') {
             obj.destroy(this.degat);
             me.game.world.removeChild(this);
         }
@@ -189,7 +189,7 @@ game.HadokenEntity = me.Entity.extend({
     },
     onCollision: function(response) {
         var obj = response.b;
-        if ((obj.type === 'ennemy' || obj.type === 'present') && !this.enemies.includes(obj)) {
+        if (obj.type === 'ennemy' && !this.enemies.includes(obj)) {
             this.enemies.push(obj);
             obj.destroy(this.degat);
         }
@@ -239,7 +239,7 @@ game.LaserEntity = me.Entity.extend({
     },
     onCollision: function(response) {
         var obj = response.b;
-        if ((obj.type === 'ennemy' || obj.type === 'present') && !this.enemies.includes(obj)) {
+        if (obj.type === 'ennemy' && !this.enemies.includes(obj)) {
             this.enemies.push(obj);
             obj.destroy(this.degat);
         }
@@ -291,7 +291,7 @@ game.MinigunEntity = me.Entity.extend({
     },
     onCollision: function(response) {
         var obj = response.b;
-        if (obj.type === 'ennemy' || obj.type === 'present') {
+        if (obj.type === 'ennemy') {
             obj.destroy(this.degat);
             me.game.world.removeChild(this);
         }
