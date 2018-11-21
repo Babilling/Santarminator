@@ -84,7 +84,7 @@ var game = {
         {
             type: "bullet", 
             lastShot: 0,
-            x: 40,
+            x: 50,
             y: 48,
             cd: 450, 
             sound: "bullet", 
@@ -106,7 +106,7 @@ var game = {
         {
             type: "shotgun", 
             lastShot: 0,
-            x: 90,
+            x: 107,
             y: 48,
             cd: 1000, 
             cartbridge: 8,
@@ -152,7 +152,7 @@ var game = {
         {
             type: "ak",
             lastShot: 0,
-            x: 45,
+            x: 70,
             y: 48,
             cd: 150,
             sound: "ak",
@@ -174,8 +174,8 @@ var game = {
         {
             type: "hadoken", 
             lastShot: 0,
-            x: 40, 
-            y: 9, 
+            x: 20,
+            y: 15,
             cd: 800, 
             sound: "hadoken", 
             pressFire: function(posX, posY) {
@@ -199,7 +199,7 @@ var game = {
         {
             type: "laser", 
             lastShot: 0,
-            x: 83,
+            x: 97,
             y: 15,
             cd: 50, 
             sound: "laser", 
@@ -222,7 +222,7 @@ var game = {
             type: "minigun", 
             lastShot: 0,
             firstShot: 0,
-            x: 77,
+            x: 97,
             y: 64,
             cd: 50, 
             cdBeforeFire: 950,

@@ -30,7 +30,8 @@ game.SantaEntity = me.Entity.extend({
         this.renderable.addAnimation ("minigun_on", ["Santa_Fly_Minigun_Spinning_0", "Santa_Fly_Minigun_Spinning_1", "Santa_Fly_Minigun_Spinning_2", "Santa_Fly_Minigun_Spinning_3"]);
 
         this.renderable.setCurrentAnimation("default");
-
+        this.renderable.anchorPoint = {"x" : 0, "y" : 0};
+        this.anchorPoint = {"x" : 0, "y" : 0};
         // enable this, since the entity starts off the viewport
         this.alwaysUpdate = true;
 		
