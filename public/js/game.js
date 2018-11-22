@@ -1,3 +1,4 @@
+const weaponsSoundLevel = 0.1;
 var game = {
     data: {
         steps: 0,
@@ -103,7 +104,7 @@ var game = {
             pressFire: function(posX, posY) {
                 if (Date.now() - this.lastShot > this.cd){
                     this.lastShot = Date.now();
-                    me.audio.play(this.sound);
+                    me.audio.play(this.sound, false, null, weaponsSoundLevel);
                     me.game.world.addChild(new me.pool.pull(this.type, posX + this.x, posY + this.y), 13);
                 }
             },
@@ -126,7 +127,7 @@ var game = {
             reloading: false,
             reloadingPlayed: false,
             pressFire: function(posX, posY) {
-                var duration = Date.now() - this.lastShot;
+                let duration = Date.now() - this.lastShot;
 
                 if (this.reloading && duration > this.reloadingCd){
                     this.reloading = false;
@@ -137,7 +138,7 @@ var game = {
                 // On peut tirer
                 if (duration > this.cd && ! this.reloading){
                     this.lastShot = Date.now();
-                    me.audio.play("shotgun");
+                    me.audio.play("shotgun", false, null, weaponsSoundLevel);
                     for (var i = -5; i < 6; i++)
                         me.game.world.addChild(new me.pool.pull(this.type, posX + this.x, posY + this.y, 
                             me.Math.degToRad(i * me.Math.random(-15, 15))), 13);
@@ -148,7 +149,7 @@ var game = {
                 // Check du rechargement
                 if (this.reloading && ! this.reloadingPlayed){
                     this.reloadingPlayed = true;
-                    me.audio.play("shotgunReloading");
+                    me.audio.play("shotgunReloading", false, null, weaponsSoundLevel);
                 }
             },
             releaseFire: function(){
@@ -171,7 +172,7 @@ var game = {
             pressFire: function(posX, posY) {
                 if (Date.now() - this.lastShot > this.cd){
                     this.lastShot = Date.now();
-                    me.audio.play(this.sound);
+                    me.audio.play(this.sound, false, null, weaponsSoundLevel);
                     me.game.world.addChild(new me.pool.pull(this.type, posX + this.x, posY + this.y), 13);
                 }
             },
@@ -193,7 +194,7 @@ var game = {
             pressFire: function(posX, posY) {
                 if (Date.now() - this.lastShot > this.cd){
                     this.lastShot = Date.now();
-                    me.audio.play(this.sound);
+                    me.audio.play(this.sound, false, null, weaponsSoundLevel);
                     me.game.world.addChild(new me.pool.pull(this.type, posX + this.x, posY + this.y), 13);
                 }
             },
@@ -218,7 +219,7 @@ var game = {
             pressFire: function(posX, posY) {
                 if (Date.now() - this.lastShot > this.cd){
                     this.lastShot = Date.now();
-                    me.audio.play(this.sound);
+                    me.audio.play(this.sound, false, null, weaponsSoundLevel);
                     me.game.world.addChild(new me.pool.pull(this.type, posX + this.x, posY + this.y), 13);
                 }
             },
@@ -247,12 +248,12 @@ var game = {
 
                     if (! this.cdBeforeFirePlayed && Date.now() - this.firstShot < this.cdBeforeFire){
                         this.cdBeforeFirePlayed = true;
-                        me.audio.play("minigunLoading");
+                        me.audio.play("minigunLoading", false, null, weaponsSoundLevel);
                         setSantaWeapon(5,"minigun_on");
                     }
                     else if (Date.now() - this.firstShot >= this.cdBeforeFire){
                         if (!this.isFiring) {
-                            me.audio.play("minigunFire", true);
+                            me.audio.play("minigunFire", true, null, weaponsSoundLevel);
                             this.isFiring = true;
                         }
                         for (var i = -1; i < 2; i++)
@@ -266,7 +267,7 @@ var game = {
                 this.firstShot = 0;
                 me.audio.stop("minigunLoading");
                 me.audio.stop("minigunFire");
-                me.audio.play("minigunRelease");
+                me.audio.play("minigunRelease", false, null, weaponsSoundLevel);
                 setSantaWeapon(5,"minigun");
             },
             resetWeapon: function(){

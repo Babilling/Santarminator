@@ -46,16 +46,14 @@ game.HUD.BossHPBar = me.Renderable.extend({
         // make sure we use screen coordinates
         this.floating = true;
         this.lostHPPercent = 0;
-        this.loaded = false;
     },
 
     draw: function(renderer) {
-        if(game.boss.hp === this.maxHP && !this.loaded) {
+        if(game.boss.hp === this.maxHP) {
             renderer.save();
             renderer.setColor('#0f0');
             renderer.fillRect(this.pos.x, this.pos.y, this.width, this.height);
             renderer.restore();
-            this.loaded = true;
         }
         else {
             renderer.save();

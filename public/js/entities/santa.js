@@ -78,9 +78,9 @@ game.SantaEntity = me.Entity.extend({
             if (this.pos.x > me.game.viewport.width - this.width) this.pos.x = me.game.viewport.width - this.width;
         }
         //TODO debug remove on release
-        if (me.input.isKeyPressed('switch') && Date.now() - this.lastSwitch > 300 ) {
+        if (me.input.isKeyPressed('switch') && Date.now() - this.lastSwitch > 500 ) {
             this.i++;
-            if(this.i === 6)
+            if(this.i >= 6)
                 this.i = 0;
             switch(this.i) {
                 case 0:setSantaWeapon(this.i, "default");break;

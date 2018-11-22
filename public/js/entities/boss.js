@@ -12,7 +12,7 @@ game.BossEntity = me.Entity.extend({
         /*************************************************************************/
         if (typeof velX === 'undefined') { this.velX = -1; } else {this.velX = velX;}
         if (typeof velY === 'undefined') { this.velY = 0; } else {this.velY = velY;}
-        if (typeof hp === 'undefined') { this.hp = 20; } else {this.hp = hp;}
+        if (typeof hp === 'undefined') { this.hp = 1000; } else {this.hp = hp;}
         if (typeof points === 'undefined') { this.points = 1000; } else {this.points = points;}
         /*************************************************************************/
         // call the super constructor
@@ -41,9 +41,6 @@ game.BossEntity = me.Entity.extend({
         // Already dead ?
         if (this.hp > 0){
             this.hp -= damage;
-            let lostHPPercent = (100-((game.boss.hp/game.bossHPBar.maxHP)*100));
-            if (lostHPPercent > 0)
-                game.bossHPBar.lostHPPercent += lostHPPercent;
             if (this.hp <= 0){
                 game.data.steps += this.points;
                 me.game.world.removeChild(this);
@@ -54,8 +51,12 @@ game.BossEntity = me.Entity.extend({
                 }
                 me.audio.play("hit");
             }
-            else if (this.hp > 0)
+            else {
+                let lostHPPercent = (100-((game.boss.hp/game.bossHPBar.maxHP)*100));
+                if (lostHPPercent > 0)
+                    game.bossHPBar.lostHPPercent += (lostHPPercent-game.bossHPBar.lostHPPercent);
                 me.audio.play("hurt");
+            }
         }
     }
 });
