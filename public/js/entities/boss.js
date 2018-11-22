@@ -81,24 +81,58 @@ game.MageBossEntity = game.BossEntity.extend({
         this.renderable.addAnimation ("idle", [28,29,30,31,32,33,34,35],this.animationSpeed*2);
         this.renderable.addAnimation ("walk", [36,37,38,39,40,41,42,43],this.animationSpeed*2);
         this.renderable.setCurrentAnimation("idle");
+        this.currentAttack = 0;
         this.attackDelay = (this.animationSpeed * this.attackFrames.length) + 3000;
         this.lastAttack = Date.now();
+        this.hasAttacked = false;
     },
 
     update: function(dt) {
         this.pos.add(this.body.vel);
         if (this.pos.x <= (me.game.viewport.width/3*2)-100 || (this.pos.x >= me.game.viewport.width-this.renderable.width && this.velX === 1)) {
-            this.velX = -this.velX;
+            this.velX = 0;
+            //if(this.velY === 0)
+                //this.velY = -1;
         }
         if (this.pos.y <= 0 || (this.pos.y >= me.game.viewport.height-this.renderable.height)) {
             this.velY = -this.velY;
         }
         if(Date.now() - this.lastAttack >= this.attackDelay) {
             this.renderable.setCurrentAnimation("attack", "idle");
+            this.currentAttack = me.Math.random(0, 1);
             this.lastAttack = Date.now();
+            this.hasAttacked = false;
         }
+        this.checkAttack();
         this.body.vel.set(this.velX, this.velY);
         me.Rect.prototype.updateBounds.apply(this);
         this._super(game.BossEntity, "update", [dt]);
+    },
+
+    checkAttack: function () {
+        if(this.hasAttacked === false && this.currentAttack === 0 && this.renderable.getCurrentAnimationFrame() === 34) {
+            me.game.world.addChild(new me.pool.pull('mageAttackEntity', this.pos.x, this.pos.y + this.renderable.height/2, -3, 0, true, 5), 14);
+            this.hasAttacked = true;
+        }
+    },
+
+    destroy: function(damage){
+        // Already dead ?
+        if (this.hp >= 0){
+            this.hp -= damage;
+            if (this.hp <= 0){
+                game.data.steps += this.points;
+                me.game.world.removeChild(this);
+
+                if (Math.random() < 0.1){
+                    // TODO Drop gifts
+                    me.game.world.addChild(new me.pool.pull('present', this.pos.x, this.pos.y, this.points), 10);
+                }
+                me.audio.play("hit");
+            }
+            else if (this.hp > 0) {
+                me.audio.play("hurt");
+            }
+        }
     }
 });
