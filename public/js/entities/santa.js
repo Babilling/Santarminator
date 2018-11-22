@@ -118,6 +118,11 @@ game.SantaEntity = me.Entity.extend({
             me.game.world.removeChild(obj);
             // TODO play sound
         }
+        else if (obj.type === 'weaponDrop'){
+            this.weapon.resetWeapon();
+            this.weapon = obj.weapon;
+            me.game.world.removeChild(obj);
+        }
         return false;
     },
 

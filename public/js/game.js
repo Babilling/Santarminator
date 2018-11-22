@@ -38,6 +38,14 @@ var game = {
         {name: "present2", type:"image", src: "data/img/present2.png"},
         {name: "present3", type:"image", src: "data/img/present3.png"},
 
+        // Drop Weapon
+        {name: "drop-bullet", type:"image", src: "data/img/present1.png"},
+        {name: "drop-shotgun", type:"image", src: "data/img/present2.png"},
+        {name: "drop-ak", type:"image", src: "data/img/present3.png"},
+        {name: "drop-hadoken", type:"image", src: "data/img/present1.png"},
+        {name: "drop-laser", type:"image", src: "data/img/present2.png"},
+        {name: "drop-minigun", type:"image", src: "data/img/present3.png"},
+
         // Decoration
         {name: "pipe", type:"image", src: "data/img/pipe.png"},
         {name: "pipe2", type:"image", src: "data/img/pipe2.png"},
