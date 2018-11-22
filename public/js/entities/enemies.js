@@ -40,7 +40,7 @@ game.EnemyEntity = me.Entity.extend({
 
     destroy: function(damage){
         // Already dead ?
-        if (this.hp >= 0){
+        if (this.hp > 0){
             this.hp -= damage;
             if (this.hp <= 0){
                 game.data.steps += this.points;
