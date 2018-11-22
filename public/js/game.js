@@ -314,6 +314,7 @@ var game = {
         me.pool.register("archerEnemy", game.ArcherEnemyEntity, true);
 		me.pool.register("mageAttackEntity", game.MageAttackEntity, true);
         me.pool.register("archerAttackEntity", game.ArcherAttackEntity, true);
+        me.pool.register("bossHPBar", game.HUD.BossHPBar, true);
 
 		//Melee enemy
 		game.meleeEnemyTexture = new me.video.renderer.Texture(

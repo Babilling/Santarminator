@@ -12,7 +12,7 @@ game.BossEntity = me.Entity.extend({
         /*************************************************************************/
         if (typeof velX === 'undefined') { this.velX = -1; } else {this.velX = velX;}
         if (typeof velY === 'undefined') { this.velY = 0; } else {this.velY = velY;}
-        if (typeof hp === 'undefined') { this.hp = 1000; } else {this.hp = hp;}
+        if (typeof hp === 'undefined') { this.hp = 20; } else {this.hp = hp;}
         if (typeof points === 'undefined') { this.points = 1000; } else {this.points = points;}
         /*************************************************************************/
         // call the super constructor
@@ -24,7 +24,8 @@ game.BossEntity = me.Entity.extend({
         this.body.vel.set(this.velX, this.velY);
         this.animationSpeed = 75;
         this.defaultHp = this.hp;
-
+        game.bossHPBar = new me.pool.pull('bossHPBar',me.game.viewport.width/2,25,this.hp);
+        me.game.world.addChild(game.bossHPBar, 50);
     },
 
     update: function(dt) {
@@ -38,8 +39,11 @@ game.BossEntity = me.Entity.extend({
 
     destroy: function(damage){
         // Already dead ?
-        if (this.hp >= 0){
+        if (this.hp > 0){
             this.hp -= damage;
+            let lostHPPercent = (100-((game.boss.hp/game.bossHPBar.maxHP)*100));
+            if (lostHPPercent > 0)
+                game.bossHPBar.lostHPPercent += lostHPPercent;
             if (this.hp <= 0){
                 game.data.steps += this.points;
                 me.game.world.removeChild(this);
@@ -114,26 +118,6 @@ game.MageBossEntity = game.BossEntity.extend({
             me.game.world.addChild(new me.pool.pull('mageAttackEntity', this.pos.x, this.pos.y + this.renderable.height/2, -3, 0, true, 5), 14);
 			me.audio.play("skraa");
             this.hasAttacked = true;
-        }
-    },
-
-    destroy: function(damage){
-        // Already dead ?
-        if (this.hp >= 0){
-            this.hp -= damage;
-            if (this.hp <= 0){
-                game.data.steps += this.points;
-                me.game.world.removeChild(this);
-
-                if (Math.random() < 0.1){
-                    // TODO Drop gifts
-                    me.game.world.addChild(new me.pool.pull('present', this.pos.x, this.pos.y, this.points), 10);
-                }
-                me.audio.play("hit");
-            }
-            else if (this.hp > 0) {
-                me.audio.play("hurt");
-            }
         }
     }
 });
