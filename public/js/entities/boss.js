@@ -59,7 +59,7 @@ game.MageBossEntity = game.BossEntity.extend({
 
     init: function(x, y, velX, velY, hp, points) {
         // Texture and animation
-        this._super(game.BossEntity, "init", [x, y, {width : 341, height : 410}, velX, velY, hp, points]);
+        this._super(game.BossEntity, "init", [x, y, {width : 282, height : 382}, velX, velY, hp, points]);
         this.renderable = game.mageBossTexture.createAnimationFromName([
             "5_animation_attack_001", "5_animation_attack_002", "5_animation_attack_003", "5_animation_attack_004", "5_animation_attack_005",
             "5_animation_attack_006", "5_animation_attack_007", "5_animation_attack_008", "5_animation_attack_009", "5_animation_attack_010",
@@ -90,9 +90,9 @@ game.MageBossEntity = game.BossEntity.extend({
     update: function(dt) {
         this.pos.add(this.body.vel);
         if (this.pos.x <= (me.game.viewport.width/3*2)-100 || (this.pos.x >= me.game.viewport.width-this.renderable.width && this.velX === 1)) {
-            this.velX = 0;
-            //if(this.velY === 0)
-                //this.velY = -1;
+            this.velX = -this.velX;
+            if(this.velY === 0)
+                this.velY = -1;
         }
         if (this.pos.y <= 0 || (this.pos.y >= me.game.viewport.height-this.renderable.height)) {
             this.velY = -this.velY;
@@ -112,6 +112,7 @@ game.MageBossEntity = game.BossEntity.extend({
     checkAttack: function () {
         if(this.hasAttacked === false && this.currentAttack === 0 && this.renderable.getCurrentAnimationFrame() === 34) {
             me.game.world.addChild(new me.pool.pull('mageAttackEntity', this.pos.x, this.pos.y + this.renderable.height/2, -3, 0, true, 5), 14);
+			me.audio.play("skraa");
             this.hasAttacked = true;
         }
     },

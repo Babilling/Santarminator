@@ -86,6 +86,7 @@ var game = {
         {name: "onestbienla", type: "audio", src: "data/sfx/"},
         {name: "tesdanslaxe", type: "audio", src: "data/sfx/"},
         {name: "explosion", type: "audio", src: "data/sfx/"},
+		{name: "skraa", type: "audio", src: "data/sfx/"},
 
 
     ],
