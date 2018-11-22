@@ -267,7 +267,7 @@ var game = {
                 me.audio.stop("minigunLoading");
                 me.audio.stop("minigunFire");
                 me.audio.play("minigunRelease");
-                setSantaWeapon(5,"minigun_off");
+                setSantaWeapon(5,"minigun");
             },
             resetWeapon: function(){
                 this.cdBeforeFirePlayed = false;
@@ -305,6 +305,7 @@ var game = {
         me.pool.register("laser", game.LaserEntity, true);
         me.pool.register("minigun", game.MinigunEntity, true);
         me.pool.register("present", game.PresentEntity, true);
+        me.pool.register("weaponDrop", game.WeaponDropEntity, true);
 		me.pool.register("pipe", game.PipeEntity, true);
         me.pool.register("snow", game.SnowEntity, true);
 		me.pool.register("mageEnemy", game.MageEnemyEntity, true);

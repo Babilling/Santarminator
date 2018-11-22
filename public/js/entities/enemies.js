@@ -46,9 +46,9 @@ game.EnemyEntity = me.Entity.extend({
                 game.data.steps += this.points;
                 me.game.world.removeChild(this);
                 
-                if (Math.random() < 0.1){
+                if (Math.random() > 0.0){
                     // TODO Drop gifts
-                    me.game.world.addChild(new me.pool.pull('present', this.pos.x, this.pos.y, this.points), 10);
+                    me.game.world.addChild(new me.pool.pull('weaponDrop', this.pos.x, this.pos.y), 10);
                 }
                 me.audio.play("hit");
             }

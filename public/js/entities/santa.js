@@ -21,15 +21,15 @@ game.SantaEntity = me.Entity.extend({
             "Santa_Hadoken_0","Santa_Hadoken_1","Santa_Hadoken_2","Santa_Hadoken_3","Santa_Hadoken_4"
         ]);
 
-        this.renderable.addAnimation ("default", ["Santa_Fly_default_0","Santa_Fly_default_1","Santa_Fly_default_2","Santa_Fly_default_3"]);
+        this.renderable.addAnimation ("bullet", ["Santa_Fly_default_0","Santa_Fly_default_1","Santa_Fly_default_2","Santa_Fly_default_3"]);
         this.renderable.addAnimation ("shotgun", ["Santa_Fly_shotgun_0", "Santa_Fly_shotgun_1", "Santa_Fly_shotgun_2", "Santa_Fly_shotgun_3"]);
         this.renderable.addAnimation ("ak", ["Santa_Fly_AK_0", "Santa_Fly_AK_1", "Santa_Fly_AK_2", "Santa_Fly_AK_3"]);
         this.renderable.addAnimation ("hadoken", ["Santa_Hadoken_0","Santa_Hadoken_1","Santa_Hadoken_2","Santa_Hadoken_3","Santa_Hadoken_4"]);
         this.renderable.addAnimation ("laser", ["Santa_Fly_Laser_0", "Santa_Fly_Laser_1", "Santa_Fly_Laser_2", "Santa_Fly_Laser_3"]);
-        this.renderable.addAnimation ("minigun_off", ["Santa_Fly_Minigun_0", "Santa_Fly_Minigun_1", "Santa_Fly_Minigun_2", "Santa_Fly_Minigun_3"]);
+        this.renderable.addAnimation ("minigun", ["Santa_Fly_Minigun_0", "Santa_Fly_Minigun_1", "Santa_Fly_Minigun_2", "Santa_Fly_Minigun_3"]);
         this.renderable.addAnimation ("minigun_on", ["Santa_Fly_Minigun_Spinning_0", "Santa_Fly_Minigun_Spinning_1", "Santa_Fly_Minigun_Spinning_2", "Santa_Fly_Minigun_Spinning_3"]);
 
-        this.renderable.setCurrentAnimation("default");
+        this.renderable.setCurrentAnimation(game.weapon[0].type);
         this.renderable.anchorPoint = {"x" : 0, "y" : 0};
         this.anchorPoint = {"x" : 0, "y" : 0};
         // enable this, since the entity starts off the viewport
@@ -88,7 +88,7 @@ game.SantaEntity = me.Entity.extend({
                 case 2:setSantaWeapon(this.i, "ak");break;
                 case 3:setSantaWeapon(this.i, "hadoken");break;
                 case 4:setSantaWeapon(this.i, "laser");break;
-                case 5:setSantaWeapon(this.i, "minigun_off");break;
+                case 5:setSantaWeapon(this.i, "minigun");break;
             }
         this.lastSwitch = Date.now();
         }
@@ -121,6 +121,7 @@ game.SantaEntity = me.Entity.extend({
         else if (obj.type === 'weaponDrop'){
             this.weapon.resetWeapon();
             this.weapon = obj.weapon;
+            this.renderable.setCurrentAnimation(obj.weapon.type);
             me.game.world.removeChild(obj);
         }
         return false;

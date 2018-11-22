@@ -28,7 +28,7 @@ game.EnnemyGenerator = me.Renderable.extend({
             }
 			switch(me.Math.random(1, 4)) {
                 case 1 :
-                    //me.game.world.addChild(new me.pool.pull('meleeEnemy', posX, posY, undefined, undefined, enemiesHp, enemiesPoints), 13);
+                    me.game.world.addChild(new me.pool.pull('meleeEnemy', posX, posY, undefined, undefined, enemiesHp, enemiesPoints), 13);
                     break;
                 case 2 :
                     //me.game.world.addChild(new me.pool.pull('archerEnemy', posX, posY, undefined, undefined, enemiesHp, enemiesPoints), 13);
