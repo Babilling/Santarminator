@@ -8,7 +8,7 @@ game.SantaEntity = me.Entity.extend({
     init: function (x, y) {
 
         // call the super constructor
-        this._super(me.Entity, "init", [200, 140, {width : 75, height : 97}]);
+        this._super(me.Entity, "init", [200, 140, {width : 78, height : 100}]);
 
         // create an animation using the cap guy sprites, and add as renderable
         this.renderable = game.santaTexture.createAnimationFromName([
@@ -18,13 +18,15 @@ game.SantaEntity = me.Entity.extend({
             "Santa_Fly_Minigun_Spinning_0", "Santa_Fly_Minigun_Spinning_1", "Santa_Fly_Minigun_Spinning_2", "Santa_Fly_Minigun_Spinning_3",
             "Santa_Fly_default_0", "Santa_Fly_default_1", "Santa_Fly_default_2", "Santa_Fly_default_3",
             "Santa_Fly_shotgun_0", "Santa_Fly_shotgun_1", "Santa_Fly_shotgun_2", "Santa_Fly_shotgun_3",
-            "Santa_Hadoken_0","Santa_Hadoken_1","Santa_Hadoken_2","Santa_Hadoken_3","Santa_Hadoken_4"
+            "Santa_Hadoken_on_0","Santa_Hadoken_on_1","Santa_Hadoken_on_2","Santa_Hadoken_on_3","Santa_Hadoken_on_4",
+            "Santa_Hadoken_0","Santa_Hadoken_1","Santa_Hadoken_2","Santa_Hadoken_3"
         ]);
 
         this.renderable.addAnimation ("bullet", ["Santa_Fly_default_0","Santa_Fly_default_1","Santa_Fly_default_2","Santa_Fly_default_3"]);
         this.renderable.addAnimation ("shotgun", ["Santa_Fly_shotgun_0", "Santa_Fly_shotgun_1", "Santa_Fly_shotgun_2", "Santa_Fly_shotgun_3"]);
         this.renderable.addAnimation ("ak", ["Santa_Fly_AK_0", "Santa_Fly_AK_1", "Santa_Fly_AK_2", "Santa_Fly_AK_3"]);
-        this.renderable.addAnimation ("hadoken", ["Santa_Hadoken_0","Santa_Hadoken_1","Santa_Hadoken_2","Santa_Hadoken_3","Santa_Hadoken_4"]);
+        this.renderable.addAnimation ("hadoken", ["Santa_Hadoken_0","Santa_Hadoken_1","Santa_Hadoken_2","Santa_Hadoken_3"]);
+        this.renderable.addAnimation ("hadoken_on", ["Santa_Hadoken_on_0","Santa_Hadoken_on_1","Santa_Hadoken_on_2","Santa_Hadoken_on_3","Santa_Hadoken_on_4"]);
         this.renderable.addAnimation ("laser", ["Santa_Fly_Laser_0", "Santa_Fly_Laser_1", "Santa_Fly_Laser_2", "Santa_Fly_Laser_3"]);
         this.renderable.addAnimation ("minigun", ["Santa_Fly_Minigun_0", "Santa_Fly_Minigun_1", "Santa_Fly_Minigun_2", "Santa_Fly_Minigun_3"]);
         this.renderable.addAnimation ("minigun_on", ["Santa_Fly_Minigun_Spinning_0", "Santa_Fly_Minigun_Spinning_1", "Santa_Fly_Minigun_Spinning_2", "Santa_Fly_Minigun_Spinning_3"]);

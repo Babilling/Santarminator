@@ -195,11 +195,12 @@ var game = {
                 if (Date.now() - this.lastShot > this.cd){
                     this.lastShot = Date.now();
                     me.audio.play(this.sound, false, null, weaponsSoundLevel);
+                    setSantaWeapon(undefined,"hadoken_on");
                     me.game.world.addChild(new me.pool.pull(this.type, posX + this.x, posY + this.y), 13);
                 }
             },
             releaseFire: function(){
-        
+                setSantaWeapon(undefined,"hadoken");
             },
             resetWeapon: function(){
 
@@ -224,7 +225,7 @@ var game = {
                 }
             },
             releaseFire: function(){
-        
+
             },
             resetWeapon: function(){
                 this.lastShot = 0;

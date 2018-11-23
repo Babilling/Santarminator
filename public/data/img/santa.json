@@ -1,624 +1,273 @@
-{
-	"frames": [
-		{
-			"filename": "Santa_Fly_AK_0",
-			"frame": {
-				"x": 1,
-				"y": 1,
-				"w": 105,
-				"h": 97
-			},
-			"rotated": false,
-			"trimmed": false,
-			"spriteSourceSize": {
-				"x": 0,
-				"y": 0,
-				"w": 105,
-				"h": 97
-			},
-			"sourceSize": {
-				"w": 105,
-				"h": 97
-			}
-		},
-		{
-			"filename": "Santa_Fly_AK_1",
-			"frame": {
-				"x": 108,
-				"y": 1,
-				"w": 105,
-				"h": 97
-			},
-			"rotated": false,
-			"trimmed": false,
-			"spriteSourceSize": {
-				"x": 0,
-				"y": 0,
-				"w": 105,
-				"h": 97
-			},
-			"sourceSize": {
-				"w": 105,
-				"h": 97
-			}
-		},
-		{
-			"filename": "Santa_Fly_AK_2",
-			"frame": {
-				"x": 215,
-				"y": 1,
-				"w": 105,
-				"h": 97
-			},
-			"rotated": false,
-			"trimmed": false,
-			"spriteSourceSize": {
-				"x": 0,
-				"y": 0,
-				"w": 105,
-				"h": 97
-			},
-			"sourceSize": {
-				"w": 105,
-				"h": 97
-			}
-		},
-		{
-			"filename": "Santa_Fly_AK_3",
-			"frame": {
-				"x": 322,
-				"y": 1,
-				"w": 105,
-				"h": 97
-			},
-			"rotated": false,
-			"trimmed": false,
-			"spriteSourceSize": {
-				"x": 0,
-				"y": 0,
-				"w": 105,
-				"h": 97
-			},
-			"sourceSize": {
-				"w": 105,
-				"h": 97
-			}
-		},
-		{
-			"filename": "Santa_Fly_Laser_0",
-			"frame": {
-				"x": 429,
-				"y": 1,
-				"w": 102,
-				"h": 97
-			},
-			"rotated": false,
-			"trimmed": false,
-			"spriteSourceSize": {
-				"x": 0,
-				"y": 0,
-				"w": 102,
-				"h": 97
-			},
-			"sourceSize": {
-				"w": 102,
-				"h": 97
-			}
-		},
-		{
-			"filename": "Santa_Fly_Laser_1",
-			"frame": {
-				"x": 1,
-				"y": 100,
-				"w": 102,
-				"h": 97
-			},
-			"rotated": false,
-			"trimmed": false,
-			"spriteSourceSize": {
-				"x": 0,
-				"y": 0,
-				"w": 102,
-				"h": 97
-			},
-			"sourceSize": {
-				"w": 102,
-				"h": 97
-			}
-		},
-		{
-			"filename": "Santa_Fly_Laser_2",
-			"frame": {
-				"x": 105,
-				"y": 100,
-				"w": 102,
-				"h": 97
-			},
-			"rotated": false,
-			"trimmed": false,
-			"spriteSourceSize": {
-				"x": 0,
-				"y": 0,
-				"w": 102,
-				"h": 97
-			},
-			"sourceSize": {
-				"w": 102,
-				"h": 97
-			}
-		},
-		{
-			"filename": "Santa_Fly_Laser_3",
-			"frame": {
-				"x": 209,
-				"y": 100,
-				"w": 102,
-				"h": 97
-			},
-			"rotated": false,
-			"trimmed": false,
-			"spriteSourceSize": {
-				"x": 0,
-				"y": 0,
-				"w": 102,
-				"h": 97
-			},
-			"sourceSize": {
-				"w": 102,
-				"h": 97
-			}
-		},
-		{
-			"filename": "Santa_Fly_Minigun_0",
-			"frame": {
-				"x": 313,
-				"y": 100,
-				"w": 114,
-				"h": 97
-			},
-			"rotated": false,
-			"trimmed": false,
-			"spriteSourceSize": {
-				"x": 0,
-				"y": 0,
-				"w": 114,
-				"h": 97
-			},
-			"sourceSize": {
-				"w": 114,
-				"h": 97
-			}
-		},
-		{
-			"filename": "Santa_Fly_Minigun_1",
-			"frame": {
-				"x": 1,
-				"y": 199,
-				"w": 114,
-				"h": 97
-			},
-			"rotated": false,
-			"trimmed": false,
-			"spriteSourceSize": {
-				"x": 0,
-				"y": 0,
-				"w": 114,
-				"h": 97
-			},
-			"sourceSize": {
-				"w": 114,
-				"h": 97
-			}
-		},
-		{
-			"filename": "Santa_Fly_Minigun_2",
-			"frame": {
-				"x": 117,
-				"y": 199,
-				"w": 114,
-				"h": 97
-			},
-			"rotated": false,
-			"trimmed": false,
-			"spriteSourceSize": {
-				"x": 0,
-				"y": 0,
-				"w": 114,
-				"h": 97
-			},
-			"sourceSize": {
-				"w": 114,
-				"h": 97
-			}
-		},
-		{
-			"filename": "Santa_Fly_Minigun_3",
-			"frame": {
-				"x": 233,
-				"y": 199,
-				"w": 114,
-				"h": 97
-			},
-			"rotated": false,
-			"trimmed": false,
-			"spriteSourceSize": {
-				"x": 0,
-				"y": 0,
-				"w": 114,
-				"h": 97
-			},
-			"sourceSize": {
-				"w": 114,
-				"h": 97
-			}
-		},
-		{
-			"filename": "Santa_Fly_Minigun_Spinning_0",
-			"frame": {
-				"x": 349,
-				"y": 199,
-				"w": 114,
-				"h": 97
-			},
-			"rotated": false,
-			"trimmed": false,
-			"spriteSourceSize": {
-				"x": 0,
-				"y": 0,
-				"w": 114,
-				"h": 97
-			},
-			"sourceSize": {
-				"w": 114,
-				"h": 97
-			}
-		},
-		{
-			"filename": "Santa_Fly_Minigun_Spinning_1",
-			"frame": {
-				"x": 1,
-				"y": 298,
-				"w": 114,
-				"h": 97
-			},
-			"rotated": false,
-			"trimmed": false,
-			"spriteSourceSize": {
-				"x": 0,
-				"y": 0,
-				"w": 114,
-				"h": 97
-			},
-			"sourceSize": {
-				"w": 114,
-				"h": 97
-			}
-		},
-		{
-			"filename": "Santa_Fly_Minigun_Spinning_2",
-			"frame": {
-				"x": 117,
-				"y": 298,
-				"w": 114,
-				"h": 97
-			},
-			"rotated": false,
-			"trimmed": false,
-			"spriteSourceSize": {
-				"x": 0,
-				"y": 0,
-				"w": 114,
-				"h": 97
-			},
-			"sourceSize": {
-				"w": 114,
-				"h": 97
-			}
-		},
-		{
-			"filename": "Santa_Fly_Minigun_Spinning_3",
-			"frame": {
-				"x": 233,
-				"y": 298,
-				"w": 114,
-				"h": 97
-			},
-			"rotated": false,
-			"trimmed": false,
-			"spriteSourceSize": {
-				"x": 0,
-				"y": 0,
-				"w": 114,
-				"h": 97
-			},
-			"sourceSize": {
-				"w": 114,
-				"h": 97
-			}
-		},
-		{
-			"filename": "Santa_Fly_default_0",
-			"frame": {
-				"x": 429,
-				"y": 100,
-				"w": 75,
-				"h": 97
-			},
-			"rotated": false,
-			"trimmed": false,
-			"spriteSourceSize": {
-				"x": 0,
-				"y": 0,
-				"w": 75,
-				"h": 97
-			},
-			"sourceSize": {
-				"w": 75,
-				"h": 97
-			}
-		},
-		{
-			"filename": "Santa_Fly_default_1",
-			"frame": {
-				"x": 349,
-				"y": 298,
-				"w": 75,
-				"h": 97
-			},
-			"rotated": false,
-			"trimmed": false,
-			"spriteSourceSize": {
-				"x": 0,
-				"y": 0,
-				"w": 75,
-				"h": 97
-			},
-			"sourceSize": {
-				"w": 75,
-				"h": 97
-			}
-		},
-		{
-			"filename": "Santa_Fly_default_2",
-			"frame": {
-				"x": 426,
-				"y": 298,
-				"w": 75,
-				"h": 97
-			},
-			"rotated": false,
-			"trimmed": false,
-			"spriteSourceSize": {
-				"x": 0,
-				"y": 0,
-				"w": 75,
-				"h": 97
-			},
-			"sourceSize": {
-				"w": 75,
-				"h": 97
-			}
-		},
-		{
-			"filename": "Santa_Fly_default_3",
-			"frame": {
-				"x": 1,
-				"y": 397,
-				"w": 75,
-				"h": 97
-			},
-			"rotated": false,
-			"trimmed": false,
-			"spriteSourceSize": {
-				"x": 0,
-				"y": 0,
-				"w": 75,
-				"h": 97
-			},
-			"sourceSize": {
-				"w": 75,
-				"h": 97
-			}
-		},
-		{
-			"filename": "Santa_Fly_shotgun_0",
-			"frame": {
-				"x": 78,
-				"y": 397,
-				"w": 109,
-				"h": 97
-			},
-			"rotated": false,
-			"trimmed": false,
-			"spriteSourceSize": {
-				"x": 0,
-				"y": 0,
-				"w": 109,
-				"h": 97
-			},
-			"sourceSize": {
-				"w": 109,
-				"h": 97
-			}
-		},
-		{
-			"filename": "Santa_Fly_shotgun_1",
-			"frame": {
-				"x": 189,
-				"y": 397,
-				"w": 109,
-				"h": 97
-			},
-			"rotated": false,
-			"trimmed": false,
-			"spriteSourceSize": {
-				"x": 0,
-				"y": 0,
-				"w": 109,
-				"h": 97
-			},
-			"sourceSize": {
-				"w": 109,
-				"h": 97
-			}
-		},
-		{
-			"filename": "Santa_Fly_shotgun_2",
-			"frame": {
-				"x": 300,
-				"y": 397,
-				"w": 109,
-				"h": 97
-			},
-			"rotated": false,
-			"trimmed": false,
-			"spriteSourceSize": {
-				"x": 0,
-				"y": 0,
-				"w": 109,
-				"h": 97
-			},
-			"sourceSize": {
-				"w": 109,
-				"h": 97
-			}
-		},
-		{
-			"filename": "Santa_Fly_shotgun_3",
-			"frame": {
-				"x": 411,
-				"y": 397,
-				"w": 109,
-				"h": 97
-			},
-			"rotated": false,
-			"trimmed": false,
-			"spriteSourceSize": {
-				"x": 0,
-				"y": 0,
-				"w": 109,
-				"h": 97
-			},
-			"sourceSize": {
-				"w": 109,
-				"h": 97
-			}
-		},
-		{
-			"filename": "Santa_Hadoken_0",
-			"frame": {
-				"x": 465,
-				"y": 199,
-				"w": 70,
-				"h": 97
-			},
-			"rotated": false,
-			"trimmed": false,
-			"spriteSourceSize": {
-				"x": 0,
-				"y": 0,
-				"w": 70,
-				"h": 97
-			},
-			"sourceSize": {
-				"w": 70,
-				"h": 97
-			}
-		},
-		{
-			"filename": "Santa_Hadoken_1",
-			"frame": {
-				"x": 533,
-				"y": 1,
-				"w": 73,
-				"h": 97
-			},
-			"rotated": false,
-			"trimmed": false,
-			"spriteSourceSize": {
-				"x": 0,
-				"y": 0,
-				"w": 73,
-				"h": 97
-			},
-			"sourceSize": {
-				"w": 73,
-				"h": 97
-			}
-		},
-		{
-			"filename": "Santa_Hadoken_2",
-			"frame": {
-				"x": 506,
-				"y": 100,
-				"w": 72,
-				"h": 97
-			},
-			"rotated": false,
-			"trimmed": false,
-			"spriteSourceSize": {
-				"x": 0,
-				"y": 0,
-				"w": 72,
-				"h": 97
-			},
-			"sourceSize": {
-				"w": 72,
-				"h": 97
-			}
-		},
-		{
-			"filename": "Santa_Hadoken_3",
-			"frame": {
-				"x": 537,
-				"y": 199,
-				"w": 73,
-				"h": 97
-			},
-			"rotated": false,
-			"trimmed": false,
-			"spriteSourceSize": {
-				"x": 0,
-				"y": 0,
-				"w": 73,
-				"h": 97
-			},
-			"sourceSize": {
-				"w": 73,
-				"h": 97
-			}
-		},
-		{
-			"filename": "Santa_Hadoken_4",
-			"frame": {
-				"x": 503,
-				"y": 298,
-				"w": 70,
-				"h": 97
-			},
-			"rotated": false,
-			"trimmed": false,
-			"spriteSourceSize": {
-				"x": 0,
-				"y": 0,
-				"w": 70,
-				"h": 97
-			},
-			"sourceSize": {
-				"w": 70,
-				"h": 97
-			}
-		}
-	],
-	"meta": {
-		"app": "http://www.codeandweb.com/texturepacker",
-		"version": "1.0",
-		"image": "santa.png",
-		"format": "RGBA8888",
-		"size": {
-			"w": 611,
-			"h": 495
-		},
-		"scale": "1"
-	}
+{"frames": [
+	{
+		"filename": "Santa_Fly_AK_0",
+		"frame": {"x":238,"y":0,"w":107,"h":100},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":107,"h":100},
+		"sourceSize": {"w":107,"h":100}
+	},
+	{
+		"filename": "Santa_Fly_AK_1",
+		"frame": {"x":233,"y":204,"w":107,"h":100},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":107,"h":100},
+		"sourceSize": {"w":107,"h":100}
+	},
+	{
+		"filename": "Santa_Fly_AK_2",
+		"frame": {"x":233,"y":102,"w":107,"h":100},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":107,"h":100},
+		"sourceSize": {"w":107,"h":100}
+	},
+	{
+		"filename": "Santa_Fly_AK_3",
+		"frame": {"x":233,"y":306,"w":107,"h":100},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":107,"h":100},
+		"sourceSize": {"w":107,"h":100}
+	},
+	{
+		"filename": "Santa_Fly_Laser_0",
+		"frame": {"x":342,"y":204,"w":105,"h":100},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":105,"h":100},
+		"sourceSize": {"w":105,"h":100}
+	},
+	{
+		"filename": "Santa_Fly_Laser_1",
+		"frame": {"x":233,"y":408,"w":105,"h":100},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":105,"h":100},
+		"sourceSize": {"w":105,"h":100}
+	},
+	{
+		"filename": "Santa_Fly_Laser_2",
+		"frame": {"x":342,"y":102,"w":105,"h":100},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":105,"h":100},
+		"sourceSize": {"w":105,"h":100}
+	},
+	{
+		"filename": "Santa_Fly_Laser_3",
+		"frame": {"x":340,"y":408,"w":105,"h":100},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":105,"h":100},
+		"sourceSize": {"w":105,"h":100}
+	},
+	{
+		"filename": "Santa_Fly_Minigun_0",
+		"frame": {"x":0,"y":204,"w":117,"h":100},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":117,"h":100},
+		"sourceSize": {"w":117,"h":100}
+	},
+	{
+		"filename": "Santa_Fly_Minigun_1",
+		"frame": {"x":0,"y":306,"w":117,"h":100},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":117,"h":100},
+		"sourceSize": {"w":117,"h":100}
+	},
+	{
+		"filename": "Santa_Fly_Minigun_2",
+		"frame": {"x":0,"y":408,"w":117,"h":100},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":117,"h":100},
+		"sourceSize": {"w":117,"h":100}
+	},
+	{
+		"filename": "Santa_Fly_Minigun_3",
+		"frame": {"x":119,"y":0,"w":117,"h":100},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":117,"h":100},
+		"sourceSize": {"w":117,"h":100}
+	},
+	{
+		"filename": "Santa_Fly_Minigun_Spinning_0",
+		"frame": {"x":0,"y":204,"w":117,"h":100},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":117,"h":100},
+		"sourceSize": {"w":117,"h":100}
+	},
+	{
+		"filename": "Santa_Fly_Minigun_Spinning_1",
+		"frame": {"x":0,"y":102,"w":117,"h":100},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":117,"h":100},
+		"sourceSize": {"w":117,"h":100}
+	},
+	{
+		"filename": "Santa_Fly_Minigun_Spinning_2",
+		"frame": {"x":0,"y":408,"w":117,"h":100},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":117,"h":100},
+		"sourceSize": {"w":117,"h":100}
+	},
+	{
+		"filename": "Santa_Fly_Minigun_Spinning_3",
+		"frame": {"x":0,"y":0,"w":117,"h":100},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":117,"h":100},
+		"sourceSize": {"w":117,"h":100}
+	},
+	{
+		"filename": "Santa_Fly_default_0",
+		"frame": {"x":347,"y":0,"w":78,"h":100},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":78,"h":100},
+		"sourceSize": {"w":78,"h":100}
+	},
+	{
+		"filename": "Santa_Fly_default_1",
+		"frame": {"x":342,"y":306,"w":78,"h":100},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":78,"h":100},
+		"sourceSize": {"w":78,"h":100}
+	},
+	{
+		"filename": "Santa_Fly_default_2",
+		"frame": {"x":427,"y":0,"w":78,"h":100},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":78,"h":100},
+		"sourceSize": {"w":78,"h":100}
+	},
+	{
+		"filename": "Santa_Fly_default_3",
+		"frame": {"x":422,"y":306,"w":78,"h":100},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":78,"h":100},
+		"sourceSize": {"w":78,"h":100}
+	},
+	{
+		"filename": "Santa_Fly_shotgun_0",
+		"frame": {"x":119,"y":102,"w":112,"h":100},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":112,"h":100},
+		"sourceSize": {"w":112,"h":100}
+	},
+	{
+		"filename": "Santa_Fly_shotgun_1",
+		"frame": {"x":119,"y":204,"w":112,"h":100},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":112,"h":100},
+		"sourceSize": {"w":112,"h":100}
+	},
+	{
+		"filename": "Santa_Fly_shotgun_2",
+		"frame": {"x":119,"y":306,"w":112,"h":100},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":112,"h":100},
+		"sourceSize": {"w":112,"h":100}
+	},
+	{
+		"filename": "Santa_Fly_shotgun_3",
+		"frame": {"x":119,"y":408,"w":112,"h":100},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":112,"h":100},
+		"sourceSize": {"w":112,"h":100}
+	},
+	{
+		"filename": "Santa_Hadoken_0",
+		"frame": {"x":526,"y":102,"w":72,"h":100},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":72,"h":100},
+		"sourceSize": {"w":72,"h":100}
+	},
+	{
+		"filename": "Santa_Hadoken_1",
+		"frame": {"x":524,"y":408,"w":72,"h":100},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":72,"h":100},
+		"sourceSize": {"w":72,"h":100}
+	},
+	{
+		"filename": "Santa_Hadoken_2",
+		"frame": {"x":579,"y":306,"w":72,"h":100},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":72,"h":100},
+		"sourceSize": {"w":72,"h":100}
+	},
+	{
+		"filename": "Santa_Hadoken_3",
+		"frame": {"x":526,"y":204,"w":72,"h":100},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":72,"h":100},
+		"sourceSize": {"w":72,"h":100}
+	},
+	{
+		"filename": "Santa_Hadoken_on_0",
+		"frame": {"x":507,"y":0,"w":75,"h":100},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":75,"h":100},
+		"sourceSize": {"w":75,"h":100}
+	},
+	{
+		"filename": "Santa_Hadoken_on_1",
+		"frame": {"x":502,"y":306,"w":75,"h":100},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":75,"h":100},
+		"sourceSize": {"w":75,"h":100}
+	},
+	{
+		"filename": "Santa_Hadoken_on_2",
+		"frame": {"x":447,"y":408,"w":75,"h":100},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":75,"h":100},
+		"sourceSize": {"w":75,"h":100}
+	},
+	{
+		"filename": "Santa_Hadoken_on_3",
+		"frame": {"x":449,"y":102,"w":75,"h":100},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":75,"h":100},
+		"sourceSize": {"w":75,"h":100}
+	},
+	{
+		"filename": "Santa_Hadoken_on_4",
+		"frame": {"x":449,"y":204,"w":75,"h":100},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":75,"h":100},
+		"sourceSize": {"w":75,"h":100}
+	},
+	{"EOL":"true"}
+],
+"meta": {
+	"app": "ShoeBox",
+	"exporter": "melonJS",
+	"size": {"w":1024,"h":512}
+}
 }
