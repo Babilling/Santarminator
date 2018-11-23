@@ -1,0 +1,209 @@
+{"frames": [
+	{
+		"filename": "Mage_Boss_Attack_01",
+		"frame": {"x":96,"y":32,"w":30,"h":30},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":30,"h":30},
+		"sourceSize": {"w":30,"h":30}
+	},
+	{
+		"filename": "Mage_Boss_Attack_02",
+		"frame": {"x":192,"y":0,"w":30,"h":30},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":30,"h":30},
+		"sourceSize": {"w":30,"h":30}
+	},
+	{
+		"filename": "Mage_Boss_Attack_03",
+		"frame": {"x":64,"y":96,"w":30,"h":30},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":30,"h":30},
+		"sourceSize": {"w":30,"h":30}
+	},
+	{
+		"filename": "Mage_Boss_Attack_04",
+		"frame": {"x":64,"y":64,"w":30,"h":30},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":30,"h":30},
+		"sourceSize": {"w":30,"h":30}
+	},
+	{
+		"filename": "Mage_Boss_Attack_05",
+		"frame": {"x":64,"y":32,"w":30,"h":30},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":30,"h":30},
+		"sourceSize": {"w":30,"h":30}
+	},
+	{
+		"filename": "Mage_Boss_Attack_06",
+		"frame": {"x":64,"y":0,"w":30,"h":30},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":30,"h":30},
+		"sourceSize": {"w":30,"h":30}
+	},
+	{
+		"filename": "Mage_Boss_Attack_07",
+		"frame": {"x":32,"y":96,"w":30,"h":30},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":30,"h":30},
+		"sourceSize": {"w":30,"h":30}
+	},
+	{
+		"filename": "Mage_Boss_Attack_08",
+		"frame": {"x":32,"y":64,"w":30,"h":30},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":30,"h":30},
+		"sourceSize": {"w":30,"h":30}
+	},
+	{
+		"filename": "Mage_Boss_Attack_09",
+		"frame": {"x":32,"y":32,"w":30,"h":30},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":30,"h":30},
+		"sourceSize": {"w":30,"h":30}
+	},
+	{
+		"filename": "Mage_Boss_Attack_10",
+		"frame": {"x":32,"y":0,"w":30,"h":30},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":30,"h":30},
+		"sourceSize": {"w":30,"h":30}
+	},
+	{
+		"filename": "Mage_Boss_Attack_11",
+		"frame": {"x":0,"y":96,"w":30,"h":30},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":30,"h":30},
+		"sourceSize": {"w":30,"h":30}
+	},
+	{
+		"filename": "Mage_Boss_Attack_12",
+		"frame": {"x":0,"y":64,"w":30,"h":30},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":30,"h":30},
+		"sourceSize": {"w":30,"h":30}
+	},
+	{
+		"filename": "Mage_Boss_Attack_13",
+		"frame": {"x":0,"y":32,"w":30,"h":30},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":30,"h":30},
+		"sourceSize": {"w":30,"h":30}
+	},
+	{
+		"filename": "Mage_Boss_Attack_14",
+		"frame": {"x":0,"y":0,"w":30,"h":30},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":30,"h":30},
+		"sourceSize": {"w":30,"h":30}
+	},
+	{
+		"filename": "Mage_Boss_Attack_15",
+		"frame": {"x":96,"y":0,"w":30,"h":30},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":30,"h":30},
+		"sourceSize": {"w":30,"h":30}
+	},
+	{
+		"filename": "Mage_Boss_Attack_16",
+		"frame": {"x":160,"y":96,"w":30,"h":30},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":30,"h":30},
+		"sourceSize": {"w":30,"h":30}
+	},
+	{
+		"filename": "Mage_Boss_Attack_17",
+		"frame": {"x":160,"y":64,"w":30,"h":30},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":30,"h":30},
+		"sourceSize": {"w":30,"h":30}
+	},
+	{
+		"filename": "Mage_Boss_Attack_18",
+		"frame": {"x":160,"y":32,"w":30,"h":30},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":30,"h":30},
+		"sourceSize": {"w":30,"h":30}
+	},
+	{
+		"filename": "Mage_Boss_Attack_19",
+		"frame": {"x":160,"y":0,"w":30,"h":30},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":30,"h":30},
+		"sourceSize": {"w":30,"h":30}
+	},
+	{
+		"filename": "Mage_Boss_Attack_20",
+		"frame": {"x":128,"y":96,"w":30,"h":30},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":30,"h":30},
+		"sourceSize": {"w":30,"h":30}
+	},
+	{
+		"filename": "Mage_Boss_Attack_21",
+		"frame": {"x":128,"y":64,"w":30,"h":30},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":30,"h":30},
+		"sourceSize": {"w":30,"h":30}
+	},
+	{
+		"filename": "Mage_Boss_Attack_22",
+		"frame": {"x":128,"y":32,"w":30,"h":30},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":30,"h":30},
+		"sourceSize": {"w":30,"h":30}
+	},
+	{
+		"filename": "Mage_Boss_Attack_23",
+		"frame": {"x":128,"y":0,"w":30,"h":30},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":30,"h":30},
+		"sourceSize": {"w":30,"h":30}
+	},
+	{
+		"filename": "Mage_Boss_Attack_24",
+		"frame": {"x":96,"y":96,"w":30,"h":30},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":30,"h":30},
+		"sourceSize": {"w":30,"h":30}
+	},
+	{
+		"filename": "Mage_Boss_Attack_25",
+		"frame": {"x":96,"y":64,"w":30,"h":30},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":30,"h":30},
+		"sourceSize": {"w":30,"h":30}
+	},
+	{"EOL":"true"}
+],
+"meta": {
+	"app": "ShoeBox",
+	"exporter": "melonJS",
+	"size": {"w":256,"h":128}
+}
+}

@@ -116,9 +116,73 @@ game.MageBossEntity = game.BossEntity.extend({
 
     checkAttack: function () {
         if(this.hasAttacked === false && this.currentAttack === 0 && this.renderable.getCurrentAnimationFrame() === 34) {
-            me.game.world.addChild(new me.pool.pull('mageAttackEntity', this.pos.x, this.pos.y + this.renderable.height/2, -3, 0, true, 5), 14);
+            me.game.world.addChild(new me.pool.pull('mageBossAttackEntity', this.pos.x, this.pos.y + this.renderable.height/2, -3, 0, true, 5), 14);
 			me.audio.play("skraa");
             this.hasAttacked = true;
+        }
+    }
+});
+/**
+ * MageBossAttackEntity
+ */
+game.MageBossAttackEntity = me.Entity.extend({
+
+    init: function(x, y, velX, velY, explode, explodesIntoNb, rad) {
+        this.explosionDelay = me.Math.random(1000,2000);
+        this._super(me.Entity, 'init', [x, y, {width : 30, height : 30}]);
+        this.renderable = game.mageBossAttackTexture.createAnimationFromName([
+            "Mage_Boss_Attack_01", "Mage_Boss_Attack_02", "Mage_Boss_Attack_03", "Mage_Boss_Attack_04", "Mage_Boss_Attack_05",
+            "Mage_Boss_Attack_06", "Mage_Boss_Attack_07", "Mage_Boss_Attack_08", "Mage_Boss_Attack_09", "Mage_Boss_Attack_10",
+            "Mage_Boss_Attack_11", "Mage_Boss_Attack_12", "Mage_Boss_Attack_13", "Mage_Boss_Attack_14", "Mage_Boss_Attack_15",
+            "Mage_Boss_Attack_16", "Mage_Boss_Attack_17", "Mage_Boss_Attack_18", "Mage_Boss_Attack_19", "Mage_Boss_Attack_20",
+            "Mage_Boss_Attack_21", "Mage_Boss_Attack_22", "Mage_Boss_Attack_23", "Mage_Boss_Attack_24", "Mage_Boss_Attack_25"
+        ]);
+
+        this.alwaysUpdate = true;
+        this.pos.add(this.body.vel);
+        this.body.gravity = 0;
+        this.type = 'attack';
+        if (typeof velX === 'undefined') { this.velX = -3; } else {this.velX = velX;}
+        if (typeof velY === 'undefined') { this.velY = 0; } else {this.velY = velY;}
+        if (typeof explode === 'undefined') { this.explode = false; } else {this.explode = explode;}
+        if (typeof explodesIntoNb === 'undefined') { this.explodesIntoNb = 0; } else {this.explodesIntoNb = explodesIntoNb;}
+        this.body.vel.set(this.velX, this.velY);
+        if (typeof rad != 'undefined' && !this.explode) {
+            this.body.vel = this.body.vel.rotate(rad);
+            this.rad = rad;
+        }
+        this.timeCreated = Date.now();
+    },
+
+    update: function(dt) {
+
+        // mechanics
+        if (!game.data.start) {
+            return this._super(me.Entity, 'update', [dt]);
+        }
+        this.pos.add(this.body.vel);
+        if (this.pos.x < -this.width || this.pos.y < -this.height || this.pos.y > me.game.viewport.width) {
+            me.game.world.removeChild(this);
+        }
+        //explode
+        if(((Date.now() - this.timeCreated) >= this.explosionDelay) && this.explode){
+            this.createExplosion();
+            this.explode = false;
+            me.game.world.removeChild(this);
+        }
+        this.body.vel.set(this.velX, this.velY);
+        if (this.rad != undefined && !this.explode)
+            this.body.vel = this.body.vel.rotate(this.rad);
+        me.Rect.prototype.updateBounds.apply(this);
+        this._super(me.Entity, 'update', [dt]);
+        return true;
+    },
+
+    createExplosion : function () {
+        for(let i = 0; i < this.explodesIntoNb; i++) {
+            let rad = me.Math.degToRad(360 / this.explodesIntoNb * (i + 1));
+            me.game.world.addChild(new me.pool.pull('mageBossAttackEntity', this.pos.x, this.pos.y, 0, -5, false, this.explodesIntoNb, rad), 14);
+            me.audio.play("explosion",false,null,0.1);
         }
     }
 });

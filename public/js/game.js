@@ -29,6 +29,8 @@ var game = {
         // Boss
         {name: "mageBoss", type:"image", src: "data/img/boss_mage.png"},
         {name: "mageBoss", type:"json", src: "data/img/boss_mage.json"},
+        {name: "mageBossAttack", type:"image", src: "data/img/bossmageattack.png"},
+        {name: "mageBossAttack", type:"json", src: "data/img/bossmageattack.json"},
 
         // Santa
         {name: "santa", type:"image", src: "data/img/santa.png"},
@@ -283,7 +285,7 @@ var game = {
 
     onload: function() {
 
-        if (!me.video.init(900, 504, {
+        if (!me.video.init(900, 600, {
             wrapper: "screen",
             scale : "auto",
             scaleMethod: "fit"
@@ -315,6 +317,7 @@ var game = {
 		me.pool.register("meleeEnemy", game.MeleeEnemyEntity, true);
         me.pool.register("archerEnemy", game.ArcherEnemyEntity, true);
 		me.pool.register("mageAttackEntity", game.MageAttackEntity, true);
+        me.pool.register("mageBossAttackEntity", game.MageBossAttackEntity, true);
         me.pool.register("archerAttackEntity", game.ArcherAttackEntity, true);
         me.pool.register("bossHPBar", game.HUD.BossHPBar, true);
 
@@ -340,6 +343,10 @@ var game = {
         game.mageBossTexture = new me.video.renderer.Texture(
             me.loader.getJSON("mageBoss"),
             me.loader.getImage("mageBoss")
+        );
+        game.mageBossAttackTexture = new me.video.renderer.Texture(
+            me.loader.getJSON("mageBossAttack"),
+            me.loader.getImage("mageBossAttack")
         );
 
 		//Santa
