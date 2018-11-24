@@ -12,7 +12,7 @@ game.BossEntity = me.Entity.extend({
         /*************************************************************************/
         if (typeof velX === 'undefined') { this.velX = -1; } else {this.velX = velX;}
         if (typeof velY === 'undefined') { this.velY = 0; } else {this.velY = velY;}
-        if (typeof hp === 'undefined') { this.hp = 1000; } else {this.hp = hp;}
+        if (typeof hp === 'undefined') { this.hp = 100; } else {this.hp = hp;}
         if (typeof points === 'undefined') { this.points = 1000; } else {this.points = points;}
         /*************************************************************************/
         // call the super constructor
@@ -90,6 +90,10 @@ game.MageBossEntity = game.BossEntity.extend({
         this.attackDelay = (this.animationSpeed * this.attackFrames.length) + 3000;
         this.lastAttack = Date.now();
         this.hasAttacked = false;
+        this.specialAttackSettings = new Map([["number",4], ["delay", 4000], ["speed", -2]]);
+        this.specialAttackEntities = [];
+        this.nextAttackIsSpecial = false;
+        this.specialAttackTriggers = new Map([[0, new Map([["hp",this.defaultHp*0.75],["triggered",false]])] , [1, new Map([["hp",this.defaultHp*0.50],["triggered",false]])] , [2, new Map([["hp",this.defaultHp*0.25],["triggered",false]])]]);
     },
 
     update: function(dt) {
@@ -102,11 +106,19 @@ game.MageBossEntity = game.BossEntity.extend({
         if (this.pos.y <= 0 || (this.pos.y >= me.game.viewport.height-this.renderable.height)) {
             this.velY = -this.velY;
         }
+        for (let i = 0; i < this.specialAttackTriggers.size; i++) {
+            if(this.hp <= this.specialAttackTriggers.get(i).get("hp") && !this.specialAttackTriggers.get(i).get("triggered")){
+                this.nextAttackIsSpecial = true;
+                this.specialAttackTriggers.get(i).set("triggered",true);
+                break;
+            }
+        }
         if(Date.now() - this.lastAttack >= this.attackDelay) {
             this.renderable.setCurrentAnimation("attack", "idle");
-            this.currentAttack = me.Math.random(0, 1);
             this.lastAttack = Date.now();
             this.hasAttacked = false;
+            if(this.nextAttackIsSpecial)
+                this.currentAttack = 1;
         }
         this.checkAttack();
         this.body.vel.set(this.velX, this.velY);
@@ -120,6 +132,27 @@ game.MageBossEntity = game.BossEntity.extend({
 			me.audio.play("skraa");
             this.hasAttacked = true;
         }
+        if(this.currentAttack === 1) {
+            if (this.hasAttacked === false) {
+                this.specialAttackEntities = [];
+                for (let i = 0; i <= this.specialAttackSettings.get('number'); i++) {
+                    let attack = new me.pool.pull('mageBossAttackEntity', (me.game.viewport.width / 3 * 2) - 100,
+                        me.game.viewport.height/this.specialAttackSettings.get('number')/2 + i * me.game.viewport.height/this.specialAttackSettings.get('number'), 0, 0, true, 3);
+                    attack.explosionDelay = this.specialAttackSettings.get('delay') + me.Math.random(1000, 2000);
+                    this.specialAttackEntities.push(attack);
+                    me.game.world.addChild(attack);
+                    this.hasAttacked = true;
+                }
+            }
+            if (this.hasAttacked === true && this.renderable.getCurrentAnimationFrame() === 34) {
+                for(let i = 0; i < this.specialAttackEntities.length; i++) {
+                    this.specialAttackEntities[i].velX = this.specialAttackSettings.get('speed');
+                    this.currentAttack = 0;
+                    this.nextAttackIsSpecial = false;
+                }
+            }
+        }
+
     }
 });
 /**
