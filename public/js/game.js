@@ -54,13 +54,6 @@ var game = {
         {name: "drop-minigun", type:"image", src: "data/img/present3.png"},
 
         // Decoration
-        {name: "pipe", type:"image", src: "data/img/pipe.png"},
-        {name: "pipe2", type:"image", src: "data/img/pipe2.png"},
-        {name: "pipe3", type:"image", src: "data/img/pipe3.png"},
-        {name: "pipebis", type:"image", src: "data/img/pipebis.png"},
-        {name: "pipe2bis", type:"image", src: "data/img/pipe2bis.png"},
-        {name: "pipe3bis", type:"image", src: "data/img/pipe3bis.png"},
-        {name: "snow", type:"image", src: "data/img/snow.png"},
         {name: "logo", type:"image", src: "data/img/logo.png"},
         {name: "gameover", type:"image", src: "data/img/gameover.png"},
 		{name: "tablo", type:"image", src: "data/img/tablo.png"},
@@ -316,8 +309,6 @@ var game = {
         me.pool.register("speedUpDrop", game.SpeedUpEntity, true);
         me.pool.register("damageUpDrop", game.DamageUpEntity, true);
         me.pool.register("weaponDrop", game.WeaponDropEntity, true);
-		me.pool.register("pipe", game.PipeEntity, true);
-        me.pool.register("snow", game.SnowEntity, true);
 		me.pool.register("mageEnemy", game.MageEnemyEntity, true);
         me.pool.register("mageBoss", game.MageBossEntity, true);
 		me.pool.register("meleeEnemy", game.MeleeEnemyEntity, true);
