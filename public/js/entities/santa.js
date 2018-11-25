@@ -44,7 +44,7 @@ game.SantaEntity = me.Entity.extend({
 
         this.velY = 5;
         this.velX = 5;
-        this.degat = 0;
+        this.damage = 0;
         this.speed = 0;
 
         //TODO debug remove on release
@@ -95,12 +95,10 @@ game.SantaEntity = me.Entity.extend({
                 case 4:setSantaWeapon(this.i, "laser");break;
                 case 5:setSantaWeapon(this.i, "minigun");break;
             }
-        this.lastSwitch = Date.now();
+            this.lastSwitch = Date.now();
         }
         me.Rect.prototype.updateBounds.apply(this);
-
-
-		
+        me.collision.check(this);
 		 // call the parent function
 		this._super(me.Entity, "update", [dt]);
         return true;
@@ -121,6 +119,15 @@ game.SantaEntity = me.Entity.extend({
             this.weapon.resetWeapon();
             this.weapon = obj.weapon;
             this.renderable.setCurrentAnimation(obj.weapon.type);
+            me.game.world.removeChild(obj);
+        }
+        else if (obj.type === 'speedUpDrop'){
+            this.speed++;
+            if (this.speed > 5) this.speed = 5; 
+            me.game.world.removeChild(obj);
+        }
+        else if (obj.type === 'damageUpDrop'){
+            this.damage++;
             me.game.world.removeChild(obj);
         }
         return false;

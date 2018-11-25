@@ -38,7 +38,7 @@ game.WeaponEntity = me.Entity.extend({
         let obj = response.b;
         if (obj.type === 'ennemy' && !this.enemies.includes(obj)) {
             this.enemies.push(obj);
-            obj.destroy(this.degat);
+            obj.destroy(this.degat + game.santa.damage);
         }
         return false;
     }
@@ -150,7 +150,7 @@ game.HadokenEntity = game.WeaponEntity.extend({
         let obj = response.b;
         if (obj.type === 'ennemy' && !this.enemies.includes(obj)) {
             this.enemies.push(obj);
-            obj.destroy(this.degat + me.game.santa.degat);
+            obj.destroy(this.degat + game.santa.damage);
         }
         else if (obj.type === 'attack')
             me.game.world.removeChild(obj);

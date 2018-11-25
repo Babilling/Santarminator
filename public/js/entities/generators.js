@@ -22,16 +22,16 @@ game.EnnemyGenerator = me.Renderable.extend({
 			let enemiesHp = 10;
 			let enemiesPoints = 10;
 			if(!this.boss) {
-			    game.boss = new me.pool.pull('mageBoss', me.game.viewport.width + 50, 50);
-                me.game.world.addChild(game.boss, 12);
-                this.boss = true;
+			    //game.boss = new me.pool.pull('mageBoss', me.game.viewport.width + 50, 50);
+                //me.game.world.addChild(game.boss, 12);
+                //this.boss = true;
             }
 			switch(me.Math.random(1, 4)) {
                 case 1 :
-                    //me.game.world.addChild(new me.pool.pull('meleeEnemy', posX, posY, undefined, undefined, enemiesHp, enemiesPoints), 13);
+                    me.game.world.addChild(new me.pool.pull('meleeEnemy', posX, posY, undefined, undefined, enemiesHp, enemiesPoints), 13);
                     break;
                 case 2 :
-                    //me.game.world.addChild(new me.pool.pull('archerEnemy', posX, posY, undefined, undefined, enemiesHp, enemiesPoints), 13);
+                    me.game.world.addChild(new me.pool.pull('archerEnemy', posX, posY, undefined, undefined, enemiesHp, enemiesPoints), 13);
                     break;
                 case 3 :
                     //me.game.world.addChild(new me.pool.pull('mageEnemy', posX, posY, undefined, undefined, enemiesHp, enemiesPoints), 13);

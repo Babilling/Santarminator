@@ -41,6 +41,10 @@ var game = {
         {name: "present2", type:"image", src: "data/img/present2.png"},
         {name: "present3", type:"image", src: "data/img/present3.png"},
 
+        // Stats up
+        {name: "speedUp", type:"image", src: "data/img/speedUp.png"},
+        {name: "damageUp", type:"image", src: "data/img/damageUp.png"},
+
         // Drop Weapon
         {name: "drop-bullet", type:"image", src: "data/img/present1.png"},
         {name: "drop-shotgun", type:"image", src: "data/img/present2.png"},
@@ -309,6 +313,8 @@ var game = {
         me.pool.register("laser", game.LaserEntity, true);
         me.pool.register("minigun", game.MinigunEntity, true);
         me.pool.register("present", game.PresentEntity, true);
+        me.pool.register("speedUpDrop", game.SpeedUpEntity, true);
+        me.pool.register("damageUpDrop", game.DamageUpEntity, true);
         me.pool.register("weaponDrop", game.WeaponDropEntity, true);
 		me.pool.register("pipe", game.PipeEntity, true);
         me.pool.register("snow", game.SnowEntity, true);
