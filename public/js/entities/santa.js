@@ -44,6 +44,9 @@ game.SantaEntity = me.Entity.extend({
 
         this.velY = 5;
         this.velX = 5;
+        this.degat = 0;
+        this.speed = 0;
+
         //TODO debug remove on release
         this.i = 0;
         this.lastSwitch=0;
@@ -64,19 +67,19 @@ game.SantaEntity = me.Entity.extend({
             }
         }
         if (me.input.isKeyPressed('forward')) {
-            this.pos.y -= this.velY;
+            this.pos.y -= (this.velY + this.speed);
             if (this.pos.y < 0) this.pos.y = 0;
         }
         if (me.input.isKeyPressed('backward')) {
-            this.pos.y += this.velY;
+            this.pos.y += (this.velY + this.speed);
             if (this.pos.y > me.game.viewport.height - this.height) this.pos.y = me.game.viewport.height - this.height;
         }
         if (me.input.isKeyPressed('left')) {
-            this.pos.x -= this.velX;
+            this.pos.x -= (this.velX + this.speed);
             if (this.pos.x < 0) this.pos.x = 0;
         }
         if (me.input.isKeyPressed('right')) {
-            this.pos.x += this.velX;
+            this.pos.x += (this.velX + this.speed);
             if (this.pos.x > me.game.viewport.width - this.width) this.pos.x = me.game.viewport.width - this.width;
         }
         //TODO debug remove on release

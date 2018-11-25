@@ -150,7 +150,7 @@ game.HadokenEntity = game.WeaponEntity.extend({
         let obj = response.b;
         if (obj.type === 'ennemy' && !this.enemies.includes(obj)) {
             this.enemies.push(obj);
-            obj.destroy(this.degat);
+            obj.destroy(this.degat + me.game.santa.degat);
         }
         else if (obj.type === 'attack')
             me.game.world.removeChild(obj);
@@ -170,7 +170,7 @@ game.LaserEntity = game.WeaponEntity.extend({
         settings.framewidth = 1500;
         settings.frameheight = 67;
 
-        this._super(game.WeaponEntity, 'init', [x, y, settings, 50]);
+        this._super(game.WeaponEntity, 'init', [x, y, settings, 5]);
         this.body.vel.set(0, 0);
         this.date = Date.now();
     },
