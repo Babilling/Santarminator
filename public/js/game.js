@@ -71,6 +71,7 @@ var game = {
         {name: "theme", type: "audio", src: "data/bgm/"},
         {name: "hit", type: "audio", src: "data/sfx/"},
         {name: "hitBoss", type: "audio", src: "data/sfx/"},
+        {name: "bossComing", type: "audio", src: "data/sfx/"},
         {name: "hurt", type: "audio", src: "data/sfx/"},
         {name: "lose", type: "audio", src: "data/sfx/"},
         {name: "presentDrop", type: "audio", src: "data/sfx/"},
