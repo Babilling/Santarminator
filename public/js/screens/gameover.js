@@ -32,13 +32,13 @@ game.GameOverScreen = me.ScreenObject.extend({
 
         me.game.world.addChild(new me.Sprite(
             me.game.viewport.width/2,
-            me.game.viewport.height/6,
+            me.game.viewport.height/6 - 25,
             {image: 'gameover'}
         ), 12);
 		
 		me.game.world.addChild(new me.Sprite(
             me.game.viewport.width/2,
-            me.game.viewport.height/2,
+            me.game.viewport.height/2+50,
             {image: 'tablo12'}
         ), 12);
 
@@ -57,51 +57,81 @@ game.GameOverScreen = me.ScreenObject.extend({
                     [0, 0, me.game.viewport.width/2, me.game.viewport.height/2]
                 );
                 this.font = new me.Font('gamefont', 25, 'white', 'left');
+                this.fontRed = new me.Font('gamefont', 25, 'red', 'left');
+                this.fontGold = new me.Font('gamefont', 25, 'gold', 'left');
+                this.fontSilver = new me.Font('gamefont', 25, 'grey', 'left');
+                this.fontBronze = new me.Font('gamefont', 25, 'chocolate', 'left');
+                this.alwaysUpdate = false;
             },
 
             draw: function (renderer) {
-                var margin = 0;
-				var stepsTxt = "" + game.data.steps;
-				var pseudoTxt = me.save.pseudo;
-				while(pseudoTxt.length < 8) {
+                let margin = 0;
+                let stepsTxt = "" + game.data.steps;
+                let pseudoTxt = me.save.pseudo;
+                while(pseudoTxt.length < 8) {
 					pseudoTxt = pseudoTxt + " ";
 				}
-				while(stepsTxt.length < 3) {
+				while(stepsTxt.length < 6) {
 						stepsTxt = "0" + stepsTxt;
 				}
-				var text = "    " + pseudoTxt + "    " + stepsTxt;
-                var textFont =  this.font.measureText(renderer, text);
-                this.font.draw(
-                    renderer,"    " + text,
-                     me.game.viewport.width/2 - textFont.width/2 - 65,
-                     me.game.viewport.height/2 + margin - 230
+                this.fontRed.draw(
+                    renderer,
+                    pseudoTxt,
+                    me.game.viewport.width/2 + 90,
+                    me.game.viewport.height/3 + 70
                 );
-                for (var i = 0; i < me.save.rows.length; i++){
-					var stepsTxt = "" + me.save.rows[i].step;
-					while(me.save.rows[i].pseudo.length < 8) {
+                this.fontRed.draw(
+                    renderer,
+                    stepsTxt,
+                    me.game.viewport.width/2 + 330,
+                    me.game.viewport.height/3 + 70
+                );
+
+                for (let i = 0; i < me.save.rows.length; i++){
+                    stepsTxt = "" + me.save.rows[i].step;
+                    while(me.save.rows[i].pseudo.length < 8) {
 						me.save.rows[i].pseudo = me.save.rows[i].pseudo + " ";
 					}
-					while(stepsTxt.length < 3) {
+					while(stepsTxt.length < 6) {
 						stepsTxt = "0" + stepsTxt;
 					}
-                    var text = me.save.rows[i].pseudo + "    " + stepsTxt;
-                    textFont =  this.font.measureText(renderer, text);
-					var pos = (i+1);
-					if(pos < 10)
-						pos = " " + pos;
-                    this.font.draw(
-                        renderer,
-                        pos + "   " + text,
-                        me.game.viewport.width/2 - textFont.width/2 - 50,
-                        me.game.viewport.height/2 + margin - 140
-                    );
+					switch(i) {
+                        case 0: this.drawLeaderboard(renderer, this.fontGold, i, stepsTxt, margin);
+                            break;
+                        case 1: this.drawLeaderboard(renderer, this.fontSilver, i, stepsTxt, margin);
+                            break;
+                        case 2: this.drawLeaderboard(renderer, this.fontBronze, i, stepsTxt, margin);
+                            break;
+                        default: this.drawLeaderboard(renderer, this.font, i, stepsTxt, margin);
+                            break
+                    }
+
                     margin = margin + 27;
                 }
+            },
+            drawLeaderboard: function(renderer,font,i,stepsTxt,margin) {
+                font.draw(
+                    renderer,
+                    " " + (i + 1),
+                    me.game.viewport.width/2 + 10,
+                    me.game.viewport.height/3 + margin + 160
+                );
+                font.draw(
+                    renderer,
+                    me.save.rows[i].pseudo,
+                    me.game.viewport.width/2 + 90,
+                    me.game.viewport.height/3 + margin + 160
+                );
+                font.draw(
+                    renderer,
+                    stepsTxt,
+                    me.game.viewport.width/2 + 330,
+                    me.game.viewport.height/3 + margin + 160
+                );
             }
         }));
         me.game.world.addChild(this.dialog, 13);
     },
-
     onDestroyEvent: function() {
         // unregister the event
         me.event.unsubscribe(this.handler);
