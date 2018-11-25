@@ -47,14 +47,18 @@ game.EnemyEntity = me.Entity.extend({
                 me.game.world.removeChild(this);
                 
                 var rdm = Math.random();
-                if (rdm > 0.7){
-                    // TODO Drop gifts
-                    me.game.world.addChild(new me.pool.pull('speedUpDrop', this.pos.x, this.pos.y), 10);
+                if (rdm > 0.5){
+                    if (rdm > 0.95)
+                        me.game.world.addChild(new me.pool.pull('shieldDrop', this.pos.x, this.pos.y), 10);
+                    else if (rdm > 0.9)
+                        me.game.world.addChild(new me.pool.pull('weaponDrop', this.pos.x, this.pos.y), 10);
+                    else if (rdm > 0.8)
+                        me.game.world.addChild(new me.pool.pull('speedUpDrop', this.pos.x, this.pos.y), 10);
+                    else if (rdm > 0.7)
+                        me.game.world.addChild(new me.pool.pull('damageUpDrop', this.pos.x, this.pos.y), 10);
+                    else
+                        me.game.world.addChild(new me.pool.pull('presentDrop', this.pos.x, this.pos.y, this.points), 10);
                 }
-                else if (rdm > 0.4)
-                    me.game.world.addChild(new me.pool.pull('damageUpDrop', this.pos.x, this.pos.y), 10);
-                else
-                    me.game.world.addChild(new me.pool.pull('shieldDrop', this.pos.x, this.pos.y), 10);
                 me.audio.play("hit");
             }
             else if (this.hp > 0)

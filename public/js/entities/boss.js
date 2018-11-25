@@ -44,12 +44,9 @@ game.BossEntity = me.Entity.extend({
             if (this.hp <= 0){
                 game.data.steps += this.points;
                 me.game.world.removeChild(this);
-
-                if (Math.random() < 0.1){
-                    // TODO Drop gifts
-                    me.game.world.addChild(new me.pool.pull('present', this.pos.x, this.pos.y, this.defaultHp, this.points), 10);
-                }
-                me.audio.play("hit");
+                me.game.enemyGenerator.boss = false;
+                // TODO Drop gifts
+                me.audio.play("hitBoss");
             }
             else {
                 let lostHPPercent = (100-((game.boss.hp/game.bossHPBar.maxHP)*100));

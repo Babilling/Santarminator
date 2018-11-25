@@ -1,4 +1,4 @@
-const weaponsSoundLevel = 0.1;
+const weaponsSoundLevel = 0.3;
 var game = {
     data: {
         steps: 0,
@@ -70,6 +70,7 @@ var game = {
         // sounds
         {name: "theme", type: "audio", src: "data/bgm/"},
         {name: "hit", type: "audio", src: "data/sfx/"},
+        {name: "hitBoss", type: "audio", src: "data/sfx/"},
         {name: "hurt", type: "audio", src: "data/sfx/"},
         {name: "lose", type: "audio", src: "data/sfx/"},
         {name: "presentDrop", type: "audio", src: "data/sfx/"},
@@ -305,7 +306,7 @@ var game = {
 		me.pool.register("hadoken", game.HadokenEntity, true);
         me.pool.register("laser", game.LaserEntity, true);
         me.pool.register("minigun", game.MinigunEntity, true);
-        me.pool.register("present", game.PresentEntity, true);
+        me.pool.register("presentDrop", game.PresentEntity, true);
         me.pool.register("speedUpDrop", game.SpeedUpEntity, true);
         me.pool.register("damageUpDrop", game.DamageUpEntity, true);
         me.pool.register("weaponDrop", game.WeaponDropEntity, true);

@@ -90,9 +90,9 @@ game.WeaponDropEntity = me.Entity.extend({
     onCollision: function(response) {
         let obj = response.b;
         if (obj.type === 'santa'){
-            obj.weapon.resetWeapon();
-            obj.weapon = this.weapon;
-            obj.renderable.setCurrentAnimation(this.weapon.type);
+            game.santa.weapon.resetWeapon();
+            game.santa.weapon = this.weapon;
+            game.santa.renderable.setCurrentAnimation(this.weapon.type);
             me.game.world.removeChild(this);
             me.audio.play("weaponDrop");
         }
