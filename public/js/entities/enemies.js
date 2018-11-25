@@ -109,6 +109,11 @@ game.MageEnemyEntity = game.RangedEnemyEntity.extend({
         ]);
         this.renderable.addAnimation ("attack", [0,1,2], this.animationSpeed);
         this.renderable.setCurrentAnimation("attack");
+        this.renderable.anchorPoint = {"x" : 0, "y" : 0};
+        this.anchorPoint = {"x" : 0, "y" : 0};
+        this.body.addShape(new me.Ellipse(40,40,60,69));
+        this.body.getShape(0).scale(0.01);
+        this.body.getShape(0).translate(40,20);
     },
 
     update: function(dt) {
@@ -130,6 +135,12 @@ game.ArcherEnemyEntity = game.RangedEnemyEntity.extend({
         ]);
         this.renderable.addAnimation ("attack", [0,1,2], this.animationSpeed);
         this.renderable.setCurrentAnimation("attack");
+        this.renderable.anchorPoint = {"x" : 0, "y" : 0};
+        this.anchorPoint = {"x" : 0, "y" : 0};
+        this.body.addShape(new me.Ellipse(45,40,60,80));
+        this.body.getShape(0).scale(0.01);
+        this.body.getShape(0).translate(40,20);
+
     },
 
     update: function(dt) {
@@ -152,6 +163,11 @@ game.MeleeEnemyEntity = game.EnemyEntity.extend({
         this.animationSpeed = 200;
         this.renderable.addAnimation ("attack", attackFrames,this.animationSpeed);
         this.renderable.setCurrentAnimation("attack");
+        this.renderable.anchorPoint = {"x" : 0, "y" : 0};
+        this.anchorPoint = {"x" : 0, "y" : 0};
+        this.body.addShape(new me.Ellipse(40,40,70,80));
+        this.body.getShape(0).scale(0.01);
+        this.body.getShape(0).translate(40,20);
     }
 });
 /**
