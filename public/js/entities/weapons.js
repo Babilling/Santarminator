@@ -78,7 +78,7 @@ game.ShotgunEntity = game.WeaponEntity.extend({
         settings.framewidth = 6;
         settings.frameheight = 6;
 
-        this._super(game.WeaponEntity, 'init', [x, y, settings, 50]);
+        this._super(game.WeaponEntity, 'init', [x, y, settings, 10]);
         this.defaultSpeed = 10 + me.Math.random(5, 10);
         this.duration = 500;
         this.minDegat = 5;
