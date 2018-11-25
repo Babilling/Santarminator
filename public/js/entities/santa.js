@@ -34,6 +34,10 @@ game.SantaEntity = me.Entity.extend({
         this.renderable.setCurrentAnimation(game.weapon[0].type);
         this.renderable.anchorPoint = {"x" : 0, "y" : 0};
         this.anchorPoint = {"x" : 0, "y" : 0};
+        this.body.addShape(new me.Ellipse(50,40,50,85));
+        this.body.getShape(0).scale(0.01);
+        this.body.getShape(0).translate(50,0);
+        //this.body.removeShapeAt(0);
         // enable this, since the entity starts off the viewport
         this.alwaysUpdate = true;
         this.type = "santa";
