@@ -261,6 +261,10 @@ game.ShieldEntity = me.Entity.extend({
 
         this._super(me.Entity, "init", [x - 21, y - 9, settings]);
         this.body.vel.set(0, 0);
+        this.renderable.anchorPoint = {"x" : 0, "y" : 0};
+        this.anchorPoint = {"x" : 0, "y" : 0};
+        this.body.addShape(new me.Ellipse(70,60,120,120));
+        this.body.removeShapeAt(0);
         this.type = "shield";
         game.santa.isProtected = true;
     },
