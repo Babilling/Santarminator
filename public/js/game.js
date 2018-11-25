@@ -45,6 +45,10 @@ var game = {
         {name: "speedUp", type:"image", src: "data/img/speedUp.png"},
         {name: "damageUp", type:"image", src: "data/img/damageUp.png"},
 
+        // Shield
+        {name: "shieldDrop", type:"image", src: "data/img/shieldDrop.png"},
+        {name: "shield", type:"image", src: "data/img/shield.png"},
+
         // Drop Weapon
         {name: "drop-bullet", type:"image", src: "data/img/present1.png"},
         {name: "drop-shotgun", type:"image", src: "data/img/present2.png"},
@@ -69,6 +73,7 @@ var game = {
         {name: "hit", type: "audio", src: "data/sfx/"},
         {name: "hurt", type: "audio", src: "data/sfx/"},
         {name: "lose", type: "audio", src: "data/sfx/"},
+        {name: "bubblePop", type: "audio", src: "data/sfx/"},
         {name: "bullet", type: "audio", src: "data/sfx/"},
         {name: "shotgun", type: "audio", src: "data/sfx/"},
         {name: "ak", type: "audio", src: "data/sfx/"},
@@ -309,6 +314,8 @@ var game = {
         me.pool.register("speedUpDrop", game.SpeedUpEntity, true);
         me.pool.register("damageUpDrop", game.DamageUpEntity, true);
         me.pool.register("weaponDrop", game.WeaponDropEntity, true);
+        me.pool.register("shieldDrop", game.ShieldDropEntity, true);
+        me.pool.register("shield", game.ShieldEntity, true);
 		me.pool.register("mageEnemy", game.MageEnemyEntity, true);
         me.pool.register("mageBoss", game.MageBossEntity, true);
 		me.pool.register("meleeEnemy", game.MeleeEnemyEntity, true);

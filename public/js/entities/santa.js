@@ -46,6 +46,7 @@ game.SantaEntity = me.Entity.extend({
         this.velX = 5;
         this.damage = 0;
         this.speed = 0;
+        this.isProtected= false;
 
         //TODO debug remove on release
         this.i = 0;
@@ -134,6 +135,11 @@ game.SantaEntity = me.Entity.extend({
         }
         else if (obj.type === 'damageUpDrop'){
             this.damage++;
+            me.game.world.removeChild(obj);
+        }
+        else if (obj.type === 'shieldDrop'){
+            if (!this.isProtected)
+                me.game.world.addChild(new me.pool.pull("shield", this.pos.x, this.pos.y), 13);
             me.game.world.removeChild(obj);
         }
         return false;

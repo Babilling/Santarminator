@@ -150,3 +150,88 @@ game.SpeedUpEntity = me.Entity.extend({
         return true;
     }
 });
+
+/**
+ * ShieldDropEntity : shield sur santa
+ */
+game.ShieldDropEntity = me.Entity.extend({
+    init: function(x, y) {
+        var settings = {};
+        settings.image = this.image = me.loader.getImage('shieldDrop');
+        settings.width = 32;
+        settings.height= 32;
+        settings.framewidth = 32;
+        settings.frameheight = 32;
+        // call the super constructor
+        this._super(me.Entity, "init", [x, y, settings]);
+        this.type = 'shieldDrop';
+        this.alwaysUpdate = true;
+        this.pos.add(this.body.vel);
+        this.body.vel.set(0, 0);
+        this.date = Date.now();
+        this.cd = 5000;
+    },
+
+    update: function(dt) {
+        // mechanics
+        if (!game.data.start) {
+            return this._super(me.Entity, 'update', [dt]);
+        }
+        this.pos.add(this.body.vel);
+        if (Date.now() - this.date > this.cd)
+            me.game.world.removeChild(this);
+
+        this.body.vel.set(0, 0);
+        me.Rect.prototype.updateBounds.apply(this);
+        this._super(me.Entity, "update", [dt]);
+        return true;
+    }
+});
+
+/**
+ * ShieldEntity
+ */
+game.ShieldEntity = me.Entity.extend({
+    init: function(x, y) {
+        let settings = {};
+        settings.image = this.image = me.loader.getImage('shield');
+        settings.width = 120;
+        settings.height= 118;
+        settings.framewidth = 120;
+        settings.frameheight = 118;
+
+        this._super(me.Entity, "init", [x - 21, y - 9, settings]);
+        this.body.vel.set(0, 0);
+        this.type = "shield";
+        game.santa.isProtected = true;
+    },
+    update: function(dt) {
+        if (!game.data.start) {
+            return this._super(me.Entity, 'update', [dt]);
+        }
+        this.pos.x = game.santa.pos.x - 21;
+        this.pos.y = game.santa.pos.y - 9;
+        this.body.vel.set(0, 0);
+
+        me.Rect.prototype.updateBounds.apply(this);
+        me.collision.check(this);
+        this._super(me.Entity, 'update', [dt]);
+        return true;
+    },
+    onCollision: function(response) {
+        let obj = response.b;
+        if (obj.type === 'ennemy'){
+            me.game.world.removeChild(this);
+            game.santa.isProtected = false;
+            me.audio.play("bubblePop");
+        }
+        else if (obj.type === 'attack'){
+            me.game.world.removeChild(obj);
+            me.game.world.removeChild(this);
+            game.santa.isProtected = false;
+            me.audio.play("bubblePop");
+        }
+            
+        return false;
+    }
+});
