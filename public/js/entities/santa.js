@@ -98,6 +98,12 @@ game.SantaEntity = me.Entity.extend({
             this.lastSwitch = Date.now();
         }
         me.Rect.prototype.updateBounds.apply(this);
+        if (this.collided) {
+            this.weapon.resetWeapon();
+            game.data.start = false;
+            me.audio.play("lose");
+            this.endAnimation();
+        }
         me.collision.check(this);
 		 // call the parent function
 		this._super(me.Entity, "update", [dt]);
