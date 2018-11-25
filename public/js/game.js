@@ -68,11 +68,15 @@ var game = {
         {name: "new", type:"image", src: "data/img/new.png"},
 
         // sounds
-        {name: "theme1", type: "audio", src: "data/bgm/"},
-        {name: "theme2", type: "audio", src: "data/bgm/"},
+        {name: "theme", type: "audio", src: "data/bgm/"},
         {name: "hit", type: "audio", src: "data/sfx/"},
         {name: "hurt", type: "audio", src: "data/sfx/"},
         {name: "lose", type: "audio", src: "data/sfx/"},
+        {name: "presentDrop", type: "audio", src: "data/sfx/"},
+        {name: "weaponDrop", type: "audio", src: "data/sfx/"},
+        {name: "speedDrop", type: "audio", src: "data/sfx/"},
+        {name: "damageDrop", type: "audio", src: "data/sfx/"},
+        {name: "shieldDrop", type: "audio", src: "data/sfx/"},
         {name: "bubblePop", type: "audio", src: "data/sfx/"},
         {name: "bullet", type: "audio", src: "data/sfx/"},
         {name: "shotgun", type: "audio", src: "data/sfx/"},
@@ -83,17 +87,8 @@ var game = {
         {name: "minigunLoading", type: "audio", src: "data/sfx/"},
         {name: "minigunFire", type: "audio", src: "data/sfx/"},
         {name: "minigunRelease", type: "audio", src: "data/sfx/"},
-		{name: "balledeboulepremium", type: "audio", src: "data/sfx/"},
-        {name: "balle de boule", type: "audio", src: "data/sfx/"},
-        {name: "cabiche", type: "audio", src: "data/sfx/"},
-        {name: "cest du bon", type: "audio", src: "data/sfx/"},
-        {name: "fatchdefitch", type: "audio", src: "data/sfx/"},
-        {name: "onestbienla", type: "audio", src: "data/sfx/"},
-        {name: "tesdanslaxe", type: "audio", src: "data/sfx/"},
         {name: "explosion", type: "audio", src: "data/sfx/"},
 		{name: "skraa", type: "audio", src: "data/sfx/"},
-
-
     ],
 
     weapon: [

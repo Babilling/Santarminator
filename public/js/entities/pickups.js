@@ -33,8 +33,19 @@ game.PresentEntity = me.Entity.extend({
 
         this.body.vel.set(0, 0);
         me.Rect.prototype.updateBounds.apply(this);
+        me.collision.check(this);
         this._super(me.Entity, "update", [dt]);
         return true;
+    },
+    onCollision: function(response) {
+        let obj = response.b;
+        if (obj.type === 'santa'){
+            game.data.steps += this.points;
+            me.game.world.removeChild(this);
+            me.audio.play("presentDrop");
+        }
+            
+        return false;
     }
 });
 
@@ -72,8 +83,21 @@ game.WeaponDropEntity = me.Entity.extend({
 
         this.body.vel.set(0, 0);
         me.Rect.prototype.updateBounds.apply(this);
+        me.collision.check(this);
         this._super(me.Entity, "update", [dt]);
         return true;
+    },
+    onCollision: function(response) {
+        let obj = response.b;
+        if (obj.type === 'santa'){
+            obj.weapon.resetWeapon();
+            obj.weapon = this.weapon;
+            obj.renderable.setCurrentAnimation(this.weapon.type);
+            me.game.world.removeChild(this);
+            me.audio.play("weaponDrop");
+        }
+            
+        return false;
     }
 });
 
@@ -109,8 +133,19 @@ game.DamageUpEntity = me.Entity.extend({
 
         this.body.vel.set(0, 0);
         me.Rect.prototype.updateBounds.apply(this);
+        me.collision.check(this);
         this._super(me.Entity, "update", [dt]);
         return true;
+    },
+    onCollision: function(response) {
+        let obj = response.b;
+        if (obj.type === 'santa'){
+            game.santa.damage++;
+            me.game.world.removeChild(this);
+            me.audio.play("damageDrop");
+        }
+            
+        return false;
     }
 });
 
@@ -146,8 +181,20 @@ game.SpeedUpEntity = me.Entity.extend({
 
         this.body.vel.set(0, 0);
         me.Rect.prototype.updateBounds.apply(this);
+        me.collision.check(this);
         this._super(me.Entity, "update", [dt]);
         return true;
+    },
+    onCollision: function(response) {
+        let obj = response.b;
+        if (obj.type === 'santa'){
+            game.santa.speed++;
+            if (game.santa.speed > 5) game.santa.speed = 5; 
+            me.game.world.removeChild(this);
+            me.audio.play("speedDrop");
+        }
+            
+        return false;
     }
 });
 
@@ -183,8 +230,20 @@ game.ShieldDropEntity = me.Entity.extend({
 
         this.body.vel.set(0, 0);
         me.Rect.prototype.updateBounds.apply(this);
+        me.collision.check(this);
         this._super(me.Entity, "update", [dt]);
         return true;
+    },
+    onCollision: function(response) {
+        let obj = response.b;
+        if (obj.type === 'santa'){
+            if (!game.santa.isProtected)
+                me.game.world.addChild(new me.pool.pull("shield", game.santa.pos.x, game.santa.pos.y), 13);
+            me.game.world.removeChild(this);
+            me.audio.play("shieldDrop");
+        }
+            
+        return false;
     }
 });
 

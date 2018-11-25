@@ -118,7 +118,6 @@ game.GameOverScreen = me.ScreenObject.extend({
         me.input.unbindKey(me.input.KEY.RIGHT);
 
         this.font = null;
-        me.audio.stop("theme1");
-        me.audio.stop("theme2");
+        me.audio.stop("theme");
     }
 });

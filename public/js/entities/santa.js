@@ -36,6 +36,7 @@ game.SantaEntity = me.Entity.extend({
         this.anchorPoint = {"x" : 0, "y" : 0};
         // enable this, since the entity starts off the viewport
         this.alwaysUpdate = true;
+        this.type = "santa";
 		
 		// collision shape
         this.collided = false;
@@ -116,31 +117,6 @@ game.SantaEntity = me.Entity.extend({
         if (obj.type === 'ennemy' || obj.type === 'attack') {
             me.device.vibrate(500);
             this.collided = true;
-        }
-        else if (obj.type === 'present'){
-            game.data.steps += obj.points;
-            me.game.world.removeChild(obj);
-            // TODO play sound
-        }
-        else if (obj.type === 'weaponDrop'){
-            this.weapon.resetWeapon();
-            this.weapon = obj.weapon;
-            this.renderable.setCurrentAnimation(obj.weapon.type);
-            me.game.world.removeChild(obj);
-        }
-        else if (obj.type === 'speedUpDrop'){
-            this.speed++;
-            if (this.speed > 5) this.speed = 5; 
-            me.game.world.removeChild(obj);
-        }
-        else if (obj.type === 'damageUpDrop'){
-            this.damage++;
-            me.game.world.removeChild(obj);
-        }
-        else if (obj.type === 'shieldDrop'){
-            if (!this.isProtected)
-                me.game.world.addChild(new me.pool.pull("shield", this.pos.x, this.pos.y), 13);
-            me.game.world.removeChild(obj);
         }
         return false;
     },
