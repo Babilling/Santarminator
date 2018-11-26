@@ -12,7 +12,7 @@ game.BossEntity = me.Entity.extend({
         /*************************************************************************/
         if (typeof velX === 'undefined') { this.velX = -1; } else {this.velX = velX;}
         if (typeof velY === 'undefined') { this.velY = 0; } else {this.velY = velY;}
-        if (typeof hp === 'undefined') { this.hp = 100; } else {this.hp = hp;}
+        if (typeof hp === 'undefined') { this.hp = 1000; } else {this.hp = hp;}
         if (typeof points === 'undefined') { this.points = 1000; } else {this.points = points;}
         /*************************************************************************/
         // call the super constructor
