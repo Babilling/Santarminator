@@ -37,7 +37,7 @@ game.EnnemyGenerator = me.Renderable.extend({
                         me.game.world.addChild(new me.pool.pull('archerEnemy', posX, posY, undefined, undefined, enemiesHp, enemiesPoints), 13);
                         break;
                     case 3 :
-                        //me.game.world.addChild(new me.pool.pull('mageEnemy', posX, posY, undefined, undefined, enemiesHp, enemiesPoints), 13);
+                        me.game.world.addChild(new me.pool.pull('mageEnemy', posX, posY, undefined, undefined, enemiesHp, enemiesPoints), 13);
                         break;
                 }
         }
