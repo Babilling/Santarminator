@@ -141,7 +141,7 @@ game.HadokenEntity = game.WeaponEntity.extend({
         settings.framewidth = 73;
         settings.frameheight = 64;
 
-        this._super(game.WeaponEntity, 'init', [x, y, settings, 50]);
+        this._super(game.WeaponEntity, 'init', [x, y, settings, 20]);
         this.body.speed = 20;
         this.body.vel.set(this.body.speed, 0);
         this.enemies = [];
@@ -170,7 +170,7 @@ game.LaserEntity = game.WeaponEntity.extend({
         settings.framewidth = 1500;
         settings.frameheight = 67;
 
-        this._super(game.WeaponEntity, 'init', [x, y, settings, 5]);
+        this._super(game.WeaponEntity, 'init', [x, y, settings, 1]);
         this.body.vel.set(0, 0);
         this.date = Date.now();
     },
@@ -196,7 +196,7 @@ game.MinigunEntity = game.WeaponEntity.extend({
         settings.framewidth = 29;
         settings.frameheight = 6;
 
-        this._super(game.WeaponEntity, 'init', [x, y, settings]);
+        this._super(game.WeaponEntity, 'init', [x, y, settings, 1]);
         this.body.speed = 20;
         this.body.vel.set(this.body.speed, 0);
         this.body.vel = this.body.vel.rotate(rad);
