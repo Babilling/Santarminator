@@ -23,7 +23,18 @@ game.EnnemyGenerator = me.Renderable.extend({
 			let enemiesHp = 10;
             let enemiesPoints = 10;
 			if(!this.boss && game.data.steps > (this.bossPopped + 1) * this.scorePopBoss + (this.bossPopped * 1000)) {
-			    game.boss = new me.pool.pull('mageBoss', me.game.viewport.width + 50, 50);
+                switch(me.Math.random(1, 4)) {
+                    case 1 :
+                        game.boss = new me.pool.pull('mageBoss', me.game.viewport.width + 50, 50);
+                        break;
+                    case 2 :
+                        game.boss = new me.pool.pull('treeBoss', me.game.viewport.width + 50, 50);
+                        break;
+                    case 3 :
+                        game.boss = new me.pool.pull('treeBoss', me.game.viewport.width + 50, 50);
+                        break;
+                }
+			    
                 me.game.world.addChild(game.boss, 12);
                 this.boss = true;
                 this.bossPopped++;
