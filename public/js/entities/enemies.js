@@ -29,9 +29,11 @@ game.EnemyEntity = me.Entity.extend({
             return this._super(me.Entity, 'update', [dt]);
         }
         this.pos.add(this.body.vel);
-        if (this.pos.x < -this.width || this.pos.y < -this.height || this.pos.y > me.game.viewport.width) {
+        if (this.pos.x < -this.width)
             me.game.world.removeChild(this);
-        }
+        if (this.pos.y < 0 && this.velY < 0 || (this.pos.y + this.height) > me.game.viewport.height && this.velY > 0)
+            this.velY = - this.velY;
+
         this.body.vel.set(this.velX, this.velY);
         me.Rect.prototype.updateBounds.apply(this);
         this._super(me.Entity, "update", [dt]);
