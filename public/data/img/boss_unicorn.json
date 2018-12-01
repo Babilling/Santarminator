@@ -1,0 +1,121 @@
+{"frames": [
+	{
+		"filename": "boss_unicorn_attack_000",
+		"frame": {"x":377,"y":808,"w":375,"h":402},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":375,"h":402},
+		"sourceSize": {"w":375,"h":402}
+	},
+	{
+		"filename": "boss_unicorn_attack_001",
+		"frame": {"x":754,"y":808,"w":375,"h":402},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":375,"h":402},
+		"sourceSize": {"w":375,"h":402}
+	},
+	{
+		"filename": "boss_unicorn_attack_002",
+		"frame": {"x":377,"y":0,"w":375,"h":402},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":375,"h":402},
+		"sourceSize": {"w":375,"h":402}
+	},
+	{
+		"filename": "boss_unicorn_attack_003",
+		"frame": {"x":0,"y":1616,"w":375,"h":402},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":375,"h":402},
+		"sourceSize": {"w":375,"h":402}
+	},
+	{
+		"filename": "boss_unicorn_attack_004",
+		"frame": {"x":0,"y":1212,"w":375,"h":402},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":375,"h":402},
+		"sourceSize": {"w":375,"h":402}
+	},
+	{
+		"filename": "boss_unicorn_attack_005",
+		"frame": {"x":0,"y":808,"w":375,"h":402},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":375,"h":402},
+		"sourceSize": {"w":375,"h":402}
+	},
+	{
+		"filename": "boss_unicorn_attack_006",
+		"frame": {"x":0,"y":404,"w":375,"h":402},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":375,"h":402},
+		"sourceSize": {"w":375,"h":402}
+	},
+	{
+		"filename": "boss_unicorn_hurt_000",
+		"frame": {"x":0,"y":0,"w":375,"h":402},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":375,"h":402},
+		"sourceSize": {"w":375,"h":402}
+	},
+	{
+		"filename": "boss_unicorn_hurt_001",
+		"frame": {"x":377,"y":404,"w":375,"h":402},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":375,"h":402},
+		"sourceSize": {"w":375,"h":402}
+	},
+	{
+		"filename": "boss_unicorn_hurt_002",
+		"frame": {"x":754,"y":404,"w":375,"h":402},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":375,"h":402},
+		"sourceSize": {"w":375,"h":402}
+	},
+	{
+		"filename": "boss_unicorn_hurt_003",
+		"frame": {"x":377,"y":404,"w":375,"h":402},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":375,"h":402},
+		"sourceSize": {"w":375,"h":402}
+	},
+	{
+		"filename": "boss_unicorn_idle_000",
+		"frame": {"x":754,"y":0,"w":375,"h":402},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":375,"h":402},
+		"sourceSize": {"w":375,"h":402}
+	},
+	{
+		"filename": "boss_unicorn_idle_001",
+		"frame": {"x":377,"y":1616,"w":375,"h":402},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":375,"h":402},
+		"sourceSize": {"w":375,"h":402}
+	},
+	{
+		"filename": "boss_unicorn_idle_002",
+		"frame": {"x":377,"y":1212,"w":375,"h":402},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":375,"h":402},
+		"sourceSize": {"w":375,"h":402}
+	},
+	{"EOL":"true"}
+],
+"meta": {
+	"app": "ShoeBox",
+	"exporter": "melonJS",
+	"size": {"w":2048,"h":2048}
+}
+}

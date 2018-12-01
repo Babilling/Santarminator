@@ -317,3 +317,93 @@ game.TreeBossEntity = game.BossEntity.extend({
 
     }
 });
+/**
+ * UnicornBossEntity
+ */
+game.UnicornBossEntity = game.BossEntity.extend({
+
+    init: function(x, y, velX, velY, hp, points) {
+        // Texture and animation
+        this._super(game.BossEntity, "init", [x, y, {width : 375, height : 402}, velX, velY, hp, points]);
+        this.renderable = game.unicornBossTexture.createAnimationFromName([
+            "boss_unicorn_attack_000", "boss_unicorn_attack_001", "boss_unicorn_attack_002", "boss_unicorn_attack_003", "boss_unicorn_attack_004",
+            "boss_unicorn_attack_005", "boss_unicorn_attack_006", "boss_unicorn_hurt_000", "boss_unicorn_hurt_001", "boss_unicorn_hurt_002",
+            "boss_unicorn_hurt_003", "boss_unicorn_idle_000", "boss_unicorn_idle_001", "boss_unicorn_idle_002"
+        ]);
+        this.animationSpeed = 150;
+        this.renderable.anchorPoint = {"x" : 0, "y" : 0};
+        this.anchorPoint = {"x" : 0, "y" : 0};
+        this.attackFrames = [7,8,9,10,7,8,9,10,0,1,2,3,4,5,6];
+        this.renderable.addAnimation ("attack", this.attackFrames,this.animationSpeed);
+        this.renderable.addAnimation ("hurt", [7,8,9,10],this.animationSpeed+25);
+        this.renderable.addAnimation ("idle", [11,12,13],this.animationSpeed*2);
+        this.renderable.setCurrentAnimation("idle");
+        this.currentAttack = 0;
+        this.attackDelay = (this.animationSpeed * this.attackFrames.length) + 3000;
+        this.lastAttack = Date.now();
+        this.hasAttacked = false;
+        this.specialAttackSettings = new Map([["number",4], ["delay", 4000], ["speed", -2]]);
+        this.specialAttackEntities = [];
+        this.nextAttackIsSpecial = false;
+        this.specialAttackTriggers = new Map([[0, new Map([["hp",this.defaultHp*0.75],["triggered",false]])] , [1, new Map([["hp",this.defaultHp*0.50],["triggered",false]])] , [2, new Map([["hp",this.defaultHp*0.25],["triggered",false]])]]);
+    },
+
+    update: function(dt) {
+        this.pos.add(this.body.vel);
+        if (this.pos.x <= (me.game.viewport.width/3*2)-100 || (this.pos.x >= me.game.viewport.width-this.renderable.width && this.velX === 1)) {
+            this.velX = -this.velX;
+            if(this.velY === 0)
+                this.velY = -1;
+        }
+        if (this.pos.y <= 0 || (this.pos.y >= me.game.viewport.height-this.renderable.height)) {
+            this.velY = -this.velY;
+        }
+        for (let i = 0; i < this.specialAttackTriggers.size; i++) {
+            if(this.hp <= this.specialAttackTriggers.get(i).get("hp") && !this.specialAttackTriggers.get(i).get("triggered")){
+                this.nextAttackIsSpecial = true;
+                this.specialAttackTriggers.get(i).set("triggered",true);
+                break;
+            }
+        }
+        if(Date.now() - this.lastAttack >= this.attackDelay) {
+            this.renderable.setCurrentAnimation("attack", "idle");
+            this.lastAttack = Date.now();
+            this.hasAttacked = false;
+            if(this.nextAttackIsSpecial)
+                this.currentAttack = 1;
+        }
+        this.checkAttack();
+        this.body.vel.set(this.velX, this.velY);
+        me.Rect.prototype.updateBounds.apply(this);
+        this._super(game.BossEntity, "update", [dt]);
+    },
+
+    checkAttack: function () {
+        if(this.hasAttacked === false && this.currentAttack === 0 && this.renderable.getCurrentAnimationFrame() === 34) {
+            me.game.world.addChild(new me.pool.pull('mageBossAttackEntity', this.pos.x, this.pos.y + this.renderable.height/2, -3, 0, true, 5), 14);
+            me.audio.play("skraa");
+            this.hasAttacked = true;
+        }
+        if(this.currentAttack === 1) {
+            if (this.hasAttacked === false) {
+                this.specialAttackEntities = [];
+                for (let i = 0; i <= this.specialAttackSettings.get('number'); i++) {
+                    let attack = new me.pool.pull('mageBossAttackEntity', (me.game.viewport.width / 3 * 2) - 100,
+                        me.game.viewport.height/this.specialAttackSettings.get('number')/2 + i * me.game.viewport.height/this.specialAttackSettings.get('number'), 0, 0, true, 3);
+                    attack.explosionDelay = this.specialAttackSettings.get('delay') + me.Math.random(1000, 2000);
+                    this.specialAttackEntities.push(attack);
+                    me.game.world.addChild(attack);
+                    this.hasAttacked = true;
+                }
+            }
+            if (this.hasAttacked === true && this.renderable.getCurrentAnimationFrame() === 34) {
+                for(let i = 0; i < this.specialAttackEntities.length; i++) {
+                    this.specialAttackEntities[i].velX = this.specialAttackSettings.get('speed');
+                    this.currentAttack = 0;
+                    this.nextAttackIsSpecial = false;
+                }
+            }
+        }
+
+    }
+});

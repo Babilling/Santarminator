@@ -31,6 +31,8 @@ var game = {
         {name: "mageBoss", type:"image", src: "data/img/boss_mage.png"},
         {name: "mageBoss", type:"json", src: "data/img/boss_mage.json"},
         {name: "treeBoss", type:"image", src: "data/img/boss_tree.png"},
+        {name: "unicornBoss", type:"json", src: "data/img/boss_unicorn.json"},
+        {name: "unicornBoss", type:"image", src: "data/img/boss_unicorn.png"},
         {name: "treeBoss", type:"json", src: "data/img/boss_tree.json"},
         {name: "mageBossAttack", type:"image", src: "data/img/bossmageattack.png"},
         {name: "mageBossAttack", type:"json", src: "data/img/bossmageattack.json"},
@@ -319,6 +321,7 @@ var game = {
 		me.pool.register("mageEnemy", game.MageEnemyEntity, true);
         me.pool.register("mageBoss", game.MageBossEntity, true);
         me.pool.register("treeBoss", game.TreeBossEntity, true);
+        me.pool.register("unicornBoss", game.UnicornBossEntity, true);
 		me.pool.register("meleeEnemy", game.MeleeEnemyEntity, true);
         me.pool.register("archerEnemy", game.ArcherEnemyEntity, true);
 		me.pool.register("mageAttackEntity", game.MageAttackEntity, true);
@@ -357,7 +360,10 @@ var game = {
             me.loader.getJSON("mageBossAttack"),
             me.loader.getImage("mageBossAttack")
         );
-
+        game.unicornBossTexture = new me.video.renderer.Texture(
+            me.loader.getJSON("unicornBoss"),
+            me.loader.getImage("unicornBoss")
+        );
 		//Santa
 		game.santaTexture = new me.video.renderer.Texture(
 			me.loader.getJSON("santa"),
