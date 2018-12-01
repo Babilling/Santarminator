@@ -49,7 +49,7 @@ game.GameOverScreen = me.ScreenObject.extend({
         );
         me.game.world.addChild(gameOverBG, 10);
 
-        me.game.world.addChild(new BackgroundLayer('bg', 1));
+        me.game.world.addChild(new BackgroundLayer(game.bg, 1));
         this.dialog = new (me.Renderable.extend({
             // constructor
             init: function() {

@@ -9,7 +9,8 @@ game.TitleScreen = me.ScreenObject.extend({
     onResetEvent: function() {
         me.audio.stop("theme");
         game.data.newHiScore = false;
-		me.game.world.addChild(new BackgroundLayer('bg', 1));
+        game.bg = 'bg' + me.Math.random(1, 3);
+		me.game.world.addChild(new BackgroundLayer(game.bg, 1));
 
 		me.input.bindKey(me.input.KEY.ENTER, "enter", true);
 		me.input.bindKey(me.input.KEY.SPACE, "enter", true);

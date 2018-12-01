@@ -7,7 +7,8 @@ var game = {
 
     resources: [
         // Images
-        {name: "bg", type:"image", src: "data/img/bg.png"},
+        {name: "bg1", type:"image", src: "data/img/bg.png"},
+        {name: "bg2", type:"image", src: "data/img/bg2.png"},
 
         // Weapon
         {name: "bullet", type:"image", src: "data/img/bullet.png"},
@@ -29,6 +30,8 @@ var game = {
         // Boss
         {name: "mageBoss", type:"image", src: "data/img/boss_mage.png"},
         {name: "mageBoss", type:"json", src: "data/img/boss_mage.json"},
+        {name: "treeBoss", type:"image", src: "data/img/boss_tree.png"},
+        {name: "treeBoss", type:"json", src: "data/img/boss_tree.json"},
         {name: "mageBossAttack", type:"image", src: "data/img/bossmageattack.png"},
         {name: "mageBossAttack", type:"json", src: "data/img/bossmageattack.json"},
 
@@ -50,12 +53,12 @@ var game = {
         {name: "shield", type:"image", src: "data/img/shield.png"},
 
         // Drop Weapon
-        {name: "drop-bullet", type:"image", src: "data/img/present1.png"},
-        {name: "drop-shotgun", type:"image", src: "data/img/present2.png"},
-        {name: "drop-ak", type:"image", src: "data/img/present3.png"},
-        {name: "drop-hadoken", type:"image", src: "data/img/present1.png"},
-        {name: "drop-laser", type:"image", src: "data/img/present2.png"},
-        {name: "drop-minigun", type:"image", src: "data/img/present3.png"},
+        {name: "drop-bullet", type:"image", src: "data/img/basicWeaponDrop.png"},
+        {name: "drop-shotgun", type:"image", src: "data/img/basicWeaponDrop.png"},
+        {name: "drop-ak", type:"image", src: "data/img/basicWeaponDrop.png"},
+        {name: "drop-hadoken", type:"image", src: "data/img/speWeaponDrop.png"},
+        {name: "drop-laser", type:"image", src: "data/img/speWeaponDrop.png"},
+        {name: "drop-minigun", type:"image", src: "data/img/speWeaponDrop.png"},
 
         // Decoration
         {name: "logo", type:"image", src: "data/img/logo.png"},
@@ -315,6 +318,7 @@ var game = {
         me.pool.register("shield", game.ShieldEntity, true);
 		me.pool.register("mageEnemy", game.MageEnemyEntity, true);
         me.pool.register("mageBoss", game.MageBossEntity, true);
+        me.pool.register("treeBoss", game.TreeBossEntity, true);
 		me.pool.register("meleeEnemy", game.MeleeEnemyEntity, true);
         me.pool.register("archerEnemy", game.ArcherEnemyEntity, true);
 		me.pool.register("mageAttackEntity", game.MageAttackEntity, true);
@@ -344,6 +348,10 @@ var game = {
         game.mageBossTexture = new me.video.renderer.Texture(
             me.loader.getJSON("mageBoss"),
             me.loader.getImage("mageBoss")
+        );
+        game.treeBossTexture = new me.video.renderer.Texture(
+            me.loader.getJSON("treeBoss"),
+            me.loader.getImage("treeBoss")
         );
         game.mageBossAttackTexture = new me.video.renderer.Texture(
             me.loader.getJSON("mageBossAttack"),

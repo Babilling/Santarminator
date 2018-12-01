@@ -26,7 +26,7 @@ game.PlayScreen = me.ScreenObject.extend({
         game.data.start = false;
         game.data.dateStart = Date.now();
 
-        me.game.world.addChild(new BackgroundLayer('bg', 1));
+        me.game.world.addChild(new BackgroundLayer(game.bg, 1));
 
         this.HUD = new game.HUD.Container();
         me.game.world.addChild(this.HUD, 11);
