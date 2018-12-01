@@ -141,6 +141,7 @@ game.DamageUpEntity = me.Entity.extend({
         let obj = response.b;
         if (obj.type === 'santa'){
             game.santa.damage++;
+            if (game.santa.damage > 5) game.santa.damage = 5; 
             me.game.world.removeChild(this);
             me.audio.play("damageDrop");
         }
