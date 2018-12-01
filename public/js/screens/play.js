@@ -8,7 +8,7 @@ game.PlayScreen = me.ScreenObject.extend({
     onResetEvent: function() {
         me.game.reset();
         me.audio.stop("theme");
-        me.audio.play("theme");
+        me.audio.play("theme", true);
 
         me.input.bindKey(me.input.KEY.SPACE, "shot");
         me.input.bindKey(me.input.KEY.Z, "forward");
