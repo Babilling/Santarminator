@@ -61,7 +61,7 @@ game.EnemyEntity = me.Entity.extend({
                     else if (rdm > 0.85)
                         me.game.world.addChild(new me.pool.pull('damageUpDrop', this.pos.x, this.pos.y), 10);
                     else
-                        me.game.world.addChild(new me.pool.pull('presentDrop', this.pos.x, this.pos.y, this.points), 10);
+                        me.game.world.addChild(new me.pool.pull('presentDrop', this.pos.x, this.pos.y), 10);
                 }
                 me.audio.play("hit");
             }

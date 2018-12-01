@@ -4,7 +4,7 @@
 game.PresentEntity = me.Entity.extend({
     init: function(x, y, points) {
         // Default params values
-        if (typeof points === 'undefined') { this.points = 10; } else {this.points = points * 5;}
+        if (typeof points === 'undefined') { this.points = 50; } else {this.points = points * 5;}
 
         var settings = {};
         settings.image = this.image = me.loader.getImage('present' + me.Math.random(1, 4));

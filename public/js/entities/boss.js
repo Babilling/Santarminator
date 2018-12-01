@@ -44,7 +44,18 @@ game.BossEntity = me.Entity.extend({
                 game.data.steps += this.points;
                 me.game.world.removeChild(this);
                 me.game.enemyGenerator.boss = false;
-                // TODO Drop gifts
+                // Drop gifts (600 points) + 2 weapons packs aléatoirement
+                for(var i = 0; i < 12; i++){
+                    me.game.world.addChild(new me.pool.pull('presentDrop', 
+                        me.Math.random(this.pos.x, this.pos.x + this.width - 32), 
+                        me.Math.random(this.pos.y, this.pos.y + this.height - 32)), 10);
+                }
+                for(var i = 0; i < 2; i++){
+                    me.game.world.addChild(new me.pool.pull('weaponDrop', 
+                        me.Math.random(this.pos.x, this.pos.x + this.width - 32), 
+                        me.Math.random(this.pos.y, this.pos.y + this.height - 32)), 10);
+                }
+
                 me.audio.play("hitBoss");
             }
             else {
