@@ -36,7 +36,7 @@ game.WeaponEntity = me.Entity.extend({
 
     onCollision: function(response) {
         let obj = response.b;
-        if (obj.type === 'ennemy' && !this.enemies.includes(obj)) {
+        if (obj.type === 'ennemy' && !this.enemies.includes(obj) && (obj.pos.x + obj.width / 2) < me.game.viewport.width) {
             this.enemies.push(obj);
             obj.destroy(this.degat + game.santa.damage);
         }
@@ -148,7 +148,7 @@ game.HadokenEntity = game.WeaponEntity.extend({
     },
     onCollision: function(response) {
         let obj = response.b;
-        if (obj.type === 'ennemy' && !this.enemies.includes(obj)) {
+        if (obj.type === 'ennemy' && !this.enemies.includes(obj) && (obj.pos.x + obj.width / 2) < me.game.viewport.width) {
             this.enemies.push(obj);
             obj.destroy(this.degat + game.santa.damage);
         }
