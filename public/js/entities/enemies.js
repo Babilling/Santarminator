@@ -5,11 +5,11 @@
  * EnemyEntity : basic enemies stats
  */
 game.EnemyEntity = me.Entity.extend({
-    init: function(x, y, settings, velX, velY, hp, points) {
+    init: function(x, y, settings, speed, radX, hp, points) {
         // Default params values
         /*************************************************************************/
-        if (typeof velX === 'undefined') { this.velX = -5; } else {this.velX = velX;}
-        if (typeof velY === 'undefined') { this.velY = me.Math.random(-2, 3); } else {this.velY = velY;}
+        if (typeof speed === 'undefined') { this.speed = -5; } else {this.speed = speed;}
+        if (typeof radX === 'undefined') { this.radX = 0; } else {this.radX = radX;}
         if (typeof hp === 'undefined') { this.hp = 1; } else {this.hp = hp;}
         if (typeof points === 'undefined') { this.points = 10; } else {this.points = points;}
         /*************************************************************************/
@@ -18,8 +18,8 @@ game.EnemyEntity = me.Entity.extend({
         this.type = 'ennemy';
         this.alwaysUpdate = true;
         this.pos.add(this.body.vel);
-        this.body.gravity = 0;
-        this.body.vel.set(this.velX, this.velY);
+        this.body.vel.set(this.speed, 0);
+        this.body.vel = this.body.vel.rotate(this.radX);
         this.animationSpeed = 333;
     },
 
@@ -31,10 +31,12 @@ game.EnemyEntity = me.Entity.extend({
         this.pos.add(this.body.vel);
         if (this.pos.x < -this.width)
             me.game.world.removeChild(this);
-        if (this.pos.y < 0 && this.velY < 0 || (this.pos.y + this.height) > me.game.viewport.height && this.velY > 0)
-            this.velY = - this.velY;
 
-        this.body.vel.set(this.velX, this.velY);
+        if (this.pos.y < 0 && this.radX > 0 || (this.pos.y + this.height) > me.game.viewport.height && this.radX < 0)
+            this.radX = - this.radX;
+
+        this.body.vel.set(this.speed, 0);
+        this.body.vel = this.body.vel.rotate(this.radX);
         me.Rect.prototype.updateBounds.apply(this);
         this._super(me.Entity, "update", [dt]);
         return true;
@@ -72,8 +74,8 @@ game.EnemyEntity = me.Entity.extend({
  * RangedEnemyEntity : launch ranged attacks
  */
 game.RangedEnemyEntity = game.EnemyEntity.extend({
-    init: function (x, y, settings, velX, velY, hp, points, attackName, attackSplitNb, attackVelX, attackVelY) {
-        this._super(game.EnemyEntity, "init", [x, y, settings, velX, velY, hp, points]);
+    init: function (x, y, settings, speed, radX, hp, points, attackName, attackSplitNb, attackVelX, attackVelY) {
+        this._super(game.EnemyEntity, "init", [x, y, settings, speed, radX, hp, points]);
         this.attackVelX = attackVelX;
         this.attackVelY = attackVelY;
         if (typeof attackName === 'undefined') { this.attackName = 'mageAttackEntity'; } else {this.attackName = attackName;}
@@ -99,13 +101,13 @@ game.RangedEnemyEntity = game.EnemyEntity.extend({
  * MageEnemyEntity
  */
 game.MageEnemyEntity = game.RangedEnemyEntity.extend({
-    init: function(x, y, velX, velY, hp, points, attackSplitNb, attackVelX, attackVelY) {
+    init: function(x, y, speed, radX, hp, points, attackSplitNb, attackVelX, attackVelY) {
         if (typeof attackSplitNb === 'undefined') { this.attackSplitNb = 3; } else {this.attackSplitNb = attackSplitNb;}
 		if (typeof attackVelX === 'undefined') { this.attackVelX = -3; } else {this.attackVelX = attackVelX;}
 		if (typeof attackVelY === 'undefined') { this.attackVelY = 0; } else {this.attackVelY = attackVelY;}
         // Texture
         this.attackFrames = [0,1,2];
-        this._super(game.RangedEnemyEntity, "init", [x, y, {width : 77, height : 69}, velX, velY, hp, points, 'mageAttackEntity', this.attackSplitNb, this.attackVelX, this.attackVelY]);
+        this._super(game.RangedEnemyEntity, "init", [x, y, {width : 77, height : 69}, speed, radX, hp, points, 'mageAttackEntity', this.attackSplitNb, this.attackVelX, this.attackVelY]);
         this.renderable = game.mageEnemyTexture.createAnimationFromName([
             "2_ATTACK_001", "2_ATTACK_002", "2_ATTACK_003"
         ]);
@@ -116,22 +118,16 @@ game.MageEnemyEntity = game.RangedEnemyEntity.extend({
         this.body.addShape(new me.Ellipse(40,40,60,69));
         this.body.getShape(0).scale(0.01);
         this.body.getShape(0).translate(40,20);
-    },
-
-    update: function(dt) {
-        this._super(game.RangedEnemyEntity, "update", [dt]);
-        if(this.pos.x <= me.game.viewport.width-150) {this.body.vel.set(0, this.velY);}
     }
-
 });
 /**
  * ArcherEnemyEntity
  */
 game.ArcherEnemyEntity = game.RangedEnemyEntity.extend({
-    init: function(x, y, velX, velY, hp, points) {
+    init: function(x, y, speed, radX, hp, points) {
         // Texture
         this.attackFrames = [0,1,2];
-        this._super(game.RangedEnemyEntity, "init", [x, y, {width : 78, height : 80}, velX, velY, hp, points, 'archerAttackEntity']);
+        this._super(game.RangedEnemyEntity, "init", [x, y, {width : 78, height : 80}, speed, radX, hp, points, 'archerAttackEntity']);
         this.renderable = game.archerEnemyTexture.createAnimationFromName([
             "ARCHER_ATTACK_000", "ARCHER_ATTACK_001", "ARCHER_ATTACK_002"
         ]);
@@ -142,22 +138,15 @@ game.ArcherEnemyEntity = game.RangedEnemyEntity.extend({
         this.body.addShape(new me.Ellipse(45,40,60,80));
         this.body.getShape(0).scale(0.01);
         this.body.getShape(0).translate(40,20);
-
-    },
-
-    update: function(dt) {
-        this._super(game.RangedEnemyEntity, "update", [dt]);
-        if(this.pos.x <= me.game.viewport.width-200) {this.body.vel.set(0, this.velY);}
     }
-
 });
 /**
  * MeleeEnemyEntity
  */
 game.MeleeEnemyEntity = game.EnemyEntity.extend({
-    init: function(x, y, velX, velY, hp, points) {
+    init: function(x, y, speed, radX, hp, points) {
         // Texture and animation
-        this._super(game.EnemyEntity, "init", [x, y, {width : 80, height : 80}, velX, velY, hp, points]);
+        this._super(game.EnemyEntity, "init", [x, y, {width : 80, height : 80}, speed, radX, hp, points]);
         this.renderable = game.meleeEnemyTexture.createAnimationFromName([
             "5_ATTACK_000", "5_ATTACK_002", "5_ATTACK_003", "5_ATTACK_004", "5_ATTACK_005"
         ]);

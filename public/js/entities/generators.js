@@ -2,7 +2,7 @@
  * Generators entities
  */
  /**
- * SnowGenerator
+ * EnnemyGenerator
  */
 game.EnnemyGenerator = me.Renderable.extend({
     init: function() {
@@ -31,16 +31,27 @@ game.EnnemyGenerator = me.Renderable.extend({
             }else if (!this.boss)
                 switch(me.Math.random(1, 4)) {
                     case 1 :
-                        me.game.world.addChild(new me.pool.pull('meleeEnemy', posX, posY, undefined, undefined, enemiesHp, enemiesPoints), 13);
+                        me.game.world.addChild(new me.pool.pull('meleeEnemy', posX, posY, undefined, me.Math.degToRad(80), enemiesHp, enemiesPoints), 13);
                         break;
                     case 2 :
-                        me.game.world.addChild(new me.pool.pull('archerEnemy', posX, posY, undefined, undefined, enemiesHp, enemiesPoints), 13);
+                        me.game.world.addChild(new me.pool.pull('archerEnemy', posX, posY, undefined, me.Math.degToRad(80), enemiesHp, enemiesPoints), 13);
                         break;
                     case 3 :
-                        me.game.world.addChild(new me.pool.pull('mageEnemy', posX, posY, undefined, undefined, enemiesHp, enemiesPoints), 13);
+                        me.game.world.addChild(new me.pool.pull('mageEnemy', posX, posY, undefined, me.Math.degToRad(80), enemiesHp, enemiesPoints), 13);
                         break;
                 }
         }
         this._super(me.Entity, "update", [dt]);
     },
+    chainPattern: function(size, enemiesHp, enemiesPoints, posY, radX){
+        let posX = me.game.viewport.width + 50;
+        if (posY === undefined) posY = me.Math.random(100, me.video.renderer.getHeight() - 100);
+        if (radX === undefined) radX;
+
+        for(var i = 0; i < size; i++){
+            me.game.world.addChild(new me.pool.pull('meleeEnemy', posX, posY, undefined, undefined, enemiesHp, enemiesPoints), 13);
+        }
+    },
 });
+
+
