@@ -13,14 +13,13 @@ game.BossEntity = me.Entity.extend({
         if (typeof velX === 'undefined') { this.velX = -1; } else {this.velX = velX;}
         if (typeof velY === 'undefined') { this.velY = 0; } else {this.velY = velY;}
         if (typeof hp === 'undefined') { this.hp = 1000; } else {this.hp = hp;}
-        if (typeof points === 'undefined') { this.points = 1000; } else {this.points = points;}
+        if (typeof points === 'undefined') { this.points = 400; } else {this.points = points;}
         /*************************************************************************/
         // call the super constructor
         this._super(me.Entity, "init", [x, y, settings]);
         this.type = 'ennemy';
         this.alwaysUpdate = true;
         this.pos.add(this.body.vel);
-        this.body.gravity = 0;
         this.body.vel.set(this.velX, this.velY);
         this.animationSpeed = 75;
         this.defaultHp = this.hp;
