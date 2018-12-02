@@ -85,8 +85,9 @@ game.MageBossEntity = game.BossEntity.extend({
             "5_animation_walk_010", "5_animation_walk_013", "5_animation_walk_016", "5_animation_walk_019",
         ]);
         this.animationSpeed = 75;
-        this.renderable.anchorPoint = {"x" : 0, "y" : 0};
-        this.anchorPoint = {"x" : 0, "y" : 0};
+        this.body.addShape(new me.Ellipse(this.renderable.width/2,this.renderable.height/2,this.renderable.width,this.renderable.height));
+        this.body.removeShapeAt(0);
+        this.body.updateBounds();
         this.attackFrames = [20,21,22,23,24,25,26,27,20,21,22,23,24,25,26,27,20,21,22,23,24,25,26,27,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19];
         this.renderable.addAnimation ("attack", this.attackFrames,this.animationSpeed);
         this.renderable.addAnimation ("hurt", [20,21,22,23,24,25,26,27],this.animationSpeed+25);
@@ -142,7 +143,7 @@ game.MageBossEntity = game.BossEntity.extend({
         if(this.currentAttack === 1) {
             if (this.hasAttacked === false) {
                 this.specialAttackEntities = [];
-                for (let i = 0; i <= this.specialAttackSettings.get('number'); i++) {
+                for (let i = 0; i < this.specialAttackSettings.get('number'); i++) {
                     let attack = new me.pool.pull('mageBossAttackEntity', (me.game.viewport.width / 3 * 2) - 100,
                         me.game.viewport.height/this.specialAttackSettings.get('number')/2 + i * me.game.viewport.height/this.specialAttackSettings.get('number'), 0, 0, true, 3);
                     attack.explosionDelay = this.specialAttackSettings.get('delay') + me.Math.random(1000, 2000);
@@ -241,8 +242,10 @@ game.TreeBossEntity = game.BossEntity.extend({
             "boss_tree_idle_003", "boss_tree_idle_004"
         ]);
         this.animationSpeed = 100;
-        this.renderable.anchorPoint = {"x" : 0, "y" : 0};
-        this.anchorPoint = {"x" : 0, "y" : 0};
+        this.renderable.alwaysUpdate = true;
+        this.body.addShape(new me.Ellipse(this.renderable.width/2,this.renderable.height/2,this.renderable.width/2,this.renderable.height));
+        this.body.removeShapeAt(0);
+        this.body.updateBounds();
         this.attackFrames = [7,8,9,10,11,7,8,9,10,11,0,1,2,3,4,5,6];
         this.renderable.addAnimation ("attack", this.attackFrames,this.animationSpeed);
         this.renderable.addAnimation ("hurt", [7,8,9,10,11],this.animationSpeed+25);
@@ -252,7 +255,7 @@ game.TreeBossEntity = game.BossEntity.extend({
         this.attackDelay = (this.animationSpeed * this.attackFrames.length) + 3000;
         this.lastAttack = Date.now();
         this.hasAttacked = false;
-        this.specialAttackSettings = new Map([["number",4], ["delay", 4000], ["speed", -2]]);
+        this.specialAttackSettings = new Map([["number",2], ["delay", 4000], ["speed", -4]]);
         this.specialAttackEntities = [];
         this.nextAttackIsSpecial = false;
         this.specialAttackTriggers = new Map([[0, new Map([["hp",this.defaultHp*0.75],["triggered",false]])] , [1, new Map([["hp",this.defaultHp*0.50],["triggered",false]])] , [2, new Map([["hp",this.defaultHp*0.25],["triggered",false]])]]);
@@ -289,32 +292,74 @@ game.TreeBossEntity = game.BossEntity.extend({
     },
 
     checkAttack: function () {
-        if(this.hasAttacked === false && this.currentAttack === 0 && this.renderable.getCurrentAnimationFrame() === 34) {
-            me.game.world.addChild(new me.pool.pull('mageBossAttackEntity', this.pos.x, this.pos.y + this.renderable.height/2, -3, 0, true, 5), 14);
-            me.audio.play("skraa");
+        if(this.hasAttacked === false && this.currentAttack === 0 && this.renderable.getCurrentAnimationFrame() === 14) {
+            me.game.world.addChild(new me.pool.pull('treeBossAttackEntity', this.pos.x, me.Math.random(114,me.game.viewport.height-144), -3), 14);
             this.hasAttacked = true;
         }
         if(this.currentAttack === 1) {
             if (this.hasAttacked === false) {
                 this.specialAttackEntities = [];
-                for (let i = 0; i <= this.specialAttackSettings.get('number'); i++) {
-                    let attack = new me.pool.pull('mageBossAttackEntity', (me.game.viewport.width / 3 * 2) - 100,
-                        me.game.viewport.height/this.specialAttackSettings.get('number')/2 + i * me.game.viewport.height/this.specialAttackSettings.get('number'), 0, 0, true, 3);
-                    attack.explosionDelay = this.specialAttackSettings.get('delay') + me.Math.random(1000, 2000);
+                for (let i = 0; i < this.specialAttackSettings.get('number'); i++) {
+                    let attack = new me.pool.pull('treeBossAttackEntity', me.Math.random(i*((me.game.viewport.width - this.renderable.width)/this.specialAttackSettings.get('number')),(i+1)*((me.game.viewport.width - this.renderable.width)/this.specialAttackSettings.get('number'))),
+                    me.game.viewport.height , 0, -1, 0);
                     this.specialAttackEntities.push(attack);
                     me.game.world.addChild(attack);
                     this.hasAttacked = true;
                 }
             }
-            if (this.hasAttacked === true && this.renderable.getCurrentAnimationFrame() === 34) {
+            if (this.hasAttacked === true && this.renderable.getCurrentAnimationFrame() === 14) {
                 for(let i = 0; i < this.specialAttackEntities.length; i++) {
-                    this.specialAttackEntities[i].velX = this.specialAttackSettings.get('speed');
+                    this.specialAttackEntities[i].velY = this.specialAttackSettings.get('speed');
                     this.currentAttack = 0;
                     this.nextAttackIsSpecial = false;
                 }
             }
         }
 
+    }
+});
+/**
+ * TreeBossAttackEntity
+ */
+game.TreeBossAttackEntity = me.Entity.extend({
+
+    init: function(x, y, velX, velY, angle) {
+
+        if (typeof velX === 'undefined') { this.velX = -3; } else {this.velX = velX;}
+        if (typeof velY === 'undefined') { this.velY = 0; } else {this.velY = velY;}
+        if (typeof angle === 'undefined') { this.angle = 270; } else {this.angle = angle;}
+        let settings = {};
+        settings.image = this.image = me.loader.getImage('treeBossAttack');
+        settings.width = 114;
+        settings.height= 140;
+        settings.framewidth = 114;
+        settings.frameheight = 140;
+        this._super(me.Entity, 'init', [x, y, settings]);
+        this.body.getShape(0).rotate(me.Math.degToRad(this.angle));
+        this.body.updateBounds();
+        this.renderable.currentTransform.rotate(me.Math.degToRad(this.angle));
+
+        this.alwaysUpdate = true;
+        this.pos.add(this.body.vel);
+        this.body.gravity = 0;
+        this.type = 'attack';
+        this.body.vel.set(this.velX, this.velY);
+    },
+
+    update: function(dt) {
+
+        // mechanics
+        if (!game.data.start) {
+            return this._super(me.Entity, 'update', [dt]);
+        }
+        this.pos.add(this.body.vel);
+        if (this.pos.x < -this.width || this.pos.y < -this.height || this.pos.y > me.game.viewport.width) {
+            me.game.world.removeChild(this);
+        }
+        this.body.vel.set(this.velX, this.velY);
+        me.Rect.prototype.updateBounds.apply(this);
+        this._super(me.Entity, 'update', [dt]);
+        return true;
     }
 });
 /**
@@ -331,8 +376,9 @@ game.UnicornBossEntity = game.BossEntity.extend({
             "boss_unicorn_hurt_003", "boss_unicorn_idle_000", "boss_unicorn_idle_001", "boss_unicorn_idle_002"
         ]);
         this.animationSpeed = 150;
-        this.renderable.anchorPoint = {"x" : 0, "y" : 0};
-        this.anchorPoint = {"x" : 0, "y" : 0};
+        this.body.addShape(new me.Ellipse(this.renderable.width/2,this.renderable.height/2,this.renderable.width,this.renderable.height));
+        this.body.removeShapeAt(0);
+        this.body.updateBounds();
         this.attackFrames = [7,8,9,10,7,8,9,10,0,1,2,3,4,5,6];
         this.renderable.addAnimation ("attack", this.attackFrames,this.animationSpeed);
         this.renderable.addAnimation ("hurt", [7,8,9,10],this.animationSpeed+25);
