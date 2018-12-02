@@ -79,6 +79,10 @@ game.HUD.BossHPBar = me.Renderable.extend({
             else
                 renderer.setColor('#0f0');
             renderer.fillRect(this.pos.x, this.pos.y, this.width, this.height);
+            renderer.setColor('#ffba2d');
+            renderer.fillRect(this.pos.x+125, this.pos.y, 2, this.height);
+            renderer.fillRect(this.pos.x+250, this.pos.y, 2, this.height);
+            renderer.fillRect(this.pos.x+375, this.pos.y, 2, this.height);
             renderer.restore();
         }
         else {
