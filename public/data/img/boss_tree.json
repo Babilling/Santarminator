@@ -1,46 +1,6 @@
 {"frames": [
 	{
 		"filename": "boss_tree_attack_000",
-		"frame": {"x":728,"y":1616,"w":362,"h":402},
-		"rotated": false,
-		"trimmed": true,
-		"spriteSourceSize": {"x":0,"y":0,"w":362,"h":402},
-		"sourceSize": {"w":362,"h":402}
-	},
-	{
-		"filename": "boss_tree_attack_001",
-		"frame": {"x":728,"y":1212,"w":362,"h":402},
-		"rotated": false,
-		"trimmed": true,
-		"spriteSourceSize": {"x":0,"y":0,"w":362,"h":402},
-		"sourceSize": {"w":362,"h":402}
-	},
-	{
-		"filename": "boss_tree_attack_002",
-		"frame": {"x":728,"y":808,"w":362,"h":402},
-		"rotated": false,
-		"trimmed": true,
-		"spriteSourceSize": {"x":0,"y":0,"w":362,"h":402},
-		"sourceSize": {"w":362,"h":402}
-	},
-	{
-		"filename": "boss_tree_attack_003",
-		"frame": {"x":728,"y":404,"w":362,"h":402},
-		"rotated": false,
-		"trimmed": true,
-		"spriteSourceSize": {"x":0,"y":0,"w":362,"h":402},
-		"sourceSize": {"w":362,"h":402}
-	},
-	{
-		"filename": "boss_tree_attack_004",
-		"frame": {"x":728,"y":0,"w":362,"h":402},
-		"rotated": false,
-		"trimmed": true,
-		"spriteSourceSize": {"x":0,"y":0,"w":362,"h":402},
-		"sourceSize": {"w":362,"h":402}
-	},
-	{
-		"filename": "boss_tree_attack_005",
 		"frame": {"x":364,"y":1616,"w":362,"h":402},
 		"rotated": false,
 		"trimmed": true,
@@ -48,39 +8,7 @@
 		"sourceSize": {"w":362,"h":402}
 	},
 	{
-		"filename": "boss_tree_attack_006",
-		"frame": {"x":364,"y":1212,"w":362,"h":402},
-		"rotated": false,
-		"trimmed": true,
-		"spriteSourceSize": {"x":0,"y":0,"w":362,"h":402},
-		"sourceSize": {"w":362,"h":402}
-	},
-	{
-		"filename": "boss_tree_hurt_000",
-		"frame": {"x":1092,"y":0,"w":362,"h":402},
-		"rotated": false,
-		"trimmed": true,
-		"spriteSourceSize": {"x":0,"y":0,"w":362,"h":402},
-		"sourceSize": {"w":362,"h":402}
-	},
-	{
-		"filename": "boss_tree_hurt_001",
-		"frame": {"x":364,"y":404,"w":362,"h":402},
-		"rotated": false,
-		"trimmed": true,
-		"spriteSourceSize": {"x":0,"y":0,"w":362,"h":402},
-		"sourceSize": {"w":362,"h":402}
-	},
-	{
-		"filename": "boss_tree_hurt_002",
-		"frame": {"x":364,"y":0,"w":362,"h":402},
-		"rotated": false,
-		"trimmed": true,
-		"spriteSourceSize": {"x":0,"y":0,"w":362,"h":402},
-		"sourceSize": {"w":362,"h":402}
-	},
-	{
-		"filename": "boss_tree_hurt_003",
+		"filename": "boss_tree_attack_001",
 		"frame": {"x":0,"y":1616,"w":362,"h":402},
 		"rotated": false,
 		"trimmed": true,
@@ -88,7 +16,7 @@
 		"sourceSize": {"w":362,"h":402}
 	},
 	{
-		"filename": "boss_tree_hurt_004",
+		"filename": "boss_tree_attack_002",
 		"frame": {"x":0,"y":1212,"w":362,"h":402},
 		"rotated": false,
 		"trimmed": true,
@@ -96,15 +24,7 @@
 		"sourceSize": {"w":362,"h":402}
 	},
 	{
-		"filename": "boss_tree_idle_000",
-		"frame": {"x":728,"y":1616,"w":362,"h":402},
-		"rotated": false,
-		"trimmed": true,
-		"spriteSourceSize": {"x":0,"y":0,"w":362,"h":402},
-		"sourceSize": {"w":362,"h":402}
-	},
-	{
-		"filename": "boss_tree_idle_001",
+		"filename": "boss_tree_attack_003",
 		"frame": {"x":0,"y":808,"w":362,"h":402},
 		"rotated": false,
 		"trimmed": true,
@@ -112,7 +32,7 @@
 		"sourceSize": {"w":362,"h":402}
 	},
 	{
-		"filename": "boss_tree_idle_002",
+		"filename": "boss_tree_attack_004",
 		"frame": {"x":0,"y":404,"w":362,"h":402},
 		"rotated": false,
 		"trimmed": true,
@@ -120,7 +40,7 @@
 		"sourceSize": {"w":362,"h":402}
 	},
 	{
-		"filename": "boss_tree_idle_003",
+		"filename": "boss_tree_attack_005",
 		"frame": {"x":0,"y":0,"w":362,"h":402},
 		"rotated": false,
 		"trimmed": true,
@@ -128,8 +48,88 @@
 		"sourceSize": {"w":362,"h":402}
 	},
 	{
-		"filename": "boss_tree_idle_004",
+		"filename": "boss_tree_attack_006",
 		"frame": {"x":364,"y":808,"w":362,"h":402},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":362,"h":402},
+		"sourceSize": {"w":362,"h":402}
+	},
+	{
+		"filename": "boss_tree_hurt_000",
+		"frame": {"x":728,"y":1616,"w":362,"h":402},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":362,"h":402},
+		"sourceSize": {"w":362,"h":402}
+	},
+	{
+		"filename": "boss_tree_hurt_001",
+		"frame": {"x":728,"y":1212,"w":362,"h":402},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":362,"h":402},
+		"sourceSize": {"w":362,"h":402}
+	},
+	{
+		"filename": "boss_tree_hurt_002",
+		"frame": {"x":728,"y":808,"w":362,"h":402},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":362,"h":402},
+		"sourceSize": {"w":362,"h":402}
+	},
+	{
+		"filename": "boss_tree_hurt_003",
+		"frame": {"x":728,"y":404,"w":362,"h":402},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":362,"h":402},
+		"sourceSize": {"w":362,"h":402}
+	},
+	{
+		"filename": "boss_tree_hurt_004",
+		"frame": {"x":728,"y":0,"w":362,"h":402},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":362,"h":402},
+		"sourceSize": {"w":362,"h":402}
+	},
+	{
+		"filename": "boss_tree_idle_000",
+		"frame": {"x":364,"y":1616,"w":362,"h":402},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":362,"h":402},
+		"sourceSize": {"w":362,"h":402}
+	},
+	{
+		"filename": "boss_tree_idle_001",
+		"frame": {"x":364,"y":1212,"w":362,"h":402},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":362,"h":402},
+		"sourceSize": {"w":362,"h":402}
+	},
+	{
+		"filename": "boss_tree_idle_002",
+		"frame": {"x":1092,"y":0,"w":362,"h":402},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":362,"h":402},
+		"sourceSize": {"w":362,"h":402}
+	},
+	{
+		"filename": "boss_tree_idle_003",
+		"frame": {"x":364,"y":404,"w":362,"h":402},
+		"rotated": false,
+		"trimmed": true,
+		"spriteSourceSize": {"x":0,"y":0,"w":362,"h":402},
+		"sourceSize": {"w":362,"h":402}
+	},
+	{
+		"filename": "boss_tree_idle_004",
+		"frame": {"x":364,"y":0,"w":362,"h":402},
 		"rotated": false,
 		"trimmed": true,
 		"spriteSourceSize": {"x":0,"y":0,"w":362,"h":402},
