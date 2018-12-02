@@ -45,13 +45,15 @@ game.SantaEntity = me.Entity.extend({
 		// collision shape
         this.collided = false;
         this.weapon = game.weapon[0];
+        this.defaultWeapon = this.weapon;
         this.fireReleased = true;
 
         this.velY = 5;
         this.velX = 5;
         this.damage = 0;
         this.speed = 0;
-        this.isProtected= false;
+        this.isProtected = false;
+        this.pickWeaponTime = 0;
 
         //TODO debug remove on release
         this.i = 0;
@@ -72,6 +74,12 @@ game.SantaEntity = me.Entity.extend({
                 this.weapon.releaseFire();
             }
         }
+
+        if (this.weapon.class === "special" && this.weapon.duration < Date.now() - this.pickWeaponTime){
+            this.weapon.resetWeapon();
+            this.weapon = this.defaultWeapon;
+        }
+
         if (me.input.isKeyPressed('forward')) {
             this.pos.y -= (this.velY + this.speed);
             if (this.pos.y < 0) this.pos.y = 0;

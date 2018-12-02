@@ -102,6 +102,7 @@ var game = {
         // 0 is default
         {
             type: "bullet", 
+            class: "basic",
             lastShot: 0,
             x: 50,
             y: 48,
@@ -124,6 +125,7 @@ var game = {
         // 1 shotgun
         {
             type: "shotgun", 
+            class: "basic",
             lastShot: 0,
             x: 107,
             y: 48,
@@ -170,6 +172,7 @@ var game = {
         // 2 Ak
         {
             type: "ak",
+            class: "basic", 
             lastShot: 0,
             x: 70,
             y: 48,
@@ -192,6 +195,8 @@ var game = {
         // 3 hadoken
         {
             type: "hadoken", 
+            class: "special", 
+            duration: 10000,
             lastShot: 0,
             x: 20,
             y: 15,
@@ -218,6 +223,8 @@ var game = {
         //4 laser
         {
             type: "laser", 
+            class: "special", 
+            duration: 10000,
             lastShot: 0,
             x: 97,
             y: 15,
@@ -239,7 +246,9 @@ var game = {
         },
         // 5 minigun
         {
-            type: "minigun", 
+            type: "minigun",
+            class: "special",
+            duration: 10000, 
             lastShot: 0,
             firstShot: 0,
             x: 97,

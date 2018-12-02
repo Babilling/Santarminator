@@ -92,7 +92,9 @@ game.WeaponDropEntity = me.Entity.extend({
         if (obj.type === 'santa'){
             game.santa.weapon.resetWeapon();
             game.santa.weapon = this.weapon;
+            if (this.weapon.class === "basic") game.santa.defaultWeapon = this.weapon;
             game.santa.renderable.setCurrentAnimation(this.weapon.type);
+            game.santa.pickWeaponTime = Date.now();
             me.game.world.removeChild(this);
             me.audio.play("weaponDrop");
         }
