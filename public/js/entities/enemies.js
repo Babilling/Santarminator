@@ -178,6 +178,8 @@ game.MageAttackEntity = me.Entity.extend({
         this.alwaysUpdate = true;
         this.pos.add(this.body.vel);
         this.body.gravity = 0;
+        this.body.addShape(new me.Ellipse(0,0,settings.width,settings.height));
+        this.body.removeShapeAt(0);
         this.type = 'attack';
         if (typeof velX === 'undefined') { this.velX = -3; } else {this.velX = velX;}
         if (typeof velY === 'undefined') { this.velY = 0; } else {this.velY = velY;}
