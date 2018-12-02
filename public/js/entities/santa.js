@@ -45,13 +45,15 @@ game.SantaEntity = me.Entity.extend({
 		// collision shape
         this.collided = false;
         this.weapon = game.weapon[0];
+        this.defaultWeapon = this.weapon;
         this.fireReleased = true;
 
         this.velY = 5;
         this.velX = 5;
         this.damage = 0;
         this.speed = 0;
-        this.isProtected= false;
+        this.isProtected = false;
+        this.pickWeaponTime = 0;
 
         //TODO debug remove on release
         this.i = 0;
@@ -72,6 +74,13 @@ game.SantaEntity = me.Entity.extend({
                 this.weapon.releaseFire();
             }
         }
+
+        if (this.weapon.class === "special" && this.weapon.duration < Date.now() - this.pickWeaponTime){
+            this.weapon.resetWeapon();
+            this.weapon = this.defaultWeapon;
+            game.santa.renderable.setCurrentAnimation(this.weapon.type);
+        }
+
         if (me.input.isKeyPressed('forward')) {
             this.pos.y -= (this.velY + this.speed);
             if (this.pos.y < 0) this.pos.y = 0;
@@ -91,15 +100,12 @@ game.SantaEntity = me.Entity.extend({
         //TODO debug remove on release
         if (me.input.isKeyPressed('switch') && Date.now() - this.lastSwitch > 500 ) {
             this.i++;
-            if(this.i >= 6)
+            if(this.i >= 3)
                 this.i = 0;
             switch(this.i) {
                 case 0:setSantaWeapon(this.i, "default");break;
                 case 1:setSantaWeapon(this.i, "shotgun");break;
                 case 2:setSantaWeapon(this.i, "ak");break;
-                case 3:setSantaWeapon(this.i, "hadoken");break;
-                case 4:setSantaWeapon(this.i, "laser");break;
-                case 5:setSantaWeapon(this.i, "minigun");break;
             }
             this.lastSwitch = Date.now();
         }

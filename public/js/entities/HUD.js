@@ -16,7 +16,8 @@ game.HUD.Container = me.Container.extend({
         this.name = "HUD";
 
         // add our child score object at the top left corner
-        this.addChild(new game.HUD.ScoreItem(5, 5));
+        this.addChild(new game.HUD.ScoreItem(me.game.viewport.width/9, 5));
+        this.addChild(new game.HUD.SpecialWeaponItem(me.game.viewport.width/9, 55));
     }
 });
 
@@ -34,7 +35,29 @@ game.HUD.ScoreItem = me.Renderable.extend({
 
     draw: function (renderer) {
         if (game.data.start && me.state.isCurrent(me.state.PLAY))
-            this.stepsFont.draw(renderer, game.data.steps, me.game.viewport.width/9, 5);
+            this.stepsFont.draw(renderer, game.data.steps, this.pos.x, this.pos.y);
+    }
+
+});
+
+/* Time left for special weapons
+*/
+game.HUD.SpecialWeaponItem = me.Renderable.extend({
+    init: function(x, y) {
+        this._super(me.Renderable, "init", [x, y, 10, 10]);
+
+        // local copy of the global score
+        this.stepsFont = new me.Font('gamefont', 50, '#000', 'center');
+
+        // make sure we use screen coordinates
+        this.floating = true;
+    },
+
+    draw: function (renderer) {
+        if (game.data.start && me.state.isCurrent(me.state.PLAY) && game.santa.weapon.class === "special")
+            this.stepsFont.draw(renderer, 
+                (Math.round(game.santa.weapon.duration - (Date.now() - game.santa.pickWeaponTime)) / 1000).toFixed(2) + " s", 
+                this.pos.x, this.pos.y);
     }
 
 });
