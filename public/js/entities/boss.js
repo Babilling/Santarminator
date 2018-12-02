@@ -22,6 +22,7 @@ game.BossEntity = me.Entity.extend({
         this.pos.add(this.body.vel);
         this.body.vel.set(this.velX, this.velY);
         this.animationSpeed = 75;
+        this.invulnerable = true;
         this.defaultHp = this.hp;
         game.bossHPBar = new me.pool.pull('bossHPBar',me.game.viewport.width/2,25,this.hp);
         me.game.world.addChild(game.bossHPBar, 50);
@@ -38,7 +39,7 @@ game.BossEntity = me.Entity.extend({
 
     destroy: function(damage){
         // Already dead ?
-        if (this.hp > 0){
+        if (this.hp > 0 && !this.invulnerable){
             this.hp -= damage;
             if (this.hp <= 0){
                 game.data.steps += this.points;
@@ -108,6 +109,7 @@ game.MageBossEntity = game.BossEntity.extend({
         this.pos.add(this.body.vel);
         if (this.pos.x <= (me.game.viewport.width/3*2)-100 || (this.pos.x >= me.game.viewport.width-this.renderable.width && this.velX === 1)) {
             this.velX = -this.velX;
+            this.invulnerable = false;
             if(this.velY === 0)
                 this.velY = -1;
         }
@@ -265,6 +267,7 @@ game.TreeBossEntity = game.BossEntity.extend({
         this.pos.add(this.body.vel);
         if (this.pos.x <= (me.game.viewport.width/3*2)-100 || (this.pos.x >= me.game.viewport.width-this.renderable.width && this.velX === 1)) {
             this.velX = -this.velX;
+            this.invulnerable = false;
             if(this.velY === 0)
                 this.velY = -1;
         }
