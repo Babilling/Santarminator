@@ -74,7 +74,10 @@ game.HUD.BossHPBar = me.Renderable.extend({
     draw: function(renderer) {
         if(game.boss.hp === this.maxHP) {
             renderer.save();
-            renderer.setColor('#0f0');
+            if(game.boss.invulnerable)
+                renderer.setColor('#3b86ff');
+            else
+                renderer.setColor('#0f0');
             renderer.fillRect(this.pos.x, this.pos.y, this.width, this.height);
             renderer.restore();
         }
