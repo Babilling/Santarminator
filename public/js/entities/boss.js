@@ -378,7 +378,7 @@ game.UnicornBossEntity = game.BossEntity.extend({
             "boss_unicorn_attack_005", "boss_unicorn_attack_006", "boss_unicorn_hurt_000", "boss_unicorn_hurt_001", "boss_unicorn_hurt_002",
             "boss_unicorn_hurt_003", "boss_unicorn_idle_000", "boss_unicorn_idle_001", "boss_unicorn_idle_002"
         ]);
-        this.animationSpeed = 150;
+        this.animationSpeed = 120;
         this.body.addShape(new me.Ellipse(this.renderable.width/2,this.renderable.height/2,this.renderable.width,this.renderable.height));
         this.body.removeShapeAt(0);
         this.body.updateBounds();
@@ -392,7 +392,6 @@ game.UnicornBossEntity = game.BossEntity.extend({
         this.lastAttack = Date.now();
         this.hasAttacked = false;
         this.specialAttackSettings = new Map([["number",4], ["delay", 4000], ["speed", -2]]);
-        this.specialAttackEntities = [];
         this.nextAttackIsSpecial = false;
         this.specialAttackTriggers = new Map([[0, new Map([["hp",this.defaultHp*0.75],["triggered",false]])] , [1, new Map([["hp",this.defaultHp*0.50],["triggered",false]])] , [2, new Map([["hp",this.defaultHp*0.25],["triggered",false]])]]);
     },
@@ -401,6 +400,7 @@ game.UnicornBossEntity = game.BossEntity.extend({
         this.pos.add(this.body.vel);
         if (this.pos.x <= (me.game.viewport.width/3*2)-100 || (this.pos.x >= me.game.viewport.width-this.renderable.width && this.velX === 1)) {
             this.velX = -this.velX;
+            this.invulnerable = false;
             if(this.velY === 0)
                 this.velY = -1;
         }
@@ -428,31 +428,76 @@ game.UnicornBossEntity = game.BossEntity.extend({
     },
 
     checkAttack: function () {
-        if(this.hasAttacked === false && this.currentAttack === 0 && this.renderable.getCurrentAnimationFrame() === 34) {
-            me.game.world.addChild(new me.pool.pull('mageBossAttackEntity', this.pos.x, this.pos.y + this.renderable.height/2, -3, 0, true, 5), 14);
+        if(this.hasAttacked === false && this.currentAttack === 0 && this.renderable.getCurrentAnimationFrame() === 12) {
+            //me.game.world.addChild(new me.pool.pull('unicornBossAttackEntity', this.pos.x, this.pos.y + this.renderable.height/2, -3, 0, true, 5), 14);
+            this.chainPattern(5, this.pos.x, me.Math.random(this.pos.y,this.pos.y + this.height/2), me.Math.degToRad(me.Math.random(-90, 91)));
             me.audio.play("skraa");
             this.hasAttacked = true;
         }
-        if(this.currentAttack === 1) {
-            if (this.hasAttacked === false) {
-                this.specialAttackEntities = [];
-                for (let i = 0; i <= this.specialAttackSettings.get('number'); i++) {
-                    let attack = new me.pool.pull('mageBossAttackEntity', (me.game.viewport.width / 3 * 2) - 100,
-                        me.game.viewport.height/this.specialAttackSettings.get('number')/2 + i * me.game.viewport.height/this.specialAttackSettings.get('number'), 0, 0, true, 3);
-                    attack.explosionDelay = this.specialAttackSettings.get('delay') + me.Math.random(1000, 2000);
-                    this.specialAttackEntities.push(attack);
-                    me.game.world.addChild(attack);
+            if (this.hasAttacked === false && this.currentAttack === 1 && this.renderable.getCurrentAnimationFrame() === 12) {
+                for (let i = 0; i < this.specialAttackSettings.get('number'); i++) {
+                    this.chainPattern(6, this.pos.x, me.Math.random(this.pos.y,this.pos.y + this.height/2), me.Math.degToRad(me.Math.random(-80, 81)));
                     this.hasAttacked = true;
-                }
-            }
-            if (this.hasAttacked === true && this.renderable.getCurrentAnimationFrame() === 34) {
-                for(let i = 0; i < this.specialAttackEntities.length; i++) {
-                    this.specialAttackEntities[i].velX = this.specialAttackSettings.get('speed');
                     this.currentAttack = 0;
                     this.nextAttackIsSpecial = false;
                 }
             }
-        }
+    },
+    chainPattern: function(size, posX, posY, radX){
+        if (posX === undefined) posX = me.game.viewport.width + 50;
+        if (posY === undefined) posY = me.Math.random(100, me.video.renderer.getHeight() - 100);
+        if (radX === undefined) radX = 0;
 
+        for(var i = 0; i < size; i++){
+            me.game.world.addChild(new me.pool.pull('unicornBossAttackEntity', posX, posY, 0, radX), 13);
+            posX += 30;
+            posY += 20 * Math.tan(radX);
+        }
+    },
+});
+/**
+ * UnicornBossAttackEntity
+ */
+game.UnicornBossAttackEntity = me.Entity.extend({
+
+    init: function(x, y, velX, velY) {
+
+        if (typeof velX === 'undefined') { this.velX = -3; } else {this.velX = velX;}
+        if (typeof velY === 'undefined') { this.velY = 0; } else {this.velY = velY;}
+        this.settingsMap = {"0":{ width : 80, height : 76, framewidth : 80, frameheight : 76, image : me.loader.getImage('unicornBossAttackBig')},
+        "1":{ width : 40, height : 38, framewidth : 40, frameheight : 38, image : me.loader.getImage('unicornBossAttackMedium')},
+            "2":{ width : 20, height : 19, framewidth : 20, frameheight : 19, image : me.loader.getImage('unicornBossAttackSmall')}};
+        this.attackSize = me.Math.random(0,3);
+        this._super(me.Entity, 'init', [x, y, this.settingsMap[this.attackSize]]);
+        this.alwaysUpdate = true;
+        this.pos.add(this.body.vel);
+        this.body.gravity = 0;
+        this.type = 'attack';
+        switch (this.attackSize) {
+            case 0: this.velX = -3;
+                break;
+            case 1: this.velX = -5;
+                break;
+            case 2: this.velX = -7;
+                break;
+        }
+        this.body.vel.set(this.velX, this.velY);
+    },
+
+    update: function(dt) {
+
+        // mechanics
+        if (!game.data.start) {
+            return this._super(me.Entity, 'update', [dt]);
+        }
+        this.pos.add(this.body.vel);
+        if (this.pos.x < -this.width || this.pos.y < -this.height || this.pos.y > me.game.viewport.width) {
+            me.game.world.removeChild(this);
+        }
+        this.renderable.currentTransform.rotate(me.Math.degToRad(1));
+        this.body.vel.set(this.velX, this.velY);
+        me.Rect.prototype.updateBounds.apply(this);
+        this._super(me.Entity, 'update', [dt]);
+        return true;
     }
 });

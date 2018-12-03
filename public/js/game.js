@@ -35,6 +35,9 @@ var game = {
         {name: "unicornBoss", type:"image", src: "data/img/boss_unicorn.png"},
         {name: "treeBoss", type:"json", src: "data/img/boss_tree.json"},
         {name: "treeBossAttack", type:"image", src: "data/img/boss_tree_attack.png"},
+        {name: "unicornBossAttackBig", type:"image", src: "data/img/unicorn_attack_big.png"},
+        {name: "unicornBossAttackMedium", type:"image", src: "data/img/unicorn_attack_medium.png"},
+        {name: "unicornBossAttackSmall", type:"image", src: "data/img/unicorn_attack_small.png"},
         {name: "mageBossAttack", type:"image", src: "data/img/bossmageattack.png"},
         {name: "mageBossAttack", type:"json", src: "data/img/bossmageattack.json"},
 
@@ -335,6 +338,7 @@ var game = {
 		me.pool.register("meleeEnemy", game.MeleeEnemyEntity, true);
         me.pool.register("archerEnemy", game.ArcherEnemyEntity, true);
 		me.pool.register("mageAttackEntity", game.MageAttackEntity, true);
+        me.pool.register("unicornBossAttackEntity", game.UnicornBossAttackEntity, true);
         me.pool.register("treeBossAttackEntity", game.TreeBossAttackEntity, true);
         me.pool.register("mageBossAttackEntity", game.MageBossAttackEntity, true);
         me.pool.register("archerAttackEntity", game.ArcherAttackEntity, true);
