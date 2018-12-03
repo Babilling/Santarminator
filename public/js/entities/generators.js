@@ -33,7 +33,7 @@ game.EnnemyGenerator = me.Renderable.extend({
                         game.boss = new me.pool.pull('treeBoss', me.game.viewport.width + 50, 50, undefined, undefined, enemiesHp * 50);
                         break;
                     case 3 :
-                        game.boss = new me.pool.pull('mageBoss', me.game.viewport.width + 50, 50, undefined, undefined, enemiesHp * 50);
+                        game.boss = new me.pool.pull('unicornBoss', me.game.viewport.width + 50, 50, undefined, undefined, enemiesHp * 50);
                         break;
                 }
 			    
