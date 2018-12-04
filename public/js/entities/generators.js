@@ -21,8 +21,8 @@ game.EnnemyGenerator = me.Renderable.extend({
             let posX = me.game.viewport.width + 50;
             let posY = me.Math.random(100, me.video.renderer.getHeight() - 100);
             let enemiesHp = 5;
-            if (game.data.steps >= 100) enemiesHp *= 2;
-			if (game.data.steps >= 1000) enemiesHp *= 2;
+            if (game.data.steps >= 800) enemiesHp *= 2;
+			if (game.data.steps >= 2400) enemiesHp *= 2;
             let enemiesPoints = 10;
 			if(!this.boss && game.data.steps > (this.bossPopped + 1) * this.scorePopBoss + (this.bossPopped * 1000)) {
                 switch(me.Math.random(1, 4)) {
