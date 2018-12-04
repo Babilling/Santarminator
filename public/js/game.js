@@ -8,7 +8,6 @@ var game = {
     resources: [
         // Images
         {name: "bg1", type:"image", src: "data/img/bg.png"},
-        {name: "bg2", type:"image", src: "data/img/bg2.png"},
 
         // Weapon
         {name: "bullet", type:"image", src: "data/img/bullet.png"},
