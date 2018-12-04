@@ -78,10 +78,9 @@ game.ShotgunEntity = game.WeaponEntity.extend({
         settings.framewidth = 6;
         settings.frameheight = 6;
 
-        this._super(game.WeaponEntity, 'init', [x, y, settings, 10]);
-        this.defaultSpeed = 10 + me.Math.random(5, 10);
+        this._super(game.WeaponEntity, 'init', [x, y, settings, 5]);
+        this.defaultSpeed = 10 + me.Math.random(7, 12);
         this.duration = 500;
-        this.minDegat = 5;
         this.body.vel.set(this.defaultSpeed, 0);
         this.body.vel = this.body.vel.rotate(rad);
         this.rad = rad;
@@ -99,8 +98,7 @@ game.ShotgunEntity = game.WeaponEntity.extend({
     onCollision: function(response) {
         let obj = response.b;
         if (obj.type === 'ennemy' ) {
-            let partDegat = this.degat - this.minDegat;
-            obj.destroy(partDegat - (Date.now() - this.date) * partDegat / this.duration + this.minDegat);
+            obj.destroy(this.degat);
             me.game.world.removeChild(this);
         }
         return false;
