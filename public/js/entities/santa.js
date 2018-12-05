@@ -75,7 +75,7 @@ game.SantaEntity = me.Entity.extend({
             }
         }
 
-        if (this.weapon.class === "special" && this.weapon.duration < Date.now() - this.pickWeaponTime){
+        if (this.weapon.class === "special" && this.weapon.magasine <= 0 ){
             this.weapon.resetWeapon();
             this.weapon = this.defaultWeapon;
             game.santa.renderable.setCurrentAnimation(this.weapon.type);

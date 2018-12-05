@@ -203,7 +203,8 @@ var game = {
             lastShot: 0,
             x: 20,
             y: 15,
-            cd: 800, 
+            cd: 800,
+            magasine: 10000/800,
             sound: "hadoken", 
             pressFire: function(posX, posY) {
                 if (Date.now() - this.lastShot > this.cd){
@@ -211,6 +212,7 @@ var game = {
                     me.audio.play(this.sound, false, null, weaponsSoundLevel);
                     setSantaWeapon(undefined,"hadoken_on");
                     me.game.world.addChild(new me.pool.pull(this.type, posX + this.x, posY + this.y), 13);
+                    this.magasine--;
                 }
             },
             releaseFire: function(){
@@ -232,12 +234,14 @@ var game = {
             x: 97,
             y: 15,
             cd: 50, 
-            sound: "laser", 
+            sound: "laser",
+            magasine: 10000/50,
             pressFire: function(posX, posY) {
                 if (Date.now() - this.lastShot > this.cd){
                     this.lastShot = Date.now();
                     me.audio.play(this.sound, false, null, weaponsSoundLevel);
                     me.game.world.addChild(new me.pool.pull(this.type, posX + this.x, posY + this.y), 13);
+                    this.magasine--;
                 }
             },
             releaseFire: function(){
@@ -256,7 +260,8 @@ var game = {
             firstShot: 0,
             x: 97,
             y: 64,
-            cd: 50, 
+            cd: 50,
+            magasine: 10000/50,
             cdBeforeFire: 950,
             cdBeforeFirePlayed: false,
             isFiring: false, 
@@ -277,6 +282,7 @@ var game = {
                         }
                         for (var i = -1; i < 2; i++)
                             me.game.world.addChild(new me.pool.pull(this.type, posX + this.x, posY + this.y, me.Math.degToRad(i * 2)), 13);
+                        this.magasine--;
                     }
                 }
             },

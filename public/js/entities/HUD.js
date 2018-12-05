@@ -56,7 +56,7 @@ game.HUD.SpecialWeaponItem = me.Renderable.extend({
     draw: function (renderer) {
         if (game.data.start && me.state.isCurrent(me.state.PLAY) && game.santa.weapon.class === "special")
             this.stepsFont.draw(renderer, 
-                (Math.round(game.santa.weapon.duration - (Date.now() - game.santa.pickWeaponTime)) / 1000).toFixed(2) + " s", 
+                Math.round(game.santa.weapon.magasine),
                 this.pos.x, this.pos.y);
     }
 
