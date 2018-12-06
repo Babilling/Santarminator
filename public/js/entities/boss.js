@@ -138,7 +138,7 @@ game.MageBossEntity = game.BossEntity.extend({
 
     checkAttack: function () {
         if(this.hasAttacked === false && this.currentAttack === 0 && this.renderable.getCurrentAnimationFrame() === 34) {
-            me.game.world.addChild(new me.pool.pull('mageBossAttackEntity', this.pos.x, this.pos.y + this.renderable.height/2, -3, 0, true, 5), 14);
+            me.game.world.addChild(new me.pool.pull('mageBossAttackEntity', this.pos.x, this.pos.y + this.renderable.height/2, -3, 0, true, 8), 14);
 			me.audio.play("skraa");
             this.hasAttacked = true;
         }
@@ -257,7 +257,7 @@ game.TreeBossEntity = game.BossEntity.extend({
         this.attackDelay = (this.animationSpeed * this.attackFrames.length) + 3000;
         this.lastAttack = Date.now();
         this.hasAttacked = false;
-        this.specialAttackSettings = new Map([["number",2], ["delay", 4000], ["speed", -4]]);
+        this.specialAttackSettings = new Map([["number",2], ["delay", 4000], ["speed", -6]]);
         this.specialAttackEntities = [];
         this.nextAttackIsSpecial = false;
         this.specialAttackTriggers = new Map([[0, new Map([["hp",this.defaultHp*0.75],["triggered",false]])] , [1, new Map([["hp",this.defaultHp*0.50],["triggered",false]])] , [2, new Map([["hp",this.defaultHp*0.25],["triggered",false]])]]);
@@ -296,7 +296,7 @@ game.TreeBossEntity = game.BossEntity.extend({
 
     checkAttack: function () {
         if(this.hasAttacked === false && this.currentAttack === 0 && this.renderable.getCurrentAnimationFrame() === 14) {
-            me.game.world.addChild(new me.pool.pull('treeBossAttackEntity', this.pos.x, me.Math.random(114,me.game.viewport.height-144), -3), 14);
+            me.game.world.addChild(new me.pool.pull('treeBossAttackEntity', this.pos.x, me.Math.random(114,me.game.viewport.height-144), -5), 14);
             this.hasAttacked = true;
         }
         if(this.currentAttack === 1) {
@@ -429,7 +429,6 @@ game.UnicornBossEntity = game.BossEntity.extend({
 
     checkAttack: function () {
         if(this.hasAttacked === false && this.currentAttack === 0 && this.renderable.getCurrentAnimationFrame() === 12) {
-            //me.game.world.addChild(new me.pool.pull('unicornBossAttackEntity', this.pos.x, this.pos.y + this.renderable.height/2, -3, 0, true, 5), 14);
             this.chainPattern(5, this.pos.x, me.Math.random(this.pos.y,this.pos.y + this.height/2), me.Math.degToRad(me.Math.random(-90, 91)));
             me.audio.play("skraa");
             this.hasAttacked = true;
@@ -474,11 +473,11 @@ game.UnicornBossAttackEntity = me.Entity.extend({
         this.body.gravity = 0;
         this.type = 'attack';
         switch (this.attackSize) {
-            case 0: this.velX = -3;
+            case 0: this.velX = -4;
                 break;
-            case 1: this.velX = -5;
+            case 1: this.velX = -6;
                 break;
-            case 2: this.velX = -7;
+            case 2: this.velX = -8;
                 break;
         }
         this.body.vel.set(this.velX, this.velY);
