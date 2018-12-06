@@ -47,6 +47,7 @@ game.EnnemyGenerator = me.Renderable.extend({
                         this.chainPattern(5, posX, posY, undefined, me.Math.degToRad(me.Math.random(-80, 81)), enemiesHp, enemiesPoints);
                         break;
                     case 2 :
+                        this.linePattern(3, posX, posY, -2, me.Math.degToRad(me.Math.random(-80, 81)), enemiesHp, enemiesPoints, me.Math.random() >= 0.5);
                         //me.game.world.addChild(new me.pool.pull('archerEnemy', posX, posY, undefined, me.Math.degToRad(80), enemiesHp, enemiesPoints), 13);
                         break;
                     case 3 :
@@ -65,6 +66,20 @@ game.EnnemyGenerator = me.Renderable.extend({
             me.game.world.addChild(new me.pool.pull('meleeEnemy', posX, posY, speed, radX, enemiesHp, enemiesPoints), 13);
             posX += 30;
             posY += 20 * Math.tan(radX);
+        }
+    },
+    linePattern: function(size, posX, posY, speed, radX, enemiesHp, enemiesPoints, vertical){
+        if (posX === undefined) posX = me.game.viewport.width + 50;
+        if (posY === undefined) posY = me.Math.random(100, me.video.renderer.getHeight() - 100);
+        if (radX === undefined) radX = 0;
+
+        for(var i = 0; i < size; i++){
+            let enemy = new me.pool.pull(Math.random() < 0.5 ? 'mageEnemy' : 'archerEnemy', posX, posY, speed, radX, enemiesHp, enemiesPoints, 2);
+            me.game.world.addChild(enemy,13);
+            if(vertical)
+                posY += enemy.height + 10;
+            else
+                posX += enemy.width;
         }
     },
 });

@@ -78,6 +78,7 @@ game.RangedEnemyEntity = game.EnemyEntity.extend({
         this._super(game.EnemyEntity, "init", [x, y, settings, speed, radX, hp, points]);
         this.attackVelX = attackVelX;
         this.attackVelY = attackVelY;
+        this.animationSpeed = 666;
         if (typeof attackName === 'undefined') { this.attackName = 'mageAttackEntity'; } else {this.attackName = attackName;}
         if (typeof attackSplitNb === 'undefined') { this.attackSplitNb = 0; } else {this.attackSplitNb = attackSplitNb;}
         this.startAttackTimer(this.animationSpeed * this.attackFrames.length);
