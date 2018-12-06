@@ -116,7 +116,7 @@ game.SantaEntity = me.Entity.extend({
             me.audio.play("lose");
             this.endAnimation();
         }
-        //me.collision.check(this);
+        me.collision.check(this);
 		 // call the parent function
 		this._super(me.Entity, "update", [dt]);
         return true;
