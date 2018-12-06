@@ -219,10 +219,8 @@ var game = {
                 setSantaWeapon(undefined,"hadoken");
             },
             resetWeapon: function(){
-
-            },
-            resetWeapon: function(){
                 this.lastShot = 0;
+                this.magasine = this.duration/this.cd;
             }
         },
         //4 laser
@@ -249,6 +247,7 @@ var game = {
             },
             resetWeapon: function(){
                 this.lastShot = 0;
+                this.magasine = this.duration/this.cd;
             }
         },
         // 5 minigun
@@ -300,6 +299,7 @@ var game = {
                 this.isFiring = false;
                 this.firstShot = 0;
                 this.lastShot = 0;
+                this.magasine = this.duration/this.cd;
                 me.audio.stop("minigunFire");
             }
         },
