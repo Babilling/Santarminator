@@ -70,6 +70,7 @@ game.WeaponDropEntity = me.Entity.extend({
         this.body.vel.set(0, 0);
         this.date = Date.now();
         this.cd = 10000;
+        this.pickedup = false;
     },
 
     update: function(dt) {
@@ -89,7 +90,8 @@ game.WeaponDropEntity = me.Entity.extend({
     },
     onCollision: function(response) {
         let obj = response.b;
-        if (obj.type === 'santa') {
+        if (obj.type === 'santa' && !this.pickedup) {
+            this.pickedup = true;
             if (this.weapon.class === "basic") game.santa.defaultWeapon = this.weapon;
             if (game.santa.weapon.class != "special" || this.weapon.class === "special") {
                 game.santa.weapon.resetWeapon();
@@ -123,6 +125,8 @@ game.DamageUpEntity = me.Entity.extend({
         this.body.vel.set(0, 0);
         this.date = Date.now();
         this.cd = 10000;
+        this.pickedup = false;
+        this.points = 10;
     },
 
     update: function(dt) {
@@ -142,9 +146,13 @@ game.DamageUpEntity = me.Entity.extend({
     },
     onCollision: function(response) {
         let obj = response.b;
-        if (obj.type === 'santa'){
+        if (obj.type === 'santa' && !this.pickedup){
+            this.pickedup = true;
             game.santa.damage++;
-            if (game.santa.damage > 5) game.santa.damage = 5; 
+            if (game.santa.damage > 5) {
+                game.santa.damage = 5;
+                game.data.steps += this.points;
+            }
             me.game.world.removeChild(this);
             me.audio.play("damageDrop");
         }
@@ -172,6 +180,8 @@ game.SpeedUpEntity = me.Entity.extend({
         this.body.vel.set(0, 0);
         this.date = Date.now();
         this.cd = 10000;
+        this.pickedup = false;
+        this.points = 10;
     },
 
     update: function(dt) {
@@ -191,9 +201,13 @@ game.SpeedUpEntity = me.Entity.extend({
     },
     onCollision: function(response) {
         let obj = response.b;
-        if (obj.type === 'santa'){
+        if (obj.type === 'santa' && !this.pickedup){
+            this.pickedup = true;
             game.santa.speed++;
-            if (game.santa.speed > 5) game.santa.speed = 5; 
+            if (game.santa.speed > 5) {
+                game.santa.speed = 5;
+                game.data.steps += this.points;
+            }
             me.game.world.removeChild(this);
             me.audio.play("speedDrop");
         }
