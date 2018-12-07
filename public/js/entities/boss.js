@@ -44,7 +44,10 @@ game.BossEntity = me.Entity.extend({
             if (this.hp <= 0){
                 game.data.steps += this.points;
                 me.game.world.removeChild(this);
-                me.game.enemyGenerator.boss = false;
+                setTimeout(function(){
+                    me.game.enemyGenerator.boss = false;
+                }, 10000);
+                
                 // Drop gifts (600 points) + 2 weapons packs aléatoirement
                 for(var i = 0; i < 12; i++){
                     me.game.world.addChild(new me.pool.pull('presentDrop', 

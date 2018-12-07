@@ -69,7 +69,7 @@ game.WeaponDropEntity = me.Entity.extend({
         this.pos.add(this.body.vel);
         this.body.vel.set(0, 0);
         this.date = Date.now();
-        this.cd = 5000;
+        this.cd = 10000;
     },
 
     update: function(dt) {
@@ -122,7 +122,7 @@ game.DamageUpEntity = me.Entity.extend({
         this.pos.add(this.body.vel);
         this.body.vel.set(0, 0);
         this.date = Date.now();
-        this.cd = 5000;
+        this.cd = 10000;
     },
 
     update: function(dt) {
@@ -171,7 +171,7 @@ game.SpeedUpEntity = me.Entity.extend({
         this.pos.add(this.body.vel);
         this.body.vel.set(0, 0);
         this.date = Date.now();
-        this.cd = 5000;
+        this.cd = 10000;
     },
 
     update: function(dt) {
@@ -220,7 +220,7 @@ game.ShieldDropEntity = me.Entity.extend({
         this.pos.add(this.body.vel);
         this.body.vel.set(0, 0);
         this.date = Date.now();
-        this.cd = 5000;
+        this.cd = 10000;
     },
 
     update: function(dt) {
