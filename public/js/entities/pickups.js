@@ -89,12 +89,13 @@ game.WeaponDropEntity = me.Entity.extend({
     },
     onCollision: function(response) {
         let obj = response.b;
-        if (obj.type === 'santa'){
-            game.santa.weapon.resetWeapon();
-            game.santa.weapon = this.weapon;
+        if (obj.type === 'santa') {
             if (this.weapon.class === "basic") game.santa.defaultWeapon = this.weapon;
-            game.santa.renderable.setCurrentAnimation(this.weapon.type);
-            game.santa.pickWeaponTime = Date.now();
+            if (game.santa.weapon.class != "special" || this.weapon.class === "special") {
+                game.santa.weapon.resetWeapon();
+                game.santa.weapon = this.weapon;
+                game.santa.renderable.setCurrentAnimation(this.weapon.type);
+            }
             me.game.world.removeChild(this);
             me.audio.play("weaponDrop");
         }

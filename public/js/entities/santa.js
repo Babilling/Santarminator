@@ -55,9 +55,6 @@ game.SantaEntity = me.Entity.extend({
         this.isProtected = false;
         this.pickWeaponTime = 0;
 
-        //TODO debug remove on release
-        this.i = 0;
-        this.lastSwitch=0;
     },
 	update: function(dt) {
         var that = this;
@@ -96,18 +93,6 @@ game.SantaEntity = me.Entity.extend({
         if (me.input.isKeyPressed('right')) {
             this.pos.x += (this.velX + this.speed);
             if (this.pos.x > me.game.viewport.width - this.width) this.pos.x = me.game.viewport.width - this.width;
-        }
-        //TODO debug remove on release
-        if (me.input.isKeyPressed('switch') && Date.now() - this.lastSwitch > 500 ) {
-            this.i++;
-            if(this.i >= 3)
-                this.i = 0;
-            switch(this.i) {
-                case 0:setSantaWeapon(this.i, "default");break;
-                case 1:setSantaWeapon(this.i, "shotgun");break;
-                case 2:setSantaWeapon(this.i, "ak");break;
-            }
-            this.lastSwitch = Date.now();
         }
         me.Rect.prototype.updateBounds.apply(this);
         if (this.collided) {

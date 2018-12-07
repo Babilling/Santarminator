@@ -243,7 +243,7 @@ game.ArcherAttackEntity = me.Entity.extend({
         this.pos.add(this.body.vel);
         this.body.gravity = 0.2;
         this.type = 'attack';
-        if (typeof velX === 'undefined') { this.velX = -10; } else {this.velX = velX;}
+        if (typeof velX === 'undefined') { this.velX = -6; } else {this.velX = velX;}
         if (typeof velY === 'undefined') { this.velY = 0; } else {this.velY = velY;}
 
         this.body.vel.set(this.velX, this.velY);

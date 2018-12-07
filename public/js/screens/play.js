@@ -20,8 +20,7 @@ game.PlayScreen = me.ScreenObject.extend({
         me.input.bindKey(me.input.KEY.LEFT, "left");
         me.input.bindKey(me.input.KEY.DOWN, "backward");
         me.input.bindKey(me.input.KEY.RIGHT, "right");
-        //TODO debug remove on release
-        me.input.bindKey(me.input.KEY.T, "switch");
+
         game.data.steps = 0;
         game.data.start = false;
         game.data.dateStart = Date.now();
