@@ -7,5 +7,13 @@
 > npm install  
 > node index.js
 
-## Docker
-> docker run --name Santarminator -d -e PORT=YOURPORT -p YOURPORT:YOURPORT ascalon/games:Santarminator  
+# Docker
+- Build it yourself :
+```
+docker build -t santarminator .
+```
+
+- Run it from Dockerhub :
+```
+docker run --name santarminator -d -p YOURPORT:8080 ascalon/games:santarminator
+```
