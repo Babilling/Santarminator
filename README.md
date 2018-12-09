@@ -15,5 +15,5 @@ docker build -t santarminator .
 
 - Run it from Dockerhub :
 ```
-docker run --name santarminator -d -p YOURPORT:8080 ascalon/games:santarminator
+docker run --name santarminator -d -p YOURPORT:8080 babilling/santarminator
 ```
