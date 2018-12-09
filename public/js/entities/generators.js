@@ -14,16 +14,17 @@ game.EnnemyGenerator = me.Renderable.extend({
         this.scorePopBoss = 500;
         this.bossPopped = 0;
         this.boss = false;
+        this.difficulty = 1;
     },
 
     update: function(dt) {
         if (this.generate++ % this.pipeFrequency == 0) {
             let posX = me.game.viewport.width + 50;
             let posY = me.Math.random(100, me.video.renderer.getHeight() - 100);
-            let enemiesHp = 5;
-            if (game.data.steps >= 800) enemiesHp *= 2;
-			if (game.data.steps >= 2400) enemiesHp *= 2;
-            let enemiesPoints = 10;
+            let enemiesHp = this.difficulty * 5;
+            //if (game.data.steps >= 800) enemiesHp *= 2;
+			//if (game.data.steps >= 2400) enemiesHp *= 2;
+            let enemiesPoints = this.difficulty * 10;
 			if(!this.boss && game.data.steps > (this.bossPopped + 1) * this.scorePopBoss + (this.bossPopped * 1000)) {
                 switch(me.Math.random(1, 4)) {
                     case 1 :
@@ -44,14 +45,13 @@ game.EnnemyGenerator = me.Renderable.extend({
             }else if (!this.boss)
                 switch(me.Math.random(1, 4)) {
                     case 1 :
-                        this.chainPattern(5, posX, posY, undefined, me.Math.degToRad(me.Math.random(-80, 81)), enemiesHp, enemiesPoints);
+                        this.chainPattern(me.Math.random(this.difficulty + 1, this.difficulty + 3), posX, posY, undefined, me.Math.degToRad(me.Math.random(-80, 81)), enemiesHp, enemiesPoints);
                         break;
                     case 2 :
-                        this.linePattern(3, posX, posY, -2, me.Math.degToRad(me.Math.random(-80, 81)), enemiesHp, enemiesPoints, me.Math.random() >= 0.5);
-                        //me.game.world.addChild(new me.pool.pull('archerEnemy', posX, posY, undefined, me.Math.degToRad(80), enemiesHp, enemiesPoints), 13);
+                        this.linePattern(me.Math.random(this.difficulty, this.difficulty + 2), posX, posY, -2, me.Math.degToRad(me.Math.random(-80, 81)), enemiesHp, enemiesPoints, me.Math.random() >= 0.5);
                         break;
                     case 3 :
-                        //me.game.world.addChild(new me.pool.pull('mageEnemy', posX, posY, undefined, me.Math.degToRad(80), enemiesHp, enemiesPoints), 13);
+                        this.linePattern(me.Math.random(this.difficulty, this.difficulty + 2), posX, posY, -2, me.Math.degToRad(me.Math.random(-80, 81)), enemiesHp, enemiesPoints, me.Math.random() >= 0.5);
                         break;
                 }
         }

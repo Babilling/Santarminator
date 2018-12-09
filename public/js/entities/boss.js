@@ -59,7 +59,7 @@ game.BossEntity = me.Entity.extend({
                         me.Math.random(this.pos.x, this.pos.x + this.width - 32), 
                         me.Math.random(this.pos.y, this.pos.y + this.height - 32)), 10);
                 }
-
+                me.game.enemyGenerator.difficulty++;
                 me.audio.play("hitBoss");
             }
             else {
@@ -141,7 +141,7 @@ game.MageBossEntity = game.BossEntity.extend({
 
     checkAttack: function () {
         if(this.hasAttacked === false && this.currentAttack === 0 && this.renderable.getCurrentAnimationFrame() === 34) {
-            me.game.world.addChild(new me.pool.pull('mageBossAttackEntity', this.pos.x, game.santa.pos.y + game.santa.height/2, -3, 0, true, 8), 14);
+            me.game.world.addChild(new me.pool.pull('mageBossAttackEntity', this.pos.x, game.santa.pos.y + game.santa.height/2, -3, 0, true, me.game.enemyGenerator.difficulty + 6), 14);
 			me.audio.play("skraa");
             this.hasAttacked = true;
         }
@@ -299,7 +299,7 @@ game.TreeBossEntity = game.BossEntity.extend({
 
     checkAttack: function () {
         if(this.hasAttacked === false && this.currentAttack === 0 && this.renderable.getCurrentAnimationFrame() === 14) {
-            me.game.world.addChild(new me.pool.pull('treeBossAttackEntity', this.pos.x,  me.Math.random(game.santa.pos.y, game.santa.pos.y + game.santa.height), -5), 14);
+            me.game.world.addChild(new me.pool.pull('treeBossAttackEntity', this.pos.x,  me.Math.random(game.santa.pos.y, game.santa.pos.y + game.santa.height), -(me.game.enemyGenerator.difficulty + 4)), 14);
             this.hasAttacked = true;
         }
         if(this.currentAttack === 1) {
@@ -341,7 +341,11 @@ game.TreeBossAttackEntity = me.Entity.extend({
         settings.framewidth = 114;
         settings.frameheight = 140;
         this._super(me.Entity, 'init', [x, y, settings]);
-        this.body.getShape(0).rotate(me.Math.degToRad(this.angle));
+        if(this.angle === 270)
+            this.body.addShape(new me.Ellipse(0,0,this.height,this.width-20));
+        else
+            this.body.addShape(new me.Ellipse(0,0,this.width-20,this.height));
+        this.body.removeShapeAt(0);
         this.body.updateBounds();
         this.renderable.currentTransform.rotate(me.Math.degToRad(this.angle));
 
@@ -432,13 +436,13 @@ game.UnicornBossEntity = game.BossEntity.extend({
 
     checkAttack: function () {
         if(this.hasAttacked === false && this.currentAttack === 0 && this.renderable.getCurrentAnimationFrame() === 12) {
-            this.chainPattern(5, this.pos.x,  game.santa.pos.y + game.santa.height/2, me.Math.degToRad(me.Math.random(-90, 91)));
+            this.chainPattern(me.game.enemyGenerator.difficulty + 4, this.pos.x,  game.santa.pos.y + game.santa.height/2, me.Math.degToRad(me.Math.random(-90, 91)));
             me.audio.play("skraa");
             this.hasAttacked = true;
         }
             if (this.hasAttacked === false && this.currentAttack === 1 && this.renderable.getCurrentAnimationFrame() === 12) {
                 for (let i = 0; i < this.specialAttackSettings.get('number'); i++) {
-                    this.chainPattern(6, this.pos.x, me.Math.random(this.pos.y,this.pos.y + this.height/2), me.Math.degToRad(me.Math.random(-80, 81)));
+                    this.chainPattern(me.game.enemyGenerator.difficulty + 2, this.pos.x, me.Math.random(this.pos.y,this.pos.y + this.height/2), me.Math.degToRad(me.Math.random(-80, 81)));
                     this.hasAttacked = true;
                     this.currentAttack = 0;
                     this.nextAttackIsSpecial = false;
