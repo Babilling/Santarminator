@@ -54,7 +54,7 @@ game.PresentEntity = me.Entity.extend({
  */
 game.WeaponDropEntity = me.Entity.extend({
     init: function(x, y) {
-        this.weapon =  game.weapon[me.Math.random(0, game.weapon.length)];
+        this.weapon =  game.weapon[me.Math.random(1, game.weapon.length)];
 
         var settings = {};
         settings.image = this.image = me.loader.getImage('drop-' + this.weapon.type);
