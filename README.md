@@ -18,5 +18,5 @@ docker build -t santarminator .
 
 - Run it from Dockerhub :
 ```
-docker run --name santarminator -d -v myvolumedb:/santarminator/db/ -v myvolumelog:/opt/log/ -p YOURPORT:8080 babilling/santarminator
+docker run --name santarminator -d -v myvolumedb:/santarminator/database.db -v myvolumelog:/opt/log/ -p YOURPORT:8080 babilling/santarminator
 ```

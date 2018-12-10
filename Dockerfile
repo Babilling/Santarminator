@@ -9,6 +9,6 @@ RUN chmod +x santarminator/entrypoint.sh && \
 
 HEALTHCHECK CMD netstat -an | grep 8080 > /dev/null; if [ 0 != $? ]; then exit 1; fi;
 
-VOLUME ["/santarminator/db/", "/etc/log/"]
+VOLUME ["/santarminator/database.db", "/etc/log/"]
 
 ENTRYPOINT ["sh","santarminator/entrypoint.sh"]
