@@ -28,6 +28,7 @@ game.EnnemyGenerator = me.Renderable.extend({
                 switch(me.Math.random(1, 4)) {
                     case 1 :
                         game.boss = new me.pool.pull('mageBoss', me.game.viewport.width + 50, 50, undefined, undefined, enemiesHp * 50);
+						me.audio.play("intro_pere_fougasse");
                         break;
                     case 2 :
                         game.boss = new me.pool.pull('treeBoss', me.game.viewport.width + 50, 50, undefined, undefined, enemiesHp * 50);
@@ -36,11 +37,10 @@ game.EnnemyGenerator = me.Renderable.extend({
                         game.boss = new me.pool.pull('unicornBoss', me.game.viewport.width + 50, 50, undefined, undefined, enemiesHp * 50);
                         break;
                 }
-			    
                 me.game.world.addChild(game.boss, 12);
                 this.boss = true;
                 this.bossPopped++;
-                me.audio.play("bossComing");
+                
             }else if (!this.boss)
                 switch(me.Math.random(1, 4)) {
                     case 1 :

@@ -66,7 +66,7 @@ game.BossEntity = me.Entity.extend({
                 let lostHPPercent = (100-((game.boss.hp/game.bossHPBar.maxHP)*100));
                 if (lostHPPercent > 0)
                     game.bossHPBar.lostHPPercent += (lostHPPercent-game.bossHPBar.lostHPPercent);
-                me.audio.play("hurt");
+                me.audio.play("fougasse_hurt"+me.Math.random(1,4));
             }
         }
     }

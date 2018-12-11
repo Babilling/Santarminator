@@ -99,6 +99,10 @@ var game = {
         {name: "minigunRelease", type: "audio", src: "data/sfx/"},
         {name: "explosion", type: "audio", src: "data/sfx/"},
 		{name: "skraa", type: "audio", src: "data/sfx/"},
+		{name: "intro_pere_fougasse", type: "audio", src: "data/sfx/"},
+		{name: "fougasse_hurt1", type: "audio", src: "data/sfx/"},
+		{name: "fougasse_hurt2", type: "audio", src: "data/sfx/"},
+		{name: "fougasse_hurt3", type: "audio", src: "data/sfx/"},
     ],
 
     weapon: [
