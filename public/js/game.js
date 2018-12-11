@@ -103,6 +103,7 @@ var game = {
 		{name: "fougasse_hurt1", type: "audio", src: "data/sfx/"},
 		{name: "fougasse_hurt2", type: "audio", src: "data/sfx/"},
 		{name: "fougasse_hurt3", type: "audio", src: "data/sfx/"},
+		{name: "fougasse_death", type: "audio", src: "data/sfx/"},
     ],
 
     weapon: [

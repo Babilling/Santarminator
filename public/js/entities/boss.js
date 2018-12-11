@@ -24,6 +24,8 @@ game.BossEntity = me.Entity.extend({
         this.animationSpeed = 75;
         this.invulnerable = true;
         this.defaultHp = this.hp;
+		this.deathSound = "hitBoss";
+		this.hurtSounds = ["hit"];
         game.bossHPBar = new me.pool.pull('bossHPBar',me.game.viewport.width/2,25,this.hp);
         me.game.world.addChild(game.bossHPBar, 50);
     },
@@ -60,13 +62,13 @@ game.BossEntity = me.Entity.extend({
                         me.Math.random(this.pos.y, this.pos.y + this.height - 32)), 10);
                 }
                 me.game.enemyGenerator.difficulty++;
-                me.audio.play("hitBoss");
+                me.audio.play(this.deathSound);
             }
             else {
                 let lostHPPercent = (100-((game.boss.hp/game.bossHPBar.maxHP)*100));
                 if (lostHPPercent > 0)
                     game.bossHPBar.lostHPPercent += (lostHPPercent-game.bossHPBar.lostHPPercent);
-                me.audio.play("fougasse_hurt"+me.Math.random(1,4));
+                me.audio.play(this.hurtSounds[me.Math.random(0,this.hurtSounds.length)]);
             }
         }
     }
@@ -106,6 +108,8 @@ game.MageBossEntity = game.BossEntity.extend({
         this.specialAttackEntities = [];
         this.nextAttackIsSpecial = false;
         this.specialAttackTriggers = new Map([[0, new Map([["hp",this.defaultHp*0.75],["triggered",false]])] , [1, new Map([["hp",this.defaultHp*0.50],["triggered",false]])] , [2, new Map([["hp",this.defaultHp*0.25],["triggered",false]])]]);
+		this.deathSound = "fougasse_death";
+		this.hurtSounds = ["fougasse_hurt1","fougasse_hurt2","fougasse_hurt3"];
     },
 
     update: function(dt) {
@@ -142,7 +146,6 @@ game.MageBossEntity = game.BossEntity.extend({
     checkAttack: function () {
         if(this.hasAttacked === false && this.currentAttack === 0 && this.renderable.getCurrentAnimationFrame() === 34) {
             me.game.world.addChild(new me.pool.pull('mageBossAttackEntity', this.pos.x, game.santa.pos.y + game.santa.height/2, -3, 0, true, me.game.enemyGenerator.difficulty + 6), 14);
-			me.audio.play("skraa");
             this.hasAttacked = true;
         }
         if(this.currentAttack === 1) {

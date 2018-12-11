@@ -37,6 +37,7 @@ game.EnnemyGenerator = me.Renderable.extend({
                         game.boss = new me.pool.pull('unicornBoss', me.game.viewport.width + 50, 50, undefined, undefined, enemiesHp * 50);
                         break;
                 }
+			    
                 me.game.world.addChild(game.boss, 12);
                 this.boss = true;
                 this.bossPopped++;
