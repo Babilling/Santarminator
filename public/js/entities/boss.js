@@ -26,6 +26,7 @@ game.BossEntity = me.Entity.extend({
         this.defaultHp = this.hp;
 		this.deathSound = "hitBoss";
 		this.hurtSounds = ["hit"];
+		this.name = "";
         game.bossHPBar = new me.pool.pull('bossHPBar',me.game.viewport.width/2,25,this.hp);
         me.game.world.addChild(game.bossHPBar, 50);
     },
@@ -110,6 +111,7 @@ game.MageBossEntity = game.BossEntity.extend({
         this.specialAttackTriggers = new Map([[0, new Map([["hp",this.defaultHp*0.75],["triggered",false]])] , [1, new Map([["hp",this.defaultHp*0.50],["triggered",false]])] , [2, new Map([["hp",this.defaultHp*0.25],["triggered",false]])]]);
 		this.deathSound = "fougasse_death";
 		this.hurtSounds = ["fougasse_hurt1","fougasse_hurt2","fougasse_hurt3"];
+        this.name = "Pere Fougasse";
     },
 
     update: function(dt) {
@@ -267,6 +269,7 @@ game.TreeBossEntity = game.BossEntity.extend({
         this.specialAttackEntities = [];
         this.nextAttackIsSpecial = false;
         this.specialAttackTriggers = new Map([[0, new Map([["hp",this.defaultHp*0.75],["triggered",false]])] , [1, new Map([["hp",this.defaultHp*0.50],["triggered",false]])] , [2, new Map([["hp",this.defaultHp*0.25],["triggered",false]])]]);
+        this.name = "Michel Sapin";
     },
 
     update: function(dt) {
@@ -404,6 +407,7 @@ game.UnicornBossEntity = game.BossEntity.extend({
         this.specialAttackSettings = new Map([["number",4], ["delay", 4000], ["speed", -2]]);
         this.nextAttackIsSpecial = false;
         this.specialAttackTriggers = new Map([[0, new Map([["hp",this.defaultHp*0.75],["triggered",false]])] , [1, new Map([["hp",this.defaultHp*0.50],["triggered",false]])] , [2, new Map([["hp",this.defaultHp*0.25],["triggered",false]])]]);
+        this.name = "Gandoulfe le vert";
     },
 
     update: function(dt) {

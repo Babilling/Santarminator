@@ -96,6 +96,8 @@ game.HUD.BossHPBar = me.Renderable.extend({
         // make sure we use screen coordinates
         this.floating = true;
         this.lostHPPercent = 0;
+        this.bossNameFont = new me.Font('gamefont', 20, '#ffba2d', 'right');
+        this.yOffset = 15;
     },
 
     draw: function(renderer) {
@@ -105,25 +107,26 @@ game.HUD.BossHPBar = me.Renderable.extend({
                 renderer.setColor('#3b86ff');
             else
                 renderer.setColor('#0f0');
-            renderer.fillRect(this.pos.x, this.pos.y, this.width, this.height);
+            renderer.fillRect(this.pos.x, this.pos.y + this.yOffset, this.width, this.height);
             renderer.setColor('#ffba2d');
-            renderer.fillRect(this.pos.x+this.width/4, this.pos.y, 2, this.height);
-            renderer.fillRect(this.pos.x+this.width/2, this.pos.y, 2, this.height);
-            renderer.fillRect(this.pos.x+(this.width/4)*3, this.pos.y, 2, this.height);
+            renderer.fillRect(this.pos.x+this.width/4, this.pos.y + this.yOffset, 2, this.height);
+            renderer.fillRect(this.pos.x+this.width/2, this.pos.y + this.yOffset, 2, this.height);
+            renderer.fillRect(this.pos.x+(this.width/4)*3, this.pos.y + this.yOffset, 2, this.height);
             renderer.restore();
         }
         else {
             renderer.save();
             renderer.setColor('#f00');
-            renderer.fillRect(this.pos.x + this.width - (this.lostHPPercent*5), this.pos.y, this.width - (this.width - (this.lostHPPercent*5)), this.height);
+            renderer.fillRect(this.pos.x + this.width - (this.lostHPPercent*5), this.pos.y + this.yOffset, this.width - (this.width - (this.lostHPPercent*5)), this.height);
             renderer.setColor('#0f0');
-            renderer.fillRect(this.pos.x, this.pos.y, this.width - (this.lostHPPercent*5), this.height);
+            renderer.fillRect(this.pos.x, this.pos.y + this.yOffset, this.width - (this.lostHPPercent*5), this.height);
             renderer.setColor('#ffba2d');
-            renderer.fillRect(this.pos.x+this.width/4, this.pos.y, 2, this.height);
-            renderer.fillRect(this.pos.x+this.width/2, this.pos.y, 2, this.height);
-            renderer.fillRect(this.pos.x+(this.width/4)*3, this.pos.y, 2, this.height);
+            renderer.fillRect(this.pos.x+this.width/4, this.pos.y + this.yOffset, 2, this.height);
+            renderer.fillRect(this.pos.x+this.width/2, this.pos.y + this.yOffset, 2, this.height);
+            renderer.fillRect(this.pos.x+(this.width/4)*3, this.pos.y + this.yOffset, 2, this.height);
             renderer.restore();
         }
+        this.bossNameFont.draw(renderer, game.boss.name, this.bossNameFont.measureText(renderer,game.boss.name).width/2+this.pos.x+this.width/2, this.pos.y - 10);
     },
 
     update: function (dt) {
