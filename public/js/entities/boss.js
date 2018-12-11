@@ -203,6 +203,9 @@ game.MageBossAttackEntity = me.Entity.extend({
             this.rad = rad;
         }
         this.timeCreated = Date.now();
+        this.body.addShape(new me.Ellipse(0,0,this.renderable.width,this.renderable.height));
+        this.body.removeShapeAt(0);
+        this.body.updateBounds();
     },
 
     update: function(dt) {
@@ -253,7 +256,7 @@ game.TreeBossEntity = game.BossEntity.extend({
         ]);
         this.animationSpeed = 100;
         this.renderable.alwaysUpdate = true;
-        this.body.addShape(new me.Ellipse(this.renderable.width/2,this.renderable.height/2,this.renderable.width/2,this.renderable.height));
+        this.body.addShape(new me.Ellipse(this.renderable.width/2,this.renderable.height/2,this.renderable.width/2,this.renderable.height-50));
         this.body.removeShapeAt(0);
         this.body.updateBounds();
         this.attackFrames = [7,8,9,10,11,7,8,9,10,11,0,1,2,3,4,5,6];
@@ -274,7 +277,7 @@ game.TreeBossEntity = game.BossEntity.extend({
 
     update: function(dt) {
         this.pos.add(this.body.vel);
-        if (this.pos.x <= (me.game.viewport.width/3*2)-100 || (this.pos.x >= me.game.viewport.width-this.renderable.width && this.velX === 1)) {
+        if (this.pos.x <= (me.game.viewport.width/3*2)-100 || (this.pos.x >= me.game.viewport.width-this.renderable.width+75 && this.velX === 1)) {
             this.velX = -this.velX;
             this.invulnerable = false;
             if(this.velY === 0)
