@@ -149,6 +149,7 @@ game.MageBossEntity = game.BossEntity.extend({
         if(this.hasAttacked === false && this.currentAttack === 0 && this.renderable.getCurrentAnimationFrame() === 34) {
             me.game.world.addChild(new me.pool.pull('mageBossAttackEntity', this.pos.x, game.santa.pos.y + game.santa.height/2, -3, 0, true, me.game.enemyGenerator.difficulty + 6), 14);
             this.hasAttacked = true;
+            me.audio.play("fougasse_attack");
         }
         if(this.currentAttack === 1) {
             if (this.hasAttacked === false) {
@@ -161,6 +162,7 @@ game.MageBossEntity = game.BossEntity.extend({
                     me.game.world.addChild(attack);
                     this.hasAttacked = true;
                 }
+                me.audio.play("fougasse_attack");
             }
             if (this.hasAttacked === true && this.renderable.getCurrentAnimationFrame() === 34) {
                 for(let i = 0; i < this.specialAttackEntities.length; i++) {
@@ -259,6 +261,7 @@ game.TreeBossEntity = game.BossEntity.extend({
         this.body.addShape(new me.Ellipse(this.renderable.width/2,this.renderable.height/2,this.renderable.width/2,this.renderable.height-50));
         this.body.removeShapeAt(0);
         this.body.updateBounds();
+
         this.attackFrames = [7,8,9,10,11,7,8,9,10,11,0,1,2,3,4,5,6];
         this.renderable.addAnimation ("attack", this.attackFrames,this.animationSpeed);
         this.renderable.addAnimation ("hurt", [7,8,9,10,11],this.animationSpeed+25);
@@ -272,6 +275,8 @@ game.TreeBossEntity = game.BossEntity.extend({
         this.specialAttackEntities = [];
         this.nextAttackIsSpecial = false;
         this.specialAttackTriggers = new Map([[0, new Map([["hp",this.defaultHp*0.75],["triggered",false]])] , [1, new Map([["hp",this.defaultHp*0.50],["triggered",false]])] , [2, new Map([["hp",this.defaultHp*0.25],["triggered",false]])]]);
+        this.deathSound = "arbre_death";
+        this.hurtSounds = ["arbre_hurt1"];
         this.name = "Michel Sapin";
     },
 
@@ -310,6 +315,7 @@ game.TreeBossEntity = game.BossEntity.extend({
         if(this.hasAttacked === false && this.currentAttack === 0 && this.renderable.getCurrentAnimationFrame() === 14) {
             me.game.world.addChild(new me.pool.pull('treeBossAttackEntity', this.pos.x,  me.Math.random(game.santa.pos.y, game.santa.pos.y + game.santa.height), -(me.game.enemyGenerator.difficulty + 4)), 14);
             this.hasAttacked = true;
+            me.audio.play("arbre_attack");
         }
         if(this.currentAttack === 1) {
             if (this.hasAttacked === false) {
@@ -321,6 +327,7 @@ game.TreeBossEntity = game.BossEntity.extend({
                     me.game.world.addChild(attack);
                     this.hasAttacked = true;
                 }
+                me.audio.play("arbre_attack");
             }
             if (this.hasAttacked === true && this.renderable.getCurrentAnimationFrame() === 14) {
                 for(let i = 0; i < this.specialAttackEntities.length; i++) {
@@ -410,6 +417,8 @@ game.UnicornBossEntity = game.BossEntity.extend({
         this.specialAttackSettings = new Map([["number",4], ["delay", 4000], ["speed", -2]]);
         this.nextAttackIsSpecial = false;
         this.specialAttackTriggers = new Map([[0, new Map([["hp",this.defaultHp*0.75],["triggered",false]])] , [1, new Map([["hp",this.defaultHp*0.50],["triggered",false]])] , [2, new Map([["hp",this.defaultHp*0.25],["triggered",false]])]]);
+        this.deathSound = "licorne_death";
+        this.hurtSounds = ["licorne_hurt1"];
         this.name = "Gandoulfe le vert";
     },
 
@@ -447,7 +456,7 @@ game.UnicornBossEntity = game.BossEntity.extend({
     checkAttack: function () {
         if(this.hasAttacked === false && this.currentAttack === 0 && this.renderable.getCurrentAnimationFrame() === 12) {
             this.chainPattern(me.game.enemyGenerator.difficulty + 4, this.pos.x,  game.santa.pos.y + game.santa.height/2, me.Math.degToRad(me.Math.random(-90, 91)));
-            me.audio.play("skraa");
+            me.audio.play("licorne_attack");
             this.hasAttacked = true;
         }
             if (this.hasAttacked === false && this.currentAttack === 1 && this.renderable.getCurrentAnimationFrame() === 12) {
@@ -457,6 +466,7 @@ game.UnicornBossEntity = game.BossEntity.extend({
                     this.currentAttack = 0;
                     this.nextAttackIsSpecial = false;
                 }
+                me.audio.play("licorne_attack");
             }
     },
     chainPattern: function(size, posX, posY, radX){
