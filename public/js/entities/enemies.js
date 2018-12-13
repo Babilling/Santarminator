@@ -63,10 +63,10 @@ game.EnemyEntity = me.Entity.extend({
                     else
                         me.game.world.addChild(new me.pool.pull('presentDrop', this.pos.x, this.pos.y), 10);
                 }
-                me.audio.play("hit");
+                me.audio.play("enemyDeath");
             }
             else if (this.hp > 0)
-                me.audio.play("hurt");
+                me.audio.play("enemyHurt");
         }
     }
 });

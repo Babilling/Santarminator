@@ -42,9 +42,11 @@ game.EnnemyGenerator = me.Renderable.extend({
                             break;
                         case 2 :
                             game.boss = new me.pool.pull('treeBoss', me.game.viewport.width + 50, 50, undefined, undefined, enemiesHp * 50);
+                            me.audio.play("intro_arbre");
                             break;
                         case 3 :
                             game.boss = new me.pool.pull('unicornBoss', me.game.viewport.width + 50, 50, undefined, undefined, enemiesHp * 50);
+                            me.audio.play("intro_licorne");
                             break;
                     }
                     
