@@ -20,13 +20,14 @@ game.EnnemyGenerator = me.Renderable.extend({
     update: function(dt) {
         if (Date.now() - this.lastSpawn > this.cdBeforeSpawn){
             this.lastSpawn = Date.now();
-            var gap = Math.round((2 + Math.log(game.data.steps + 1) / 4) * ((this.bossPopped + 1) / 2)); 
+            var gap;
+            if (this.bossPopped === 0) gap = Math.round(game.data.steps / 166) + 1;
+            else gap = Math.round((2 + Math.log(game.data.steps + 1) / 4) * ((this.bossPopped + 1) / 2)); 
             var enemyNumber = 0;
             me.game.world.forEach(function (child) {
                 if (child.type === 'ennemy')
                     enemyNumber++;
             });
-            console.log(gap);
             if (enemyNumber < gap) {
                 let posX = me.game.viewport.width + 50;
                 let posY = me.Math.random(100, me.video.renderer.getHeight() - 100);
