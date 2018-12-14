@@ -97,6 +97,7 @@ game.WeaponDropEntity = me.Entity.extend({
                 game.santa.weapon.resetWeapon();
                 game.santa.weapon = this.weapon;
                 game.santa.renderable.setCurrentAnimation(this.weapon.type);
+                me.audio.play("pick_" + this.weapon.type);
             }
             me.game.world.removeChild(this);
             me.audio.play("weaponDrop");
