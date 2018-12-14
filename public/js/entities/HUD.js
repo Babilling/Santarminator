@@ -77,7 +77,9 @@ game.HUD.BuffsDisplay = me.Renderable.extend({
     draw: function (renderer) {
         if (game.data.start && me.state.isCurrent(me.state.PLAY)) {
             if(game.santa.damage === 5) this.damageFont.setFont('gamefont', 20, '#fa0000', 'right');
+            else this.damageFont.setFont('gamefont', 20, '#000', 'right');
             if(game.santa.speed === 5) this.speedFont.setFont('gamefont', 20, '#fa0000', 'right');
+            else this.speedFont.setFont('gamefont', 20, '#000', 'right');
             this.damageFont.draw(renderer,
                 "PUISSANCE "+game.santa.damage,
                 this.pos.x, this.pos.y);
