@@ -116,7 +116,10 @@ var game = {
         {name: "licorne_attack", type: "audio", src: "data/sfx/"},
         {name: "licorne_hurt1", type: "audio", src: "data/sfx/"},
         {name: "licorne_death", type: "audio", src: "data/sfx/"},
-        {name: "enemyHurt", type: "audio", src: "data/sfx/"},
+        {name: "enemyHurt1", type: "audio", src: "data/sfx/"},
+        {name: "enemyHurt2", type: "audio", src: "data/sfx/"},
+        {name: "enemyHurt3", type: "audio", src: "data/sfx/"},
+        {name: "enemyHurt4", type: "audio", src: "data/sfx/"},
         {name: "enemyDeath", type: "audio", src: "data/sfx/"},
     ],
 

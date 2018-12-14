@@ -66,7 +66,7 @@ game.EnemyEntity = me.Entity.extend({
                 me.audio.play("enemyDeath");
             }
             else if (this.hp > 0)
-                me.audio.play("enemyHurt");
+                me.audio.play("enemyHurt" + me.Math.random(1, 5));
         }
     }
 });
