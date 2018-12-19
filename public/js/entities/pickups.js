@@ -20,6 +20,7 @@ game.PresentEntity = me.Entity.extend({
         this.body.vel.set(0, 0);
         this.date = Date.now();
         this.cd = 10000;
+		this.pickedup = false;
     },
 
     update: function(dt) {
@@ -39,7 +40,8 @@ game.PresentEntity = me.Entity.extend({
     },
     onCollision: function(response) {
         let obj = response.b;
-        if (obj.type === 'santa'){
+        if (obj.type === 'santa' && !this.pickedup){
+			this.pickedup = true;
             game.data.steps += this.points;
             me.game.world.removeChild(this);
             me.audio.play("presentDrop");
