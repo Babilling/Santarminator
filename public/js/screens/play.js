@@ -58,8 +58,8 @@ game.PlayScreen = me.ScreenObject.extend({
     onDestroyEvent: function() {
         me.audio.stopTrack('theme');
         // free the stored instance
-        this.HUD = null;
-        this.santa = null;
+        me.game.world.removeChild(this.HUD);
+		me.game.world.removeChild(this.santa);
 
         me.input.unbindKey(me.input.KEY.SPACE);
         me.input.unbindPointer(me.input.pointer.LEFT);
